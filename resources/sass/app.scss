@@ -9,4 +9,74 @@
 
 // Components
 
-@import './components/layouts/layout'
+@import './components/layouts/layout';
+@import './components/dashboard/dashboard';
+
+
+//general styles non-component specific
+
+.quick-summary-container{
+    .quick-summary-item{
+        border-bottom-style: solid;
+        padding: 10px 15px;
+        border-bottom-width: 1px;
+        border-color: #2a2c331f;
+        .qsi-right{
+            text-align: right;
+        }
+    }
+}
+
+.summary-container{
+    .summary-headers{
+        margin-bottom: 15px;
+        padding: 30px 30px 10px 30px;
+        border-color: #273D8A;
+        border-bottom-width: 5px;
+        border-bottom-style: solid;
+    }
+    .sh-top{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        color: #8A8D97;
+    }
+    .sh-bottom{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 28px;
+        display: flex;
+        align-items: center;
+        color: #293661;
+    }
+    .summary-items{
+        .summary-item{
+            padding: 10px 30px;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-top-style: solid;
+            border-color: #2a2c331f;
+            border-top-width: 1px;
+            .item-header{
+                font-style: normal;
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 21px;
+                display: flex;
+                align-items: center;
+            }
+            .item-desc{
+                font-style: normal;
+                font-size: 18px;
+                line-height: 21px;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Sidebar from './sidebar';
+import {BrowserRouter as Router, Link, Route, withRouter} from 'react-router-dom';
+import Dashboard from '../dashboard/dashboard';
 import {
     Row,
 } from 'react-bootstrap';
@@ -24,7 +26,7 @@ export default class Layout extends Component{
             element.classList.add("sidebar-hidden");            
         }
     }
-
+    
     hideSideBar(){
         let element = document.getElementById('sidebar-container')
         element.classList.remove("sidebar-show");
@@ -45,6 +47,9 @@ export default class Layout extends Component{
                 <Sidebar
                     hideSideBar = {this.hideSideBar}
                 />
+                
+                <Route exact path={`${this.props.match.url}`} component={Dashboard}/>
+                <Route exact path={`${this.props.match.url}/home`} component={Dashboard}/>
             </div>
         )
     }

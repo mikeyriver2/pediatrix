@@ -35,6 +35,7 @@
             transition: left 1s ease;
         }
         .sidebar-container{
+            z-index: 10;
             position: absolute;
             padding-top: 50px;
             border-right-width: .1px;

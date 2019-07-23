@@ -18,7 +18,7 @@ class Routes extends Component{
     render(){
         return (
             <Router>
-                <Route path="/" component={Layout} /> 
+                <Route path="" component={Layout} /> 
             </Router>
             );
     }
