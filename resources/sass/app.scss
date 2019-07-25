@@ -11,6 +11,7 @@
 
 @import './components/layouts/layout';
 @import './components/dashboard/dashboard';
+@import './components/modals/new-payments';
 
 
 //general styles non-component specific
@@ -96,6 +97,7 @@
             height: 1.5em;
             color: white;
             font-weight: bold;
+            padding-top: 3px;
         }
         .summary-item{
             padding: 10px 30px;

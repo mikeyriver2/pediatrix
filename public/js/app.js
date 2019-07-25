@@ -79016,6 +79016,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+/* harmony import */ var _summaries_summary__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../summaries/summary */ "./resources/js/components/summaries/summary.js");
+/* harmony import */ var _summaries_quick_summary__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../summaries/quick-summary */ "./resources/js/components/summaries/quick-summary.js");
+/* harmony import */ var _summaries_summary_with_label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../summaries/summary-with-label */ "./resources/js/components/summaries/summary-with-label.js");
+/* harmony import */ var _modals_new_payments__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../modals/new-payments */ "./resources/js/components/modals/new-payments.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79039,6 +79043,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
+
 var Dashboard =
 /*#__PURE__*/
 function (_Component) {
@@ -79050,7 +79058,11 @@ function (_Component) {
     _classCallCheck(this, Dashboard);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Dashboard).call(this));
-    _this.state = {};
+    _this.state = {
+      appointments: [],
+      quickSummaries: {},
+      payments: []
+    };
     return _this;
   }
 
@@ -79059,148 +79071,7 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dashboard-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "quick-summary-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        style: {
-          paddingTop: "20px"
-        },
-        className: "quick-summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 8,
-        className: "qsi-left"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "APPOINTMENTS TODAY")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 4,
-        className: "qsi-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "10")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        className: "quick-summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 6,
-        className: "qsi-left"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "INCOME THIS MONTH")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 6,
-        className: "qsi-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "15,000.00 PhP")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        className: "quick-summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 8,
-        className: "qsi-left"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "PATIENTS THIS MONTH")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 4,
-        className: "qsi-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "10")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        className: "quick-summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 8,
-        className: "qsi-left"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "RECORDS THIS MONTH")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 4,
-        className: "qsi-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "10"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-headers"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "sh-top"
-      }, "RECENT APPOINTMENTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-        className: "sh-bottom"
-      }, "THIS WEEK")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-items"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bottom-top-borders summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-header"
-      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-desc"
-      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "item-created-at"
-      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bottom-top-borders summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-header"
-      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-desc"
-      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "item-created-at"
-      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bottom-top-borders summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-header"
-      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-desc"
-      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "item-created-at"
-      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bottom-top-borders summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-header"
-      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-desc"
-      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "item-created-at"
-      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "view-all"
-      }, "View All Appointments >"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-headers"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "sh-top"
-      }, "RECENT PAYMENTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-        className: "sh-bottom"
-      }, "THIS WEEK")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-items"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        className: "bottom-top-borders item-row-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 8,
-        className: "no-right-padding summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-header"
-      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-desc"
-      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "item-created-at"
-      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 4,
-        className: "completed no-padding summary-item-label"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "status"
-      }, "COMPLETED"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        className: "bottom-top-borders item-row-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 8,
-        className: "no-right-padding summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-header"
-      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-desc"
-      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "item-created-at"
-      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 4,
-        className: "incomplete no-padding summary-item-label"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "status"
-      }, "INCOMPLETE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
-        className: "bottom-top-borders item-row-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 8,
-        className: "no-right-padding summary-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-header"
-      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "item-desc"
-      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "item-created-at"
-      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
-        xs: 4,
-        className: "pending no-padding summary-item-label"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
-        className: "status"
-      }, "PENDING"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "view-all"
-      }, "View All Appointments >"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_summaries_quick_summary__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_summaries_summary__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_summaries_summary_with_label__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modals_new_payments__WEBPACK_IMPORTED_MODULE_7__["default"], null));
     }
   }]);
 
@@ -79526,6 +79397,110 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/modals/new-payments.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/modals/new-payments.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NewPayments; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+/* harmony import */ var _summaries_summary__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../summaries/summary */ "./resources/js/components/summaries/summary.js");
+/* harmony import */ var _summaries_quick_summary__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../summaries/quick-summary */ "./resources/js/components/summaries/quick-summary.js");
+/* harmony import */ var _summaries_summary_with_label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../summaries/summary-with-label */ "./resources/js/components/summaries/summary-with-label.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+var NewPayments =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(NewPayments, _Component);
+
+  function NewPayments() {
+    var _this;
+
+    _classCallCheck(this, NewPayments);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NewPayments).call(this));
+    _this.state = {
+      show_modal: true
+    };
+    _this.closeModal = _this.closeModal.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(NewPayments, [{
+    key: "closeModal",
+    value: function closeModal() {
+      this.setState({
+        show_modal: !this.state.show_modal
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"], {
+        id: "new-payments-modal",
+        show: this.state.show_modal,
+        onHide: this.closeModal
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"].Header, {
+        closeButton: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Modal"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "New Payment"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Form"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Form"].Label, null, "Patient"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Form"].Control, {
+        type: "text",
+        placeholder: "Enter Patient Name"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Form"].Label, null, "Amount"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["InputGroup"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["InputGroup"].Prepend, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["InputGroup"].Text, {
+        id: "Php"
+      }, "PhP")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["FormControl"], {
+        onChange: function onChange() {
+          console.log('bleb');
+        },
+        placeholder: "Enter Amount"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Form"].Label, null, "Status"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Form"].Control, {
+        as: "select"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Completed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Pending"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Incomplete")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        variant: "success"
+      }, "SAVE"))));
+    }
+  }]);
+
+  return NewPayments;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/routes.js":
 /*!*******************************************!*\
   !*** ./resources/js/components/routes.js ***!
@@ -79599,6 +79574,351 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Routes);
+
+/***/ }),
+
+/***/ "./resources/js/components/summaries/quick-summary.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/summaries/quick-summary.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return QuickSummary; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var QuickSummary =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(QuickSummary, _Component);
+
+  function QuickSummary() {
+    var _this;
+
+    _classCallCheck(this, QuickSummary);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(QuickSummary).call(this));
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(QuickSummary, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "quick-summary-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        style: {
+          paddingTop: "20px"
+        },
+        className: "quick-summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "qsi-left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "APPOINTMENTS TODAY")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "qsi-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "10")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "quick-summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 6,
+        className: "qsi-left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "INCOME THIS MONTH")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 6,
+        className: "qsi-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "15,000.00 PhP")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "quick-summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "qsi-left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "PATIENTS THIS MONTH")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "qsi-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "10")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "quick-summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "qsi-left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "RECORDS THIS MONTH")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "qsi-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "10")))));
+    }
+  }]);
+
+  return QuickSummary;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/summaries/summary-with-label.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/summaries/summary-with-label.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SummaryWithLabel; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var SummaryWithLabel =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SummaryWithLabel, _Component);
+
+  function SummaryWithLabel() {
+    var _this;
+
+    _classCallCheck(this, SummaryWithLabel);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SummaryWithLabel).call(this));
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(SummaryWithLabel, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-headers"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "sh-top"
+      }, "RECENT PAYMENTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "sh-bottom"
+      }, "THIS WEEK")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-items"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "bottom-top-borders item-row-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "no-right-padding summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "completed summary-item-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "status"
+      }, "COMPLETED"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "bottom-top-borders item-row-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "no-right-padding summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "incomplete summary-item-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "status"
+      }, "INCOMPLETE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "bottom-top-borders item-row-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "no-right-padding summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "pending summary-item-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "status"
+      }, "PENDING"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "view-all"
+      }, "View All Appointments >")));
+    }
+  }]);
+
+  return SummaryWithLabel;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/summaries/summary.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/summaries/summary.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Summary; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var Summary =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Summary, _Component);
+
+  function Summary() {
+    var _this;
+
+    _classCallCheck(this, Summary);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Summary).call(this));
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Summary, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-headers"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "sh-top"
+      }, "RECENT APPOINTMENTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "sh-bottom"
+      }, "THIS WEEK")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-items"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bottom-top-borders summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bottom-top-borders summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bottom-top-borders summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bottom-top-borders summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "view-all"
+      }, "View All Appointments >")));
+    }
+  }]);
+
+  return Summary;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ }),
 
