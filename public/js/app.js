@@ -79107,7 +79107,7 @@ function (_Component) {
       }, "THIS WEEK")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "summary-items"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-item"
+        className: "bottom-top-borders summary-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
         className: "item-header"
       }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -79115,7 +79115,7 @@ function (_Component) {
       }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
         className: "item-created-at"
       }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-item"
+        className: "bottom-top-borders summary-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
         className: "item-header"
       }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -79123,7 +79123,7 @@ function (_Component) {
       }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
         className: "item-created-at"
       }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-item"
+        className: "bottom-top-borders summary-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
         className: "item-header"
       }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -79131,14 +79131,76 @@ function (_Component) {
       }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
         className: "item-created-at"
       }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "summary-item"
+        className: "bottom-top-borders summary-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
         className: "item-header"
       }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
         className: "item-desc"
       }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
         className: "item-created-at"
-      }, "10AM-10:30AM")))));
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "view-all"
+      }, "View All Appointments >"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-headers"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "sh-top"
+      }, "RECENT PAYMENTS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "sh-bottom"
+      }, "THIS WEEK")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "summary-items"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "bottom-top-borders item-row-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "no-right-padding summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "completed no-padding summary-item-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
+        className: "status"
+      }, "COMPLETED"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "bottom-top-borders item-row-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "no-right-padding summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "incomplete no-padding summary-item-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
+        className: "status"
+      }, "INCOMPLETE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+        className: "bottom-top-borders item-row-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 8,
+        className: "no-right-padding summary-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-header"
+      }, "JOHNNY DEPP"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "item-desc"
+      }, "GENERAL CONSULTATION"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
+        className: "item-created-at"
+      }, "10AM-10:30AM")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["Col"], {
+        xs: 4,
+        className: "pending no-padding summary-item-label"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h7", {
+        className: "status"
+      }, "PENDING"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "view-all"
+      }, "View All Appointments >"))));
     }
   }]);
 

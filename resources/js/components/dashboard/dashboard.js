@@ -77,7 +77,7 @@ export default class Dashboard extends Component{
                         </h4>
                     </div>
                     <div className="summary-items">
-                        <div className="summary-item">
+                        <div className="bottom-top-borders summary-item">
                             <h6 className="item-header">
                                 JOHNNY DEPP
                             </h6>
@@ -88,7 +88,7 @@ export default class Dashboard extends Component{
                             10AM-10:30AM
                             </h7>
                         </div>
-                        <div className="summary-item">
+                        <div className="bottom-top-borders summary-item">
                             <h6 className="item-header">
                                 JOHNNY DEPP
                             </h6>
@@ -99,7 +99,7 @@ export default class Dashboard extends Component{
                             10AM-10:30AM
                             </h7>
                         </div>
-                        <div className="summary-item">
+                        <div className="bottom-top-borders summary-item">
                             <h6 className="item-header">
                                 JOHNNY DEPP
                             </h6>
@@ -110,7 +110,7 @@ export default class Dashboard extends Component{
                             10AM-10:30AM
                             </h7>
                         </div>
-                        <div className="summary-item">
+                        <div className="bottom-top-borders summary-item">
                             <h6 className="item-header">
                                 JOHNNY DEPP
                             </h6>
@@ -121,6 +121,75 @@ export default class Dashboard extends Component{
                             10AM-10:30AM
                             </h7>
                         </div>
+
+                        <a className="view-all">View All Appointments ></a>
+                    </div>
+                </div>
+                <div className="summary-container">
+                    <div className="summary-headers">
+                        <h6 className="sh-top">
+                            RECENT PAYMENTS
+                        </h6>
+                        <h4 className="sh-bottom">
+                            THIS WEEK
+                        </h4>
+                    </div>
+                    <div className="summary-items">
+                        <Row className="bottom-top-borders item-row-container">
+                            <Col xs={8} className="no-right-padding summary-item">
+                                <h6 className="item-header">
+                                    JOHNNY DEPP
+                                </h6>
+                                <h6 className="item-desc">
+                                    GENERAL CONSULTATION
+                                </h6>
+                                <h7 className="item-created-at">
+                                10AM-10:30AM
+                                </h7>
+                            </Col>
+                            <Col xs={4} className="completed no-padding summary-item-label">
+                                <h7 className="status">
+                                    COMPLETED
+                                </h7>
+                            </Col>
+                        </Row>
+                        <Row className="bottom-top-borders item-row-container">
+                            <Col xs={8} className="no-right-padding summary-item">
+                                <h6 className="item-header">
+                                    JOHNNY DEPP
+                                </h6>
+                                <h6 className="item-desc">
+                                    GENERAL CONSULTATION
+                                </h6>
+                                <h7 className="item-created-at">
+                                10AM-10:30AM
+                                </h7>
+                            </Col>
+                            <Col xs={4} className="incomplete no-padding summary-item-label">
+                                <h7 className="status">
+                                    INCOMPLETE
+                                </h7>
+                            </Col>
+                        </Row>
+                        <Row className="bottom-top-borders item-row-container">
+                            <Col xs={8} className="no-right-padding summary-item">
+                                <h6 className="item-header">
+                                    JOHNNY DEPP
+                                </h6>
+                                <h6 className="item-desc">
+                                    GENERAL CONSULTATION
+                                </h6>
+                                <h7 className="item-created-at">
+                                10AM-10:30AM
+                                </h7>
+                            </Col>
+                            <Col xs={4} className="pending no-padding summary-item-label">
+                                <h7 className="status">
+                                    PENDING
+                                </h7>
+                            </Col>
+                        </Row>
+                        <a className="view-all">View All Appointments ></a>
                     </div>
                 </div>
             </div>

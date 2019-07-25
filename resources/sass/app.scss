@@ -15,6 +15,34 @@
 
 //general styles non-component specific
 
+.bottom-top-borders{
+    border-bottom-style: solid !important;
+    border-bottom-width: 1px !important;
+    border-top-style: solid !important;
+    border-color: #2a2c331f !important;
+    border-top-width: 1px !important;
+}
+
+.no-padding{
+    padding: 0px !important;
+}
+
+.no-right-padding{
+    padding-right: 0px !important;
+}
+
+.view-all{
+    margin: 30px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-decoration-line: underline;
+    display: block;
+}
+
 .quick-summary-container{
     .quick-summary-item{
         border-bottom-style: solid;
@@ -54,13 +82,28 @@
         color: #293661;
     }
     .summary-items{
+        .completed{
+            background: #5DA327;
+        }
+        .pending{
+            background: #D7A700;
+        }
+        .incomplete{
+            background: #D92C2C;
+        }
+        .summary-item-label{
+            text-align: center;
+            height: 1.5em;
+            color: white;
+            font-weight: bold;
+        }
         .summary-item{
             padding: 10px 30px;
-            border-bottom-style: solid;
-            border-bottom-width: 1px;
-            border-top-style: solid;
-            border-color: #2a2c331f;
-            border-top-width: 1px;
+            // border-bottom-style: solid;
+            // border-bottom-width: 1px;
+            // border-top-style: solid;
+            // border-color: #2a2c331f;
+            // border-top-width: 1px;
             .item-header{
                 font-style: normal;
                 font-weight: bold;
