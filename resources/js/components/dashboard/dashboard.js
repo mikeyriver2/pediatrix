@@ -9,6 +9,7 @@ import Summary from '../summaries/summary';
 import QuickSummary from '../summaries/quick-summary';
 import SummaryWithLabel from '../summaries/summary-with-label';
 import NewPayments from '../modals/new-payments'
+import NewAppointment from '../modals/new-appointment'
 
 export default class Dashboard extends Component{
     constructor(){
@@ -26,7 +27,7 @@ export default class Dashboard extends Component{
                 <QuickSummary />
                 <Summary />
                 <SummaryWithLabel />
-                <NewPayments />
+                <NewAppointment />
             </div>
         )
     }
