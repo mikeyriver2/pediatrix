@@ -11,8 +11,19 @@ export default class Layout extends Component{
     constructor(){
         super();
         this.state = {
-
+            appHeight: "",
+            ass: "ass"
         }
+        this.switchSideBar = this.switchSideBar.bind(this);
+    }
+    
+    componentDidMount(){
+        this.setState({
+            appHeight: document.getElementById('pediatrix').clientHeight
+        },()=>{
+            //console.log(this.state.appHeight);
+            //document.getElementById('sidebar-container').style.height = `${this.state.appHeight}px`;
+        })
     }
 
     switchSideBar(){
@@ -21,9 +32,12 @@ export default class Layout extends Component{
         if(classes.includes("sidebar-hidden")){
             element.classList.remove("sidebar-hidden");
             element.classList.add("sidebar-show");
+            document.getElementById('pediatrix').style.height = "100vh"; //temporarily disable scroll
+            document.getElementById('pediatrix').style.overflow = "hidden";
         }else{
             element.classList.remove("sidebar-show");
-            element.classList.add("sidebar-hidden");            
+            element.classList.add("sidebar-hidden");
+            document.getElementById('pediatrix').removeAttribute("style"); //re-enable scroll
         }
     }
     
@@ -31,6 +45,7 @@ export default class Layout extends Component{
         let element = document.getElementById('sidebar-container')
         element.classList.remove("sidebar-show");
         element.classList.add("sidebar-hidden");     
+        document.getElementById('pediatrix').removeAttribute("style"); 
     }
 
     render(){

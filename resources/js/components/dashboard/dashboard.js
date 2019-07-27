@@ -28,7 +28,6 @@ export default class Dashboard extends Component{
                 <QuickSummary />
                 <Summary />
                 <SummaryWithLabel />
-                <SearchBar />
             </div>
         )
     }
