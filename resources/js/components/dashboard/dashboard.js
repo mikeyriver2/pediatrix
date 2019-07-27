@@ -10,6 +10,7 @@ import QuickSummary from '../summaries/quick-summary';
 import SummaryWithLabel from '../summaries/summary-with-label';
 import NewPayments from '../modals/new-payments'
 import NewAppointment from '../modals/new-appointment'
+import SearchBar from '../modules/searchbar';
 
 export default class Dashboard extends Component{
     constructor(){
@@ -27,7 +28,7 @@ export default class Dashboard extends Component{
                 <QuickSummary />
                 <Summary />
                 <SummaryWithLabel />
-                <NewAppointment />
+                <SearchBar />
             </div>
         )
     }
