@@ -18,20 +18,13 @@ export default class NewPayments extends Component{
     constructor(){
         super();
         this.state = {
-            show_modal: true
-        }
-        this.closeModal = this.closeModal.bind(this);
-    }
 
-    closeModal(){
-        this.setState({
-            show_modal: !this.state.show_modal
-        })
+        }
     }
 
     render(){
         return (
-            <Modal id="new-payments-modal" show={this.state.show_modal} onHide={this.closeModal}>
+            <Modal id="new-payments-modal" show={this.props.show} onHide={()=>this.props.closeModal()}>
                 <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body>

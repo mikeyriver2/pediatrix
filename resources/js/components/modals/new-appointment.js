@@ -28,20 +28,13 @@ export default class NewAppointment extends Component{
     constructor(){
         super();
         this.state = {
-            show_modal: true
-        }
-        this.closeModal = this.closeModal.bind(this);
-    }
 
-    closeModal(){
-        this.setState({
-            show_modal: !this.state.show_modal
-        })
+        }
     }
 
     render(){
         return (
-            <Modal id="new-appointments-modal" show={this.state.show_modal} onHide={this.closeModal}>
+            <Modal id="new-appointments-modal" show={this.props.show} onHide={()=>this.props.closeModal()}>
                 <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body>
