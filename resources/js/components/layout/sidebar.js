@@ -90,18 +90,25 @@ export default class Sidebar extends Component{
                         </ul>
                     </li>
                 </ul>
-                <NewPatient 
-                    show = {this.state.modal.type == "new-patient" && this.state.modal.show}
-                    closeModal = {this.closeModal}
-                />
-                <NewAppointment 
-                    show = {this.state.modal.type == "new-appointment" && this.state.modal.show}
-                    closeModal = {this.closeModal}
-                />
-                <NewPayment
-                    show = {this.state.modal.type == "new-payment" && this.state.modal.show}
-                    closeModal = {this.closeModal}
-                />
+
+                {(this.state.modal.type == "new-patient" && this.state.modal.show) &&
+                    <NewPatient 
+                        show = {this.state.modal.type == "new-patient" && this.state.modal.show}
+                        closeModal = {this.closeModal}
+                    />
+                }
+                {(this.state.modal.type == "new-appointment" && this.state.modal.show) &&
+                    <NewAppointment 
+                        show = {this.state.modal.type == "new-appointment" && this.state.modal.show}
+                        closeModal = {this.closeModal}
+                    />
+                }
+                {(this.state.modal.type == "new-payment" && this.state.modal.show) &&
+                    <NewPayment
+                        show = {this.state.modal.type == "new-payment" && this.state.modal.show}
+                        closeModal = {this.closeModal}
+                    />
+                }
             </div>
         )
     }

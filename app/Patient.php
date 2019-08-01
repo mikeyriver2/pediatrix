@@ -15,4 +15,17 @@ class Patient extends Model
         'email'
     ];
 
+    protected $appends = [
+        'full_name'
+    ];
+
+    public function getFullNameAttribute(){
+        $first_name = $this->attributes["first_name"];
+        $middle_name = $this->attributes["first_name"];
+        $last_name = $this->attributes["last_name"];
+
+        return "".$first_name." ".$middle_name." ".$last_name."";
+    }
+
+
 }
