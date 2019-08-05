@@ -6,6 +6,7 @@ import {
 import NewPatient from '../modals/new-patient';
 import NewAppointment from '../modals/new-appointment';
 import NewPayment from '../modals/new-payments';
+import NewRecord from '../modals/new-records';
 
 export default class Sidebar extends Component{
     constructor(){
@@ -68,7 +69,7 @@ export default class Sidebar extends Component{
                     <li className="sidebar-outter">
                         View Records
                         <ul className="sidebar-view-records-parent">
-                            <li className="sidebar-inner">New Record</li>
+                            <li onClick={e => this.triggerModal('new-record')} className="sidebar-inner">New Record</li>
                         </ul>
                     </li>
                     <li className="sidebar-outter">
@@ -106,6 +107,12 @@ export default class Sidebar extends Component{
                 {(this.state.modal.type == "new-payment" && this.state.modal.show) &&
                     <NewPayment
                         show = {this.state.modal.type == "new-payment" && this.state.modal.show}
+                        closeModal = {this.closeModal}
+                    />
+                }
+                {(this.state.modal.type == "new-record" && this.state.modal.show) &&
+                    <NewRecord
+                        show = {this.state.modal.type == "new-record" && this.state.modal.show}
                         closeModal = {this.closeModal}
                     />
                 }
