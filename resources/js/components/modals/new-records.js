@@ -34,20 +34,19 @@ export default class NewRecord extends Component{
         this.showSuggestions = this.showSuggestions.bind(this);
         this.selectPatient = this.selectPatient.bind(this);
         this.showNewPatientModal = this.showNewPatientModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount(){
         var interval = setInterval(()=>{
             if(document.getElementById("new-record-modal")){
                 document.getElementById("new-record-modal").addEventListener("click", (e)=>{
-                    console.log(e.target.className)
-                    console.log(e.target.id)
-                    console.log(e.target.className.includes("ignore-listener"));
-
-                    if(e.target.id == "" && e.target.id != "records-patient-name"){
+                    console.log(e.target.className);
+                    if(!e.target.className.includes("ignore-listener")){
+                        console.log('disabling div');
                         this.setState({disableDiv: true});
-                    }else if(e.target.className == "" && e.target.className.includes("ignore-listener")){
-                        this.setState({disableDiv: true});
+                    }else{
+                        console.log('ignoring div');
                     }
                 });
                 clearInterval(interval)
@@ -70,7 +69,8 @@ export default class NewRecord extends Component{
 
     selectPatient(patient){
         this.setState({
-            selected_patient: patient
+            selected_patient: patient,
+            disableDiv: true 
         })
     }
 
@@ -81,15 +81,26 @@ export default class NewRecord extends Component{
                 ...prevState.modal,
                 type: "new-patient",
                 show: !prevState.modal.show
+            },
+            disableDiv: true
+        }))
+    }
+
+    closeModal(){
+        this.setState(prevState => ({
+            modal: {
+                ...prevState.modal,
+                type: "",
+                show: false
             } 
-         }))
+        }))
     }
 
     showSuggestions(){
         if(!this.state.disableDiv && this.state.patients && this.state.full_name != ""){
             if(this.state.patients.length > 0){
                 return (
-                    <div className="suggestions-patients">
+                    <div className="ignore-listener suggestions-patients">
                         {this.state.patients.map(patient=>{
                             return (
                                 <div key={patient.id} onClick={e=>this.selectPatient(patient)} className="ignore-listener suggestion-patient">
@@ -99,7 +110,7 @@ export default class NewRecord extends Component{
                         })
                         }
                         <div onClick={this.showNewPatientModal} className="ignore-listener suggestion-patient">
-                            <b className="ignore-listener"><i>New Patient . . .</i></b>
+                            <b className="ignore-listener">New Patient . . .</b>
                         </div>
                     </div>
                 )
@@ -126,7 +137,10 @@ export default class NewRecord extends Component{
                         <Form>
                             <Form.Label>Patient</Form.Label>
                             <div className="patient-suggestions-container">
-                                <Form.Control id="records-patient-name" onFocus={()=>{this.setState({disableDiv: false, full_name: " "})}} onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
+                                <Form.Control className="ignore-listener" value={this.state.selected_patient.id ? this.state.selected_patient.full_name : this.state.full_name} id="records-patient-name" onFocus={()=>{this.setState({disableDiv: false, full_name: " "})}} onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
+                                <button onClick={()=>{this.setState({selected_patient: {}})}} type="button" className="close">
+                                    <span>x</span>
+                                </button>
                                 {this.showSuggestions()}
                             </div>
 
@@ -151,6 +165,8 @@ export default class NewRecord extends Component{
                     <NewPatient 
                         show = {this.state.modal.type == "new-patient" && this.state.modal.show}
                         closeModal = {this.closeModal}
+                        parentComponent = "NewRecord"
+                        selectPatient = {this.selectPatient}
                     />
                 }
             </div>

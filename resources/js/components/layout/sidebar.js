@@ -7,6 +7,7 @@ import NewPatient from '../modals/new-patient';
 import NewAppointment from '../modals/new-appointment';
 import NewPayment from '../modals/new-payments';
 import NewRecord from '../modals/new-records';
+import { timingSafeEqual } from 'crypto';
 
 export default class Sidebar extends Component{
     constructor(){
@@ -17,14 +18,12 @@ export default class Sidebar extends Component{
                show: false
            }
         }
-        //this.node = React.createRef();
         this.handleClick = this.handleClick.bind(this);
         this.triggerModal = this.triggerModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount(){
-        console.log('qweqweqwe');
         document.addEventListener('mousedown', this.handleClick, false);
     }
 
@@ -43,9 +42,8 @@ export default class Sidebar extends Component{
     }
 
     handleClick(e){
-        if (this.node && !this.node.contains(e.target)) {
+        if (!e.target.className.includes("layout-main") && this.node && !this.node.contains(e.target) && !this.state.modal.show) {
             this.props.hideSideBar();
-            console.log('You clicked outside of me!');
         }
     }
 

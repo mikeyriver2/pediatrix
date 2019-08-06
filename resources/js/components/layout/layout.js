@@ -12,8 +12,10 @@ export default class Layout extends Component{
         super();
         this.state = {
             appHeight: "",
-            ass: "ass"
+            ass: "ass",
+            showSideBar: false
         }
+        this.header = React.createRef();
         this.switchSideBar = this.switchSideBar.bind(this);
     }
     
@@ -30,14 +32,22 @@ export default class Layout extends Component{
         let element = document.getElementById('sidebar-container')
         let classes = element.className;
         if(classes.includes("sidebar-hidden")){
-            element.classList.remove("sidebar-hidden");
-            element.classList.add("sidebar-show");
-            document.getElementById('pediatrix').style.height = "100vh"; //temporarily disable scroll
-            document.getElementById('pediatrix').style.overflow = "hidden";
+            this.setState({
+                showSideBar: true
+            },()=>{
+                element.classList.remove("sidebar-hidden");
+                element.classList.add("sidebar-show");
+                document.getElementById('pediatrix').style.height = "100vh"; //temporarily disable scroll
+                document.getElementById('pediatrix').style.overflow = "hidden";
+            })
         }else{
-            element.classList.remove("sidebar-show");
-            element.classList.add("sidebar-hidden");
-            document.getElementById('pediatrix').removeAttribute("style"); //re-enable scroll
+            this.setState({
+                showSideBar: false
+            },()=>{
+                element.classList.remove("sidebar-show");
+                element.classList.add("sidebar-hidden");
+                document.getElementById('pediatrix').removeAttribute("style"); //re-enable scroll
+            })
         }
     }
     
@@ -50,16 +60,18 @@ export default class Layout extends Component{
 
     render(){
         return (
-            <div className="main-layout">
+            <div ref={this.header} className="main-layout">
                 <div onClick={this.switchSideBar} className="layout-header">
                     <Row className="layout-main-logo">
                         <img src="/images/pediatrix1.png"/>
                     </Row>
                     <Row className="layout-nav">
-                        <h5>HOME</h5>
+                        <h5 className="layout-main-nav">HOME</h5>
                     </Row>
                 </div>
                 <Sidebar
+                    layoutRef = {this.header}
+                    showSideBar = {this.state.showSideBar}
                     hideSideBar = {this.hideSideBar}
                 />
                 

@@ -34,7 +34,12 @@ export default class NewPatient extends Component{
             ...this.state
         }
         axios.post('/api/store',values).then(res=>{
-            console.log(res)
+            if(this.props.parentComponent){
+                if(this.props.parentComponent == "NewRecord"){
+                    this.props.selectPatient(res.data.patient);
+                    this.props.closeModal()
+                }
+            }
         }).catch(err=>{
             console.log(err);
         })
@@ -49,8 +54,8 @@ export default class NewPatient extends Component{
                     <h5>New Patient</h5>
                     <Form>
                         <Form.Label>Patient Name</Form.Label>
-                        <Form.Control onChange={e => {this.setState({firstName: e.target.value})}} style={{marginBottom:"0px"}} type="text" placeholder="First Name" />
-                        <Form.Control onChange={e => {this.setState({middleName: e.target.value})}} style={{marginBottom:"0px"}} type="text" placeholder="Middle Name" />
+                        <Form.Control onChange={e => {this.setState({firstName: e.target.value})}} style={{marginBottom:"10px"}} type="text" placeholder="First Name" />
+                        <Form.Control onChange={e => {this.setState({middleName: e.target.value})}} style={{marginBottom:"10px"}} type="text" placeholder="Middle Name" />
                         <Form.Control onChange={e => {this.setState({lastName: e.target.value})}} type="text" placeholder="Last Name" />
 
                         <Form.Label>Phone Number</Form.Label>

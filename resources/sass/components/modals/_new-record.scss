@@ -1,4 +1,4 @@
-#new-payments-modal{
+#new-record-modal{
     .modal-header{
         border-bottom: 0px;
     }
@@ -16,6 +16,13 @@
         form{
             .patient-suggestions-container{
                 position: relative;
+                .close{
+                    margin: 0px !important;
+                    width: 0px !important;
+                    position: absolute;
+                    top: 7px;
+                    left: 77vw;
+                }
                 .suggestions-patients{
                     position: absolute;
                     z-index: 10;

@@ -23,53 +23,171 @@ import {
 import Summary from '../summaries/summary';
 import QuickSummary from '../summaries/quick-summary';
 import SummaryWithLabel from '../summaries/summary-with-label';
+import NewPatient from './new-patient';
 
 export default class NewAppointment extends Component{
     constructor(){
         super();
         this.state = {
+            full_name: "",
+            patients: [],
+            disableDiv: false,
+            modal: {
+                type: "",
+                show: false
+            },
+            selected_patient: {}
+        }
+        this.handleQuickSearch = this.handleQuickSearch.bind(this);
+        this.showSuggestions = this.showSuggestions.bind(this);
+        this.selectPatient = this.selectPatient.bind(this);
+        this.showNewPatientModal = this.showNewPatientModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+    }
 
+    componentDidMount(){
+        var interval = setInterval(()=>{
+            if(document.getElementById("new-appointments-modal")){
+                document.getElementById("new-appointments-modal").addEventListener("click", (e)=>{
+                    console.log(e.target.className);
+                    if(!e.target.className.includes("ignore-listener")){
+                        console.log('disabling div');
+                        this.setState({disableDiv: true});
+                    }else{
+                        console.log('ignoring div');
+                    }
+                });
+                clearInterval(interval)
+            }
+        },1000)   
+    }
+
+    handleQuickSearch(e){
+        this.setState({
+            full_name: e.target.value,
+            disableDiv: false
+        },()=>{
+            axios.get("/api/patients/qs"+"?full_name="+this.state.full_name).then(res=>{
+                this.setState({
+                    patients: res.data
+                })
+            })
+        });
+    }
+
+    selectPatient(patient){
+        this.setState({
+            selected_patient: patient,
+            disableDiv: true 
+        })
+    }
+
+    showNewPatientModal(){
+        console.log('ass');
+        this.setState(prevState => ({
+            modal: {
+                ...prevState.modal,
+                type: "new-patient",
+                show: !prevState.modal.show
+            },
+            disableDiv: true
+        }))
+    }
+
+    closeModal(){
+        this.setState(prevState => ({
+            modal: {
+                ...prevState.modal,
+                type: "",
+                show: false
+            } 
+        }))
+    }
+
+    showSuggestions(){
+        if(!this.state.disableDiv && this.state.patients && this.state.full_name != ""){
+            if(this.state.patients.length > 0){
+                return (
+                    <div className="ignore-listener suggestions-patients">
+                        {this.state.patients.map(patient=>{
+                            return (
+                                <div key={patient.id} onClick={e=>this.selectPatient(patient)} className="ignore-listener suggestion-patient">
+                                    {patient.full_name}
+                                </div>
+                            )
+                        })
+                        }
+                        <div onClick={this.showNewPatientModal} className="ignore-listener suggestion-patient">
+                            <b className="ignore-listener">New Patient . . .</b>
+                        </div>
+                    </div>
+                )
+            }else{
+                return (
+                    <div className="suggestions-patients">
+                        <div onClick={this.showNewPatientModal} className="ignore-listener suggestion-patient">
+                            <b className="ignore-listener">New Patient . . .</b>
+                        </div>
+                    </div>
+                )
+            }
         }
     }
 
+
     render(){
         return (
-            <Modal id="new-appointments-modal" show={this.props.show} onHide={()=>this.props.closeModal()}>
-                <Modal.Header closeButton>
-                </Modal.Header>
-                <Modal.Body>
-                    <h5>Request Appointment</h5>
-                    <Form>
-                        <Form.Label>Patient</Form.Label>
-                        <Form.Control type="text" placeholder="Enter Patient Name" />
+            <div>
+                <Modal id="new-appointments-modal" show={this.props.show} onHide={()=>this.props.closeModal()}>
+                    <Modal.Header closeButton>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5>Request Appointment</h5>
+                        <Form>
+                            <div className="patient-appointments-container">
+                                <Form.Label>Patient</Form.Label>
+                                <Form.Control onFocus={()=>{this.setState({disableDiv: false, full_name: " "})}} onChange={this.handleQuickSearch} value={this.state.selected_patient.id ? this.state.selected_patient.full_name : this.state.full_name} className="ignore-listener" type="text" placeholder="Enter Patient Name" />
+                                <button onClick={()=>{this.setState({selected_patient: {}})}} type="button" className="close">
+                                    <span>x</span>
+                                </button>
+                                {this.showSuggestions()}
+                            </div>
+                            <Form.Label>Appointment Type</Form.Label>
+                            <Form.Control as="select">
+                                <option>General Consultation</option>
+                                <option>Something</option>
+                                <option>Something2</option>
+                            </Form.Control>
 
-                        <Form.Label>Appointment Type</Form.Label>
-                        <Form.Control as="select">
-                            <option>General Consultation</option>
-                            <option>Something</option>
-                            <option>Something2</option>
-                         </Form.Control>
-
-                        
-                        <Form.Label>Date of Appointments</Form.Label>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            clearable
-                            value={new Date()}
-                            placeholder="10/10/2018"
-                            onChange={()=>{}}
-                            minDate={new Date()}
-                            InputProps={{
-                                disableUnderline: true,
-                            }}
-                            format="MM/dd/yyyy"
-                        />
-                        </MuiPickersUtilsProvider>
-                        
-                        <Button variant="success">SAVE</Button>
-                    </Form>
-                </Modal.Body>
-            </Modal>
+                            
+                            <Form.Label>Date of Appointments</Form.Label>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                clearable
+                                value={new Date()}
+                                placeholder="10/10/2018"
+                                onChange={()=>{}}
+                                minDate={new Date()}
+                                InputProps={{
+                                    disableUnderline: true,
+                                }}
+                                format="MM/dd/yyyy"
+                            />
+                            </MuiPickersUtilsProvider>
+                            
+                            <Button variant="success">SAVE</Button>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
+                {(this.state.modal.type == "new-patient" && this.state.modal.show) &&
+                    <NewPatient 
+                        show = {this.state.modal.type == "new-patient" && this.state.modal.show}
+                        closeModal = {this.closeModal}
+                        parentComponent = "NewRecord"
+                        selectPatient = {this.selectPatient}
+                    />
+                }
+            </div>
         )
     }
 

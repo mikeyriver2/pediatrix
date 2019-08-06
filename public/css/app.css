@@ -10722,11 +10722,11 @@ a.text-dark:focus {
   list-style: none;
 }
 
-#new-record-modal .modal-header {
+#new-payments-modal .modal-header {
   border-bottom: 0px;
 }
 
-#new-record-modal .modal-body h5 {
+#new-payments-modal .modal-body h5 {
   padding: 20px;
   font-style: normal;
   font-weight: bold;
@@ -10735,11 +10735,11 @@ a.text-dark:focus {
   color: #293661;
 }
 
-#new-record-modal .modal-body form .patient-suggestions-container {
+#new-payments-modal .modal-body form .patient-suggestions-container {
   position: relative;
 }
 
-#new-record-modal .modal-body form .patient-suggestions-container .suggestions-patients {
+#new-payments-modal .modal-body form .patient-suggestions-container .suggestions-patients {
   position: absolute;
   z-index: 10;
   background: #FFFFFF;
@@ -10750,21 +10750,21 @@ a.text-dark:focus {
   top: 35px;
 }
 
-#new-record-modal .modal-body form .patient-suggestions-container .suggestion-patient {
+#new-payments-modal .modal-body form .patient-suggestions-container .suggestion-patient {
   padding: 5px;
 }
 
-#new-record-modal .modal-body form .patient-suggestions-container .suggestion-patient:hover {
+#new-payments-modal .modal-body form .patient-suggestions-container .suggestion-patient:hover {
   background: #141f45c7;
   color: white;
 }
 
-#new-record-modal .modal-body form button {
+#new-payments-modal .modal-body form button {
   margin: 20px 0px;
   width: 100%;
 }
 
-#new-record-modal .modal-body form label {
+#new-payments-modal .modal-body form label {
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -10773,14 +10773,14 @@ a.text-dark:focus {
   margin-bottom: 0.5rem;
 }
 
-#new-record-modal .modal-body form .form-control {
+#new-payments-modal .modal-body form .form-control {
   margin-bottom: 20px;
   background: #FFFFFF;
   box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
 
-#new-record-modal .modal-body form .input-group .input-group-prepend {
+#new-payments-modal .modal-body form .input-group .input-group-prepend {
   display: block;
 }
 
@@ -10795,6 +10795,38 @@ a.text-dark:focus {
   font-size: 24px;
   line-height: 28px;
   color: #293661;
+}
+
+#new-appointments-modal .modal-body form .patient-appointments-container {
+  position: relative;
+}
+
+#new-appointments-modal .modal-body form .patient-appointments-container .close {
+  margin: 0px !important;
+  width: 0px !important;
+  position: absolute;
+  top: 36px;
+  left: 80vw;
+}
+
+#new-appointments-modal .modal-body form .patient-appointments-container .suggestions-patients {
+  position: absolute;
+  z-index: 10;
+  background: #FFFFFF;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  top: 66px;
+}
+
+#new-appointments-modal .modal-body form .patient-appointments-container .suggestion-patient {
+  padding: 5px;
+}
+
+#new-appointments-modal .modal-body form .patient-appointments-container .suggestion-patient:hover {
+  background: #141f45c7;
+  color: white;
 }
 
 #new-appointments-modal .modal-body form button {
@@ -10860,11 +10892,11 @@ a.text-dark:focus {
   display: block;
 }
 
-#new-payments-modal .modal-header {
+#new-record-modal .modal-header {
   border-bottom: 0px;
 }
 
-#new-payments-modal .modal-body h5 {
+#new-record-modal .modal-body h5 {
   padding: 20px;
   font-style: normal;
   font-weight: bold;
@@ -10873,11 +10905,19 @@ a.text-dark:focus {
   color: #293661;
 }
 
-#new-payments-modal .modal-body form .patient-suggestions-container {
+#new-record-modal .modal-body form .patient-suggestions-container {
   position: relative;
 }
 
-#new-payments-modal .modal-body form .patient-suggestions-container .suggestions-patients {
+#new-record-modal .modal-body form .patient-suggestions-container .close {
+  margin: 0px !important;
+  width: 0px !important;
+  position: absolute;
+  top: 7px;
+  left: 77vw;
+}
+
+#new-record-modal .modal-body form .patient-suggestions-container .suggestions-patients {
   position: absolute;
   z-index: 10;
   background: #FFFFFF;
@@ -10888,21 +10928,21 @@ a.text-dark:focus {
   top: 35px;
 }
 
-#new-payments-modal .modal-body form .patient-suggestions-container .suggestion-patient {
+#new-record-modal .modal-body form .patient-suggestions-container .suggestion-patient {
   padding: 5px;
 }
 
-#new-payments-modal .modal-body form .patient-suggestions-container .suggestion-patient:hover {
+#new-record-modal .modal-body form .patient-suggestions-container .suggestion-patient:hover {
   background: #141f45c7;
   color: white;
 }
 
-#new-payments-modal .modal-body form button {
+#new-record-modal .modal-body form button {
   margin: 20px 0px;
   width: 100%;
 }
 
-#new-payments-modal .modal-body form label {
+#new-record-modal .modal-body form label {
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -10911,14 +10951,14 @@ a.text-dark:focus {
   margin-bottom: 0.5rem;
 }
 
-#new-payments-modal .modal-body form .form-control {
+#new-record-modal .modal-body form .form-control {
   margin-bottom: 20px;
   background: #FFFFFF;
   box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
 
-#new-payments-modal .modal-body form .input-group .input-group-prepend {
+#new-record-modal .modal-body form .input-group .input-group-prepend {
   display: block;
 }
 

@@ -14,6 +14,33 @@
             color: #293661;
         }
         form{
+            .patient-appointments-container{
+                position: relative;
+                .close{
+                    margin: 0px !important;
+                    width: 0px !important;
+                    position: absolute;
+                    top: 36px;
+                    left: 80vw;
+                }
+                .suggestions-patients{
+                    position: absolute;
+                    z-index: 10;
+                    background: #FFFFFF;
+                    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+                    border-radius: 5px;
+                    width: 100%;
+                    padding: 10px;
+                    top: 66px;
+                }
+                .suggestion-patient{
+                    padding: 5px;
+                }
+                .suggestion-patient:hover{
+                    background: #141f45c7;
+                    color: white; 
+                }
+            }
             button{
                 margin: 20px 0px;
                 width: 100%;
