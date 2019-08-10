@@ -15,10 +15,11 @@ import QuickSummary from '../summaries/quick-summary';
 import SummaryWithLabel from '../summaries/summary-with-label';
 import axios from 'axios';
 import NewPatient from './new-patient';
+import * as helpers from '../../helpers/validations'
 
 export default class NewRecord extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             full_name: "",
             patients: [],
@@ -27,7 +28,8 @@ export default class NewRecord extends Component{
                 type: "",
                 show: false
             },
-            selected_patient: {}
+            selected_patient: {},
+            errors: {}
         }
 
         this.handleQuickSearch = this.handleQuickSearch.bind(this);
@@ -35,6 +37,7 @@ export default class NewRecord extends Component{
         this.selectPatient = this.selectPatient.bind(this);
         this.showNewPatientModal = this.showNewPatientModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.handleOnChange = this.handleOnChange.bind(this);
     }
 
     componentDidMount(){
@@ -126,6 +129,29 @@ export default class NewRecord extends Component{
         }
     }
 
+    handleOnChange(e, type){
+        let isError = false;
+        let errorCase = ""
+        switch(type){
+            case "weight":
+                isError = helpers.validateIsNumeric(e.target.value,type);
+                errorCase = "is not a valid weight";
+                break;
+        }
+        let errors = this.state.errors;
+        if(!isError){
+            errors[type] = errorCase;
+            this.setState({
+                errors: errors
+            })
+        }else if (errors[type]){
+            delete errors[type];
+            this.setState({
+                errors: errors
+            })
+        }
+    }
+
     render(){
         return (
             <div>
@@ -145,8 +171,8 @@ export default class NewRecord extends Component{
                             </div>
 
                             <Form.Label>Weight</Form.Label>   
-                            <Form.Control type="text" placeholder="10 lbs" />
-
+                            <Form.Control onChange={e=>this.handleOnChange(e,"weight")} type="text" placeholder="10 lbs" />
+                            <p style={{display: this.state.errors.weight ? "block" : "none"}}>Weight is Invalid</p>
                             
                             <Form.Label>Temperature</Form.Label>   
                             <Form.Control type="text" placeholder="36 °C" />
