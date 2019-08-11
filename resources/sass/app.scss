@@ -17,6 +17,9 @@
 @import './components/modals/new-record';
 
 //general styles non-component specific
+.error{
+    color: red;
+}
 
 .bottom-top-borders{
     border-bottom-style: solid !important;

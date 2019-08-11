@@ -10962,6 +10962,10 @@ a.text-dark:focus {
   display: block;
 }
 
+.error {
+  color: red;
+}
+
 .bottom-top-borders {
   border-bottom-style: solid !important;
   border-bottom-width: 1px !important;

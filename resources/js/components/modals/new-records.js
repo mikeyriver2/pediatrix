@@ -29,7 +29,11 @@ export default class NewRecord extends Component{
                 show: false
             },
             selected_patient: {},
-            errors: {}
+            errors: {},
+            weight: "",
+            temperature: "",
+            diagnosis: "",
+            prescription: "",
         }
 
         this.handleQuickSearch = this.handleQuickSearch.bind(this);
@@ -136,6 +140,16 @@ export default class NewRecord extends Component{
             case "weight":
                 isError = helpers.validateIsNumeric(e.target.value,type);
                 errorCase = "is not a valid weight";
+                this.setState({
+                    weight: `${e.target.value}` 
+                });
+                break;
+            case "temperature":
+                isError = helpers.validateIsNumeric(e.target.value,type);
+                errorCase = "is not a valid weight";
+                this.setState({
+                    temperature: `${e.target.value}` 
+                });
                 break;
         }
         let errors = this.state.errors;
@@ -153,6 +167,12 @@ export default class NewRecord extends Component{
     }
 
     render(){
+        let disableSave = Object.keys(this.state.errors).length > 0 || !this.state.selected_patient.id;
+        let borderStyle = {
+            borderTopRightRadius: "0px",
+            borderBottomRightRadius: "0px"
+        };
+
         return (
             <div>
                 <Modal id="new-record-modal" show={this.props.show} onHide={()=>this.props.closeModal()}>
@@ -171,11 +191,22 @@ export default class NewRecord extends Component{
                             </div>
 
                             <Form.Label>Weight</Form.Label>   
-                            <Form.Control onChange={e=>this.handleOnChange(e,"weight")} type="text" placeholder="10 lbs" />
-                            <p style={{display: this.state.errors.weight ? "block" : "none"}}>Weight is Invalid</p>
+                            <InputGroup>
+                                <FormControl style={borderStyle} onChange={e=>this.handleOnChange(e,"weight")} type="text" placeholder="10" />
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text>lbs</InputGroup.Text>
+                                </InputGroup.Prepend>
+                            </InputGroup>
+                            <p className="error" style={{display: this.state.errors.weight ? "block" : "none"}}>Weight is Invalid</p>
                             
                             <Form.Label>Temperature</Form.Label>   
-                            <Form.Control type="text" placeholder="36 °C" />
+                            <InputGroup>
+                               <Form.Control style={borderStyle} onChange={e=>this.handleOnChange(e,"temperature")} type="text" placeholder="36" />
+                               <InputGroup.Prepend>
+                                    <InputGroup.Text>°C</InputGroup.Text>
+                                </InputGroup.Prepend>
+                            </InputGroup>
+                            <p className="error" style={{display: this.state.errors.temperature ? "block" : "none"}}>Temperature is Invalid</p>
 
                             <Form.Label>Diagnosis</Form.Label>   
                             <Form.Control as="textarea" rows="3"/>
@@ -183,7 +214,7 @@ export default class NewRecord extends Component{
                             <Form.Label>Prescription</Form.Label>   
                             <Form.Control as="textarea" rows="3"/>
 
-                            <Button variant="success">SAVE</Button>
+                            <Button disabled={disableSave} variant="success">SAVE</Button>
                         </Form>
                     </Modal.Body>
                 </Modal>
