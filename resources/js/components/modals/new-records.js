@@ -15,7 +15,7 @@ import QuickSummary from '../summaries/quick-summary';
 import SummaryWithLabel from '../summaries/summary-with-label';
 import axios from 'axios';
 import NewPatient from './new-patient';
-import * as helpers from '../../helpers/validations'
+import * as helpers from '../../helpers/validations';
 
 export default class NewRecord extends Component{
     constructor(props){
@@ -138,14 +138,14 @@ export default class NewRecord extends Component{
         let errorCase = ""
         switch(type){
             case "weight":
-                isError = helpers.validateIsNumeric(e.target.value,type);
+                isError = !helpers.validateIsNumeric(e.target.value,type);
                 errorCase = "is not a valid weight";
                 this.setState({
                     weight: `${e.target.value}` 
                 });
                 break;
             case "temperature":
-                isError = helpers.validateIsNumeric(e.target.value,type);
+                isError = !helpers.validateIsNumeric(e.target.value,type);
                 errorCase = "is not a valid weight";
                 this.setState({
                     temperature: `${e.target.value}` 
@@ -153,7 +153,7 @@ export default class NewRecord extends Component{
                 break;
         }
         let errors = this.state.errors;
-        if(!isError){
+        if(isError){
             errors[type] = errorCase;
             this.setState({
                 errors: errors
@@ -183,7 +183,7 @@ export default class NewRecord extends Component{
                         <Form>
                             <Form.Label>Patient</Form.Label>
                             <div className="patient-suggestions-container">
-                                <Form.Control className="ignore-listener" value={this.state.selected_patient.id ? this.state.selected_patient.full_name : this.state.full_name} id="records-patient-name" onFocus={()=>{this.setState({disableDiv: false, full_name: " "})}} onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
+                                <Form.Control className="ignore-listener" value={this.state.selected_patient.id ? this.state.selected_patient.full_name : ""} id="records-patient-name" onFocus={()=>{this.setState({disableDiv: false, full_name: " "})}} onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
                                 <button onClick={()=>{this.setState({selected_patient: {}})}} type="button" className="close">
                                     <span>x</span>
                                 </button>
