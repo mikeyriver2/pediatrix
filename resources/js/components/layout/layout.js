@@ -6,6 +6,7 @@ import Dashboard from '../dashboard/dashboard';
 import {
     Row,
 } from 'react-bootstrap';
+import ViewPatients from '../view/patients/patients'
 
 export default class Layout extends Component{
     constructor(){
@@ -75,8 +76,9 @@ export default class Layout extends Component{
                     hideSideBar = {this.hideSideBar}
                 />
                 
-                <Route exact path={`${this.props.match.url}`} component={Dashboard}/>
-                <Route exact path={`${this.props.match.url}/home`} component={Dashboard}/>
+                <Route exact path={`/`} component={Dashboard}/>
+                <Route exact path={`/patients`} component={ViewPatients}/>
+                <Route exact path={`/home`} component={Dashboard}/>
             </div>
         )
     }

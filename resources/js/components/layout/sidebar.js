@@ -8,6 +8,7 @@ import NewAppointment from '../modals/new-appointment';
 import NewPayment from '../modals/new-payments';
 import NewRecord from '../modals/new-records';
 import { timingSafeEqual } from 'crypto';
+import {Link} from 'react-router-dom';
 
 export default class Sidebar extends Component{
     constructor(){
@@ -77,7 +78,7 @@ export default class Sidebar extends Component{
                         </ul>
                     </li>
                     <li className="sidebar-outter">
-                        View Patients
+                    <Link to="/patients" >View Patients</Link>
                         <ul onClick={e => this.triggerModal('new-patient')} className="sidebar-view-records-parent">
                             <li className="sidebar-inner">New Patient</li>
                         </ul>
