@@ -7,6 +7,13 @@ use App\Patient;
 
 class PatientController extends Controller
 {
+    public function index(Request $request){
+        $patients = Patient::all();
+        return response()->json([
+            'patients' => $patients,
+        ]);
+    }
+
     public function store(Request $request){
         $patient = Patient::create([
             'first_name' => $request->firstName,

@@ -7,64 +7,36 @@ import {
 } from 'react-bootstrap';
 
 export default class QuickSummary extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
 
         }
     }
 
     render(){
+        const { summary } = this.props;
         return (
             <div className="quick-summary-container">
-                <Row style={{paddingTop:"20px"}} className="quick-summary-item"> 
-                    <Col xs={8} className="qsi-left"> 
-                        <h6>
-                            APPOINTMENTS TODAY
-                        </h6>
-                    </Col>
-                    <Col xs={4} className="qsi-right">
-                        <h6>
-                            <b>10</b>
-                        </h6>
-                    </Col>
-                </Row>
-                <Row className="quick-summary-item"> 
-                    <Col xs={6} className="qsi-left">
-                        <h6>
-                            INCOME THIS MONTH
-                        </h6>
-                    </Col>
-                    <Col xs={6} className="qsi-right">
-                        <h6>
-                            <b>15,000.00 PhP</b>
-                        </h6>
-                    </Col>
-                </Row>
-                <Row className="quick-summary-item"> 
-                    <Col xs={8} className="qsi-left">
-                        <h6>
-                            PATIENTS THIS MONTH
-                        </h6>
-                    </Col>
-                    <Col xs={4} className="qsi-right">
-                        <h6>
-                            <b>10</b>
-                        </h6>
-                    </Col>
-                </Row>
-                <Row className="quick-summary-item"> 
-                    <Col xs={8} className="qsi-left">
-                        <h6>
-                            RECORDS THIS MONTH
-                        </h6>
-                    </Col>
-                    <Col xs={4} className="qsi-right">
-                        <h6>
-                            <b>10</b>
-                        </h6>
-                    </Col>
-                </Row>
+                { 
+                    (summary && summary.length > 0) &&
+                        summary.map((value, index) => {
+                            return (
+                                <Row key={index} style={{paddingTop: index == 0 ? "20px" : ""}} className="quick-summary-item"> 
+                                    <Col xs={8} className="qsi-left"> 
+                                        <h6>
+                                            {value.header}
+                                        </h6>
+                                    </Col>
+                                    <Col xs={4} className="qsi-right">
+                                        <h6>
+                                            <b>{value.value}</b>
+                                        </h6>
+                                    </Col>
+                                </Row>
+                            )
+                        })    
+                }
             </div>
         )
     }

@@ -5,6 +5,8 @@ import NewAppointment from '../../modals/new-appointment'
 import SearchBar from '../../modules/searchbar';
 import Summary from '../../summaries/summary';
 import QuickSummary from '../../summaries/quick-summary';
+import SummaryWithLabel from '../../summaries/summary-with-label';
+import axios from 'axios';
 
 export default class ViewPatients extends Component{
     constructor(){
@@ -14,11 +16,37 @@ export default class ViewPatients extends Component{
         }
     }
 
+    componentDidMount(){
+        axios.get('/api/patients').then(res=>{
+            this.setState({
+                patients: res.data.patients
+            })
+        })
+    }
+
     render(){
+        const summary = [
+            {header: "Total Patients", value: 10},
+            {header: "New Patients This Week", value: 2},
+            {header: "Newest Patient", value: "Mikey Rivera"},
+        ]
         return (
             <div className="view-patients">
-                <QuickSummary />
-                <Summary />
+                <QuickSummary 
+                    summary = {summary}
+                />
+                {/*<Summary 
+                    summary = {this.state.patients}
+                    parent = "ViewPatients"
+                    header = "Patients List"
+                />*/}
+                <SummaryWithLabel 
+                    summary = {this.state.patients}
+                    parent = "ViewPatients"
+                    header = "Patients List"
+                    filterBy = {["All", "InPatient", "OutPatient"]}
+                />
+
             </div>
         )
     }
