@@ -42,6 +42,7 @@ export default class NewRecord extends Component{
         this.showNewPatientModal = this.showNewPatientModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -150,6 +151,10 @@ export default class NewRecord extends Component{
                 this.setState({
                     temperature: `${e.target.value}` 
                 });
+            default:
+                this.setState({
+                    [type]: `${e.target.value}` 
+                });
                 break;
         }
         let errors = this.state.errors;
@@ -164,6 +169,20 @@ export default class NewRecord extends Component{
                 errors: errors
             })
         }
+    }
+
+    handleSubmit(){
+        const {selected_patient, weight, temperature, diagnosis, prescription} = this.state;
+        let values = {
+            patient: selected_patient,
+            weight: weight,
+            temperature: temperature,
+            diagnosis: diagnosis,
+            prescription: prescription
+        }
+        axios.post('/api/records/store', values).then(res=>{
+            this.props.closeModal();
+        });
     }
 
     render(){
@@ -209,12 +228,12 @@ export default class NewRecord extends Component{
                             <p className="error" style={{display: this.state.errors.temperature ? "block" : "none"}}>Temperature is Invalid</p>
 
                             <Form.Label>Diagnosis</Form.Label>   
-                            <Form.Control as="textarea" rows="3"/>
+                            <Form.Control onChange={e=>this.handleOnChange(e,"diagnosis")} as="textarea" rows="3"/>
 
                             <Form.Label>Prescription</Form.Label>   
-                            <Form.Control as="textarea" rows="3"/>
+                            <Form.Control onChange={e=>this.handleOnChange(e,"prescription")} as="textarea" rows="3"/>
 
-                            <Button disabled={disableSave} variant="success">SAVE</Button>
+                            <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
                         </Form>
                     </Modal.Body>
                 </Modal>

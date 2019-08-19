@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('records/store','RecordController@store');
+Route::post('payments/store','PaymentController@store');
 Route::get('patients','PatientController@index');
 Route::get('patients/qs','PaymentController@quickSearchPatients');
 Route::post('store','PatientController@store');

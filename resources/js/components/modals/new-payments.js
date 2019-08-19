@@ -14,6 +14,7 @@ import Summary from '../summaries/summary';
 import QuickSummary from '../summaries/quick-summary';
 import SummaryWithLabel from '../summaries/summary-with-label';
 import axios from 'axios';
+import * as helpers from '../../helpers/validations';
 
 export default class NewPayments extends Component{
     constructor(){
@@ -22,18 +23,27 @@ export default class NewPayments extends Component{
             full_name: "",
             patients: [],
             disableDiv: false,
+            selected_patient: {},
+            amount: 0,
+            status: "Complete", 
+            errors: {}
         }
 
         this.handleQuickSearch = this.handleQuickSearch.bind(this);
         this.showSuggestions = this.showSuggestions.bind(this);
         this.selectPatient = this.selectPatient.bind(this);
+        this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
         var interval = setInterval(()=>{
             if(document.getElementById("new-payments-modal")){
-                document.getElementById("new-payments-modal").addEventListener("click", ()=>{
-                    this.setState({disableDiv: true});
+                document.getElementById("new-payments-modal").addEventListener("click", e=>{
+                    if(!e.target.className.includes("ignore-listener")){
+                        this.setState({disableDiv: true});
+                    }else{
+                    }
                 });
                 clearInterval(interval)
             }
@@ -55,7 +65,8 @@ export default class NewPayments extends Component{
 
     selectPatient(patient){
         this.setState({
-            selected_patient: patient
+            selected_patient: patient,
+            disableDiv: true
         })
     }
 
@@ -63,10 +74,10 @@ export default class NewPayments extends Component{
         if(!this.state.disableDiv && this.state.patients && this.state.full_name != ""){
             if(this.state.patients.length > 0){
                 return (
-                    <div className="suggestions-patients">
+                    <div className="ignore-listener suggestions-patients">
                         {this.state.patients.map(patient=>{
                             return (
-                                <div key={patient.id} onClick={e=>this.selectPatient(patient)} className="suggestion-patient">
+                                <div key={patient.id} onClick={e=>this.selectPatient(patient)} className="ignore-listener suggestion-patient">
                                     {patient.full_name}
                                 </div>
                             )
@@ -78,6 +89,50 @@ export default class NewPayments extends Component{
             }
         }
     }
+
+    handleSubmit(){
+        const {selected_patient, amount, status} = this.state;
+        let values = {
+            patient: selected_patient,
+            amount: amount,
+            status: status
+        }
+        axios.post('/api/payments/store', values).then(res=>{
+            this.props.closeModal();
+        });
+    }
+
+    handleOnChange(e, type){
+        let isError = false;
+        let errorCase = ""
+        switch(type){
+            case "amount":
+                isError = !helpers.validateIsNumeric(e.target.value,type);
+                errorCase = "is not a valid weight";
+                this.setState({
+                    amount: `${e.target.value}` 
+                });
+                break;
+            default:
+                this.setState({
+                    [type]: `${e.target.value}` 
+                });
+                break;
+        }
+        let errors = this.state.errors;
+        if(isError){
+            errors[type] = errorCase;
+            this.setState({
+                errors: errors
+            })
+        }else if (errors[type]){
+            delete errors[type];
+            this.setState({
+                errors: errors
+            })
+        }
+    }
+
 
     render(){
         return (
@@ -98,20 +153,22 @@ export default class NewPayments extends Component{
                                 <InputGroup.Text id="Php">PhP</InputGroup.Text>
                             </InputGroup.Prepend>
                             <FormControl
-                                onChange={()=>{console.log('bleb')}}
+                                onChange={e=>this.handleOnChange(e,"amount")}
                                 placeholder="Enter Amount"
                             />
                         </InputGroup>
 
                         
                         <Form.Label>Status</Form.Label>
-                        <Form.Control as="select">
+                        <Form.Control 
+                            onChange={e=>this.handleOnChange(e,"status")}
+                        as="select">
                             <option>Completed</option>
                             <option>Pending</option>
                             <option>Incomplete</option>
                          </Form.Control>
 
-                         <Button variant="success">SAVE</Button>
+                         <Button onClick={this.handleSubmit} variant="success">SAVE</Button>
                     </Form>
                 </Modal.Body>
             </Modal>
