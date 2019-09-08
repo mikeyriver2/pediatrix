@@ -6,7 +6,8 @@ import Dashboard from '../dashboard/dashboard';
 import {
     Row,
 } from 'react-bootstrap';
-import ViewPatients from '../view/patients/patients'
+import ViewPatients from '../view/patients/patients';
+import ViewRecords from '../view/records/records';
 
 export default class Layout extends Component{
     constructor(){
@@ -78,6 +79,7 @@ export default class Layout extends Component{
                 
                 <Route exact path={`/`} component={Dashboard}/>
                 <Route exact path={`/patients`} component={ViewPatients}/>
+                <Route exact path={`/records`} component={ViewRecords}/>
                 <Route exact path={`/home`} component={Dashboard}/>
             </div>
         )

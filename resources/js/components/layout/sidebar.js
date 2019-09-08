@@ -66,7 +66,7 @@ export default class Sidebar extends Component{
                         Welcome, <b>Dr. Rivera (Admin)</b>
                     </li>
                     <li className="sidebar-outter">
-                        View Records
+                        <Link to="/records" >View Records</Link>
                         <ul className="sidebar-view-records-parent">
                             <li onClick={e => this.triggerModal('new-record')} className="sidebar-inner">New Record</li>
                         </ul>
