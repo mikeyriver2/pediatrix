@@ -8,6 +8,16 @@ use App\Patient;
 
 class PaymentController extends Controller
 {
+    public function index (Request $request){
+        $payments = Payment::select(
+            'payments.id',
+            'payments.created_at',
+            \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+        )
+        ->join('patients','patients.id','patient_id')->get();
+        return $payments;
+    }
+
     public function store(Request $request){
         $payment = Payment::create([
             'patient_id' => $request->patient["id"],

@@ -84,7 +84,7 @@ export default class Sidebar extends Component{
                         </ul>
                     </li>
                     <li className="sidebar-outter">
-                        View Payment
+                        <Link to="/payments" >View Payments</Link>
                         <ul onClick={e => this.triggerModal('new-payment')} className="sidebar-view-records-parent">
                             <li className="sidebar-inner">New Payment</li>
                         </ul>

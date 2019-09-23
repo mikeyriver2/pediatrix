@@ -144,7 +144,7 @@ export default class NewPayments extends Component{
                     <Form>
                         <Form.Label>Patient</Form.Label>
                         <div className="patient-suggestions-container">
-                            <Form.Control onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
+                            <Form.Control value={this.state.selected_patient.id ? this.state.selected_patient.full_name : ""} onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
                             {this.showSuggestions()}
                         </div>
                         <Form.Label>Amount</Form.Label>   

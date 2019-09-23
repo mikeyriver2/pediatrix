@@ -11,4 +11,8 @@ class Payment extends Model
         'amount',
         'patient_id' 
     ];
+
+    public function patient(){
+        return $this->belongsTo('App\Patient');
+    }
 }

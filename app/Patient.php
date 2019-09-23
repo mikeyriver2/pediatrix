@@ -27,5 +27,9 @@ class Patient extends Model
         return "".$first_name." ".$middle_name." ".$last_name."";
     }
 
+    public function payments(){
+        return $this->hasMany('App\Payment');
+    }
+
 
 }

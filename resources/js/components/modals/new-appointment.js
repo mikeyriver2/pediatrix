@@ -14,6 +14,7 @@ import {
 
 import { 
     KeyboardDatePicker,
+    KeyboardTimePicker,
     DatePicker,
     TimePicker,
     DateTimePicker,
@@ -36,7 +37,10 @@ export default class NewAppointment extends Component{
                 type: "",
                 show: false
             },
-            selected_patient: {}
+            selectedDate: "",
+            selectedTime: "",
+            selected_patient: {},
+            consultationType: "General Consultation"
         }
         this.handleQuickSearch = this.handleQuickSearch.bind(this);
         this.showSuggestions = this.showSuggestions.bind(this);
@@ -153,25 +157,38 @@ export default class NewAppointment extends Component{
                                 {this.showSuggestions()}
                             </div>
                             <Form.Label>Appointment Type</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control
+                                onChange={(e)=>{this.setState({consultationType: e.target.value})}} 
+                            as="select">
                                 <option>General Consultation</option>
                                 <option>Something</option>
                                 <option>Something2</option>
                             </Form.Control>
 
                             
-                            <Form.Label>Date of Appointments</Form.Label>
+                            <Form.Label>Set Appointment time</Form.Label>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
                                 clearable
-                                value={new Date()}
+                                label="Select Date"
+                                //value={this.state.selectedDate}
                                 placeholder="10/10/2018"
-                                onChange={()=>{}}
+                                onChange={(date)=>{this.setState({selectedDate: date})}}
                                 minDate={new Date()}
                                 InputProps={{
                                     disableUnderline: true,
                                 }}
                                 format="MM/dd/yyyy"
+                            />
+                            <KeyboardTimePicker
+                                margin="normal"
+                                id="time-picker"
+                                label="Select Time"
+                                //value={this.state.selectedTime}
+                                onChange={(time)=>{this.setState({selectedTime: time})}}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change time',
+                                }}
                             />
                             </MuiPickersUtilsProvider>
                             
