@@ -12,6 +12,7 @@ class PaymentController extends Controller
         $payments = Payment::select(
             'payments.id',
             'payments.created_at',
+            'payments.amount',
             \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
         )
         ->join('patients','patients.id','patient_id')->get();

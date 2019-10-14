@@ -42,8 +42,8 @@ export default class ViewPayments extends Component{
                 />*/}
                 <SummaryWithLabel 
                     summary = {this.state.payments}
-                    parent = "ViewPatients"
-                    header = "Patients List"
+                    parent = "ViewPayments"
+                    header = "Payment List"
                     filterBy = {["All", "InPatient", "OutPatient"]}
                 />
 
