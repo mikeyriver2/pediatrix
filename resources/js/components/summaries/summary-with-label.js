@@ -17,8 +17,10 @@ export default class SummaryWithLabel extends Component{
 
     renderSummarySimple = (summary) => {
         let elements = [];
+        const { parent } = this.props;
         (summary && summary.length > 0) &&
         summary.map((value,index)=>{
+            
             elements.push(
                 <Row key={index} className="bottom-top-borders item-row-container">
                     <Col xs={8} className="no-right-padding summary-item">
@@ -34,17 +36,12 @@ export default class SummaryWithLabel extends Component{
                             </h6>
                     </Col>
                     <Col xs={4} style={{background: parent !== "ViewPayments" ? "transparent" : "" }} className="completed summary-item-label">
-                        {parent === "ViewPayments" &&
-                            <h6 className="status">
-                                COMPLETED
-                            </h6>
-                        }
                         <p style={{padding: parent === "ViewPatients" ? "10px" : "", textAlign:"right",color:"rgba(41, 54, 97, 0.5)"}}>InPatient</p>
                     </Col>
                     <Row style={{width:"100%"}}>
                         <Col xs={8} className="no-right-padding summary-item">
                             <h6 className="item-created-at">
-                                {parent == "ViewPayments" && value.created_at}
+                                {/*dis a filler div*/}
                             </h6>
                         </Col>
                         <Col style={{textAlign: "right"}} xs={4}>
@@ -59,34 +56,51 @@ export default class SummaryWithLabel extends Component{
     }
 
     renderSummaryFancy = () => {
-        return (
-            <Row className="bottom-top-borders item-row-container">
-                <Col xs={8} className="no-right-padding summary-item">
-                    <h6 className="item-header">
-                        JOHNNY DEPP
-                    </h6>
-                    <h6 className="item-desc">
-                        GENERAL CONSULTATION
-                    </h6>
-                </Col>
-                <Col xs={4} className="completed summary-item-label">
-                    <h6 className="status">
-                        COMPLETED
-                    </h6>
-                    <p style={{textAlign:"right",color:"rgba(41, 54, 97, 0.5)"}}>InPatient</p>
-                </Col>
-                <Row style={{width:"100%"}}>
-                    <Col xs={8} className="no-right-padding summary-item">
-                        <h6 className="item-created-at">
-                            10AM-10:30AM
-                        </h6>
-                    </Col>
-                    <Col style={{textAlign: "right"}} xs={4}>
-                        <a style={{fontWeight:"bold",textDecorationLine:"underline",color:"#7896FF"}}>Edit</a>
-                    </Col>
-                </Row>
-            </Row>
-        )
+        let elements = [];
+        const { summary, parent } = this.props;
+        let name = "";
+        let bottomText = "";
+        let status = "PENDING";
+        let time = ""; //if appointments, iz like a 10am-11am
+        if(summary){
+            summary.map((data)=>{
+                name = data.full_name;
+                if(parent == "ViewPayments"){
+                    bottomText = `P${data.amount}.00`;
+                    time = `Created at ${data.created_at}`;
+                }
+            
+                elements.push(
+                    <Row className="bottom-top-borders item-row-container">
+                        <Col xs={8} className="no-right-padding summary-item">
+                            <h6 className="item-header">
+                                {name && name.toUpperCase()}
+                            </h6>
+                            <h6 className="item-desc">
+                                {bottomText}
+                            </h6>
+                        </Col>
+                        <Col xs={4} className="completed summary-item-label">
+                            <h6 className="status">
+                                {status}
+                            </h6>
+                            <p style={{textAlign:"right",color:"rgba(41, 54, 97, 0.5)"}}>InPatient</p>
+                        </Col>
+                        <Row style={{width:"100%"}}>
+                            <Col xs={8} className="no-right-padding summary-item">
+                                <h6 className="item-created-at">
+                                    {time}
+                                </h6>
+                            </Col>
+                            <Col style={{textAlign: "right"}} xs={4}>
+                                <a style={{fontWeight:"bold",textDecorationLine:"underline",color:"#7896FF"}}>Edit</a>
+                            </Col>
+                        </Row>
+                    </Row>
+                )
+            });
+        }
+        return elements;
     }
 
     handleRender = () => { 

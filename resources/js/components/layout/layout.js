@@ -77,12 +77,6 @@ export default class Layout extends Component{
                     showSideBar = {this.state.showSideBar}
                     hideSideBar = {this.hideSideBar}
                 />
-                
-                <Route exact path={`/`} component={Dashboard}/>
-                <Route exact path={`/patients`} component={ViewPatients}/>
-                <Route exact path={`/payments`} component={ViewPayments}/>
-                <Route exact path={`/records`} component={ViewRecords}/>
-                <Route exact path={`/home`} component={Dashboard}/>
             </div>
         )
     }

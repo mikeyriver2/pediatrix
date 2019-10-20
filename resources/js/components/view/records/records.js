@@ -42,8 +42,8 @@ export default class ViewRecords extends Component{
                 />*/}
                 <SummaryWithLabel 
                     summary = {this.state.records}
-                    parent = "ViewPatients"
-                    header = "Patients List"
+                    parent = "ViewRecords"
+                    header = "Records List"
                     filterBy = {["All", "InPatient", "OutPatient"]}
                 />
 
