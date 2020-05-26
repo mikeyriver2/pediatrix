@@ -10962,6 +10962,176 @@ a.text-dark:focus {
   display: block;
 }
 
+.record {
+  padding: 10px 20px 50px 20px;
+}
+
+.record h5 {
+  padding: 20px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #293661;
+}
+
+.record form .patient-suggestions-container {
+  position: relative;
+}
+
+.record form .patient-suggestions-container .close {
+  margin: 0px !important;
+  width: 0px !important;
+  position: absolute;
+  top: 7px;
+  left: 77vw;
+}
+
+.record form .patient-suggestions-container .suggestions-patients {
+  position: absolute;
+  z-index: 10;
+  background: #FFFFFF;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  top: 35px;
+}
+
+.record form .patient-suggestions-container .suggestion-patient {
+  padding: 5px;
+}
+
+.record form .patient-suggestions-container .suggestion-patient:hover {
+  background: #141f45c7;
+  color: white;
+}
+
+.record form button {
+  margin: 20px 0px;
+  width: 100%;
+}
+
+.record form label {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #6C7B8A;
+  margin-bottom: 0.5rem;
+}
+
+.record form .form-control {
+  margin-bottom: 20px;
+  background: #FFFFFF;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.record form .input-group .input-group-prepend {
+  display: block;
+}
+
+.payment {
+  padding: 10px 20px 50px 20px;
+}
+
+.payment h5 {
+  padding: 20px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #293661;
+}
+
+.payment form .patient-suggestions-container {
+  position: relative;
+}
+
+.payment form .patient-suggestions-container .suggestions-patients {
+  position: absolute;
+  z-index: 10;
+  background: #FFFFFF;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  top: 35px;
+}
+
+.payment form .patient-suggestions-container .suggestion-patient {
+  padding: 5px;
+}
+
+.payment form .patient-suggestions-container .suggestion-patient:hover {
+  background: #141f45c7;
+  color: white;
+}
+
+.payment form button {
+  margin: 20px 0px;
+  width: 100%;
+}
+
+.payment form label {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #6C7B8A;
+  margin-bottom: 0.5rem;
+}
+
+.payment form .form-control {
+  margin-bottom: 20px;
+  background: #FFFFFF;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.payment form .input-group .input-group-prepend {
+  display: block;
+}
+
+.patient {
+  padding: 10px 20px 50px 20px;
+}
+
+.patient h5 {
+  padding: 20px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #293661;
+}
+
+.patient form button {
+  margin: 20px 0px;
+  width: 100%;
+}
+
+.patient form label {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #6C7B8A;
+  margin-bottom: 0.5rem;
+}
+
+.patient form .form-control {
+  margin-bottom: 20px;
+  background: #FFFFFF;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.patient form .input-group .input-group-prepend {
+  display: block;
+}
+
 .error {
   color: red;
 }
