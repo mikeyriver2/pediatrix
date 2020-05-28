@@ -31,9 +31,40 @@ class PaymentController extends Controller
         ]);
     }
 
+    public function update(Request $request) {
+        $rPayment = $request->payment;
+        $payment = Payment::select(
+            'amount', 
+            'status',
+            \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+        )
+        ->join('patients','patients.id','=','patient_id')
+        ->where('payments.id',$request->paymentId)
+        ->first();
+
+        $payment->amount = $rPayment["amount"];
+        $payment->status = $rPayment["status"];
+        $payment->save();
+
+        return $payment ;    
+    }
+
+    public function view(Request $request, $slug){
+        $payment = Payment::select(
+                'amount', 
+                'status',
+                \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+            )
+            ->join('patients','patients.id','=','patient_id')
+            ->where('payments.id',$slug)
+            ->first();
+
+        return $payment;
+    }
+
     public function quickSearchPatients(Request $request){
         $patients = Patient::where('first_name','LIKE',"%".$request->full_name."%")
-                            ->orWhere('last_name','LIKE',"%".$request->full_name."%")->get();
+            ->orWhere('last_name','LIKE',"%".$request->full_name."%")->get();
         return $patients;
     }
 }
