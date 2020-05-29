@@ -38,6 +38,7 @@ const Payment = (props) => {
   const { full_name: cFullName, amount: cAmount, status: cStatus } = clonedPatient;
 
   const handleChange = (e, type = '') => {
+    const clonedPatientFoo = { ...clonedPatient };
     const { target } = e;
     const { value } = target;
     const clonedErrors = { ...errors };
@@ -47,13 +48,14 @@ const Payment = (props) => {
       case 'amount':
         isError = !helpers.validateIsNumeric(e.target.value, type);
         errorCase = 'is not a valid number';
-        clonedPatient.amount = value;
+        clonedPatientFoo.amount = value;
         break;
       default:
-        clonedPatient[type] = value;
+        clonedPatientFoo[type] = value;
         break;
     }
 
+    setClonedPatient(clonedPatientFoo);
     if (isError) {
       clonedErrors[type] = errorCase;
     } else if (clonedErrors[type]) {
@@ -149,6 +151,7 @@ const Payment = (props) => {
         {editMode
           && (
           <Button
+            disabled={Object.keys(errors).length > 0}
             onClick={handleUpdate}
             variant="primary"
           >
