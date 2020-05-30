@@ -38,7 +38,7 @@ export default class NewPatient extends Component {
     const values = {
       ...this.state,
     };
-    axios.post('/api/store', values).then((res) => {
+    axios.post('/api/patients/store', values).then((res) => {
       if (this.props.parentComponent) {
         if (this.props.parentComponent == 'NewRecord') {
           this.props.selectPatient(res.data.patient);

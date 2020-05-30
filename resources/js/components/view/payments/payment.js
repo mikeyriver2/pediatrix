@@ -20,7 +20,8 @@ const Payment = (props) => {
   const [errors, setErrors] = useState({});
 
   useState(() => {
-    const { match } = props;
+    const { match, location } = props;
+    const { state } = location;
     const { params } = match;
 
     axios.get(`/api/payments/${params.paymentId}`).then((res) => {
@@ -28,6 +29,10 @@ const Payment = (props) => {
       setPatient(data);
       setClonedPatient(data);
     });
+
+    if (state && state.edit) {
+      setEditMode(true);
+    }
   }, []);
 
   useState(() => {

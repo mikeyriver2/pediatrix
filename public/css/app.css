@@ -11132,6 +11132,11 @@ a.text-dark:focus {
   display: block;
 }
 
+#pediatrix {
+  width: 100%;
+  overflow: hidden;
+}
+
 .error {
   color: red;
 }
@@ -11204,6 +11209,10 @@ a.text-dark:focus {
   color: #293661;
 }
 
+.summary-container .summary-items .item-created-at {
+  padding-left: 15px;
+}
+
 .summary-container .summary-items .completed {
   background: #5DA327;
 }
@@ -11222,6 +11231,10 @@ a.text-dark:focus {
   color: white;
   font-weight: bold;
   padding-top: 3px;
+}
+
+.summary-container .summary-items .summary-item-label p {
+  padding-right: 15px;
 }
 
 .summary-container .summary-items .summary-item {

@@ -18,6 +18,37 @@ class RecordController extends Controller
         return $records;
     }
 
+    public function view(Request $request, $slug){
+        $records = Record::select(
+                'records.*',
+                \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+            )
+            ->join('patients','patients.id','patient_id')
+            ->where('records.id',$slug)
+            ->first();
+
+        return $records;
+    }
+
+    public function update(Request $request){
+        $records = Record::select(
+                'records.*',
+                \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+            )
+            ->join('patients','patients.id','patient_id')
+            ->where('records.id',$request->id)
+            ->first();
+            
+        $records->weight = $request->weight;
+        $records->temperature = $request->temperature;
+        $records->diagnosis = $request->diagnosis;
+        $records->prescription = $request->prescription;
+        $records->type = $request->type;
+        $records->save();
+        
+        return $records;
+    }
+
     public function store(Request $request){
         $record = Record::create([
             'patient_id' => $request->patient["id"],

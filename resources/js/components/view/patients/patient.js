@@ -18,7 +18,8 @@ const Patient = (props) => {
   const [errors, setErrors] = useState({});
 
   useState(() => {
-    const { match } = props;
+    const { match, location } = props;
+    const { state } = location;
     const { params } = match;
 
     axios.get(`/api/patients/${params.patientId}`).then((res) => {
@@ -26,6 +27,10 @@ const Patient = (props) => {
       setPatient(data);
       setClonedPatient(data);
     });
+
+    if (state && state.edit) {
+      setEditMode(true);
+    }
   }, []);
 
   const handleChange = (e, type = '') => {

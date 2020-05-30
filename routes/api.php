@@ -20,14 +20,18 @@ Route::group(['prefix' => 'payments'], function(){
     Route::get('{slug?}','PaymentController@view');    
 });
 
-Route::post('records/store','RecordController@store');
-Route::get('records/','RecordController@index');
+Route::group(['prefix' => 'records'], function(){
+    Route::post('store','RecordController@store');
+    Route::get('','RecordController@index');
+    Route::get('{slug?}','RecordController@view');
+    Route::put('','RecordController@update');
+});
 
 Route::group(['prefix' => 'patients'], function(){
     Route::get('','PatientController@index');
     Route::get('{slug?}','PatientController@view');
     Route::get('qs','PaymentController@quickSearchPatients');
-    Route::post('','PatientController@store');
+    Route::post('store','PatientController@store');
     Route::put('','PatientController@update');
 });
 

@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import SearchBar from '../modules/searchbar';
 
-export default class SummaryWithLabel extends Component{
+class SummaryWithLabel extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -17,10 +17,16 @@ export default class SummaryWithLabel extends Component{
 
     renderSummarySimple = (summary) => {
         let elements = [];
-        const { parent } = this.props;
+        let url = 'records';
+        const { parent, history } = this.props;
+        if (parent === 'ViewRecords') {
+            url = 'records'
+        } else if (parent === 'ViewPatients') {
+            url = 'patients';
+        }
         (summary && summary.length > 0) &&
         summary.map((value,index)=>{
-            
+            const { id } = value;
             elements.push(
                 <Row key={index} className="bottom-top-borders item-row-container">
                     <Col xs={8} className="no-right-padding summary-item">
@@ -45,8 +51,32 @@ export default class SummaryWithLabel extends Component{
                             </h6>
                         </Col>
                         <Col style={{textAlign: "right"}} xs={4}>
-                            <a style={{fontWeight:"bold",textDecorationLine:"underline",color:"#7896FF", marginRight: "10px"}}>View</a>
-                            <a style={{fontWeight:"bold",textDecorationLine:"underline",color:"#7896FF"}}>Edit</a>
+                            <a 
+                                onClick={()=> {history.push({
+                                    pathname: `/${url}/${id}`
+                                })}}
+                                style={{
+                                    fontWeight:"bold",
+                                    textDecorationLine:"underline",
+                                    color:"#7896FF", 
+                                    marginRight: "10px"
+                                }}
+                            >
+                                View
+                            </a>
+                            <a
+                                onClick={()=> {history.push({
+                                    pathname: `/${url}/${id}`,
+                                    state: {edit: true}
+                                })}}
+                                style={{
+                                    fontWeight:"bold",
+                                    textDecorationLine:"underline",
+                                    color:"#7896FF"
+                                }}
+                            >
+                                Edit
+                            </a>
                         </Col>
                     </Row>
                 </Row>
@@ -57,13 +87,18 @@ export default class SummaryWithLabel extends Component{
 
     renderSummaryFancy = () => {
         let elements = [];
-        const { summary, parent } = this.props;
+        let url = 'payments';
+        const { parent, history, summary } = this.props;
+        if (parent === 'ViewPayments') {
+            url = 'payments';
+        } 
         let name = "";
         let bottomText = "";
         let status = "PENDING";
         let time = ""; //if appointments, iz like a 10am-11am
         if(summary){
             summary.map((data)=>{
+                const { id } = data;
                 name = data.full_name;
                 if(parent == "ViewPayments"){
                     bottomText = `P${data.amount}.00`;
@@ -93,8 +128,33 @@ export default class SummaryWithLabel extends Component{
                                 </h6>
                             </Col>
                             <Col style={{textAlign: "right"}} xs={4}>
-                                <a style={{fontWeight:"bold",textDecorationLine:"underline",color:"#7896FF"}}>Edit</a>
-                            </Col>
+                            <a 
+                                onClick={()=> {history.push({
+                                    pathname: `/${url}/${id}`
+                                })}}
+                                style={{
+                                    fontWeight:"bold",
+                                    textDecorationLine:"underline",
+                                    color:"#7896FF", 
+                                    marginRight: "10px"
+                                }}
+                            >
+                                View
+                            </a>
+                            <a
+                                onClick={()=> {history.push({
+                                    pathname: `/${url}/${id}`,
+                                    state: {edit: true}
+                                })}}
+                                style={{
+                                    fontWeight:"bold",
+                                    textDecorationLine:"underline",
+                                    color:"#7896FF"
+                                }}
+                            >
+                                Edit
+                            </a>
+                        </Col>
                         </Row>
                     </Row>
                 )
@@ -170,3 +230,5 @@ export default class SummaryWithLabel extends Component{
         )
     }
 }
+
+export default withRouter(SummaryWithLabel);

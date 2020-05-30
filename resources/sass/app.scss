@@ -20,6 +20,11 @@
 @import './components/views/patient';
 
 //general styles non-component specific
+#pediatrix {
+    width: 100%;
+    overflow: hidden;
+}
+
 .error{
     color: red;
 }
@@ -91,6 +96,9 @@
         color: #293661;
     }
     .summary-items{
+        .item-created-at {
+            padding-left: 15px;
+        }
         .completed{
             background: #5DA327;
         }
@@ -106,6 +114,9 @@
             color: white;
             font-weight: bold;
             padding-top: 3px;
+            p {
+                padding-right: 15px;
+            }
         }
         .summary-item{
             padding: 10px 30px 0px 30px;
