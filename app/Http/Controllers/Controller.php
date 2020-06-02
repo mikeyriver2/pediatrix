@@ -7,11 +7,53 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-
+use App\Payment;
+use App\Record;
+use App\Patient;
+use Carbon\Carbon;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    public function dashboardIndex(Request $request){
+        $patients = Patient::orderBy('id','desc')->limit(5)->get();
+        
+        $records = Record::select(
+            'records.id',
+            'records.created_at',
+            \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+        )
+        ->join('patients','patients.id','patient_id')
+        ->orderBy('id','desc')->limit(5)->get();
+        
+        $payments = Payment::select(
+            'payments.id',
+            'payments.created_at',
+            'payments.amount',
+            \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+        )
+        ->join('patients','patients.id','patient_id')
+        ->orderBy('id','desc')->limit(5)->get();
+
+        $now = Carbon::now();
+        $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
+        
+        $patientsThisWeek = Patient::where('created_at', '>=', $weekStartDate)->get()->count();
+        $recordssThisWeek = Record::where('created_at', '>=', $weekStartDate)->get()->count();
+        $paymentsThisWeek = Payment::where('created_at', '>=', $weekStartDate)->get()->count();
+
+        return response()->json([
+            'quickSummary' => [
+                'patWeek' => $patientsThisWeek,
+                'recWeek' => $recordssThisWeek,
+                'payWeek' => $paymentsThisWeek
+            ],
+            'patients' => $patients,
+            'records' => $records,
+            'payments' => $payments
+        ]);
+    }
+
     public function OGP(Request $request)
     {
         $exploded_message = explode(" ",$request->message);

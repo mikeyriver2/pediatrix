@@ -13,7 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
+// -- OA extra code -- //
 Route::get('ogp', 'Controller@OGP');
+
+Route::get('', 'Controller@dashboardIndex');
 
 Route::group(['prefix' => 'payments'], function(){
     Route::post('store','PaymentController@store');
