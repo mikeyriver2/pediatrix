@@ -61,10 +61,4 @@ class PaymentController extends Controller
 
         return $payment;
     }
-
-    public function quickSearchPatients(Request $request){
-        $patients = Patient::where('first_name','LIKE',"%".$request->full_name."%")
-            ->orWhere('last_name','LIKE',"%".$request->full_name."%")->get();
-        return $patients;
-    }
 }

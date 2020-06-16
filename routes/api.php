@@ -13,10 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-// -- OA extra code -- //
-Route::get('ogp', 'Controller@OGP');
-
 Route::get('', 'Controller@dashboardIndex');
+
+Route::group(['prefix' => 'patients'], function(){
+    Route::get('','PatientController@index');
+    Route::get('qs','PatientController@quickSearchPatients');
+    Route::post('store','PatientController@store');
+    Route::put('','PatientController@update');
+    Route::get('{slug?}','PatientController@view');
+});
 
 Route::group(['prefix' => 'payments'], function(){
     Route::post('store','PaymentController@store');
@@ -30,14 +35,6 @@ Route::group(['prefix' => 'records'], function(){
     Route::get('','RecordController@index');
     Route::get('{slug?}','RecordController@view');
     Route::put('','RecordController@update');
-});
-
-Route::group(['prefix' => 'patients'], function(){
-    Route::get('','PatientController@index');
-    Route::get('{slug?}','PatientController@view');
-    Route::get('qs','PaymentController@quickSearchPatients');
-    Route::post('store','PatientController@store');
-    Route::put('','PatientController@update');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

@@ -39,12 +39,11 @@ export default class NewPayments extends Component {
   }
 
   componentDidMount() {
-    var interval = setInterval(() => {
+    const interval = setInterval(() => {
       if (document.getElementById('new-payments-modal')) {
         document.getElementById('new-payments-modal').addEventListener('click', (e) => {
           if (!e.target.className.includes('ignore-listener')) {
             this.setState({ disableDiv: true });
-          } else {
           }
         });
         clearInterval(interval);
@@ -53,15 +52,18 @@ export default class NewPayments extends Component {
   }
 
   handleQuickSearch(e) {
+    const fullName = e.target.value;
     this.setState({
-      full_name: e.target.value,
+      full_name: fullName,
       disableDiv: false,
     }, () => {
-      axios.get(`${'/api/patients/qs' + '?full_name='}${this.state.full_name}`).then((res) => {
-        this.setState({
-          patients: res.data,
+      if (fullName.replace(/\s/g, '') !== '') {
+        axios.get(`${'/api/patients/qs' + '?full_name='}${this.state.full_name}`).then((res) => {
+          this.setState({
+            patients: res.data,
+          });
         });
-      });
+      }
     });
   }
 
@@ -73,7 +75,7 @@ export default class NewPayments extends Component {
   }
 
   showSuggestions() {
-    if (!this.state.disableDiv && this.state.patients && this.state.full_name != '') {
+    if (!this.state.disableDiv && this.state.patients && this.state.full_name.replace(/\s/g, '') !== '') {
       if (this.state.patients.length > 0) {
         return (
           <div className="ignore-listener suggestions-patients">
@@ -96,7 +98,10 @@ export default class NewPayments extends Component {
       status,
     };
     axios.post('/api/payments/store', values).then((res) => {
+      const { history } = this.props;
+      const { payment } = res.data;
       this.props.closeModal();
+      history.push(`/payments/${payment.id}`)
     });
   }
 
@@ -133,6 +138,9 @@ export default class NewPayments extends Component {
 
 
   render() {
+    const { full_name: fullName, amount } = this.state;
+    const disableSave = Object.keys(this.state.errors).length > 0 || !this.state.selected_patient.id || (amount && amount.replace(/\s/g, '') === '');
+
     return (
       <Modal id="new-payments-modal" show={this.props.show} onHide={() => this.props.closeModal()}>
         <Modal.Header closeButton />
@@ -141,7 +149,12 @@ export default class NewPayments extends Component {
           <Form>
             <Form.Label>Patient</Form.Label>
             <div className="patient-suggestions-container">
-              <Form.Control value={this.state.selected_patient.id ? this.state.selected_patient.full_name : ''} onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
+              <Form.Control
+                value={this.state.selected_patient.id ? this.state.selected_patient.full_name : fullName}
+                onChange={this.handleQuickSearch}
+                type="text"
+                placeholder="Enter Patient Name"
+              />
               {this.showSuggestions()}
             </div>
             <Form.Label>Amount</Form.Label>
@@ -154,7 +167,7 @@ export default class NewPayments extends Component {
                 placeholder="Enter Amount"
               />
             </InputGroup>
-
+            <p className="error" style={{ display: this.state.errors.amount ? 'block' : 'none' }}>Amount is Invalid</p>
 
             <Form.Label>Status</Form.Label>
             <Form.Control
@@ -166,7 +179,7 @@ export default class NewPayments extends Component {
               <option>Incomplete</option>
             </Form.Control>
 
-            <Button onClick={this.handleSubmit} variant="success">SAVE</Button>
+            <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
           </Form>
         </Modal.Body>
       </Modal>

@@ -35,15 +35,21 @@ export default class NewPatient extends Component {
   }
 
   handleClick() {
+    const { history } = this.props;
     const values = {
       ...this.state,
     };
     axios.post('/api/patients/store', values).then((res) => {
+      const { patient } = res.data;
+      this.props.closeModal();
       if (this.props.parentComponent) {
-        if (this.props.parentComponent == 'NewRecord') {
+        if (this.props.parentComponent === 'NewRecord') {
           this.props.selectPatient(res.data.patient);
-          this.props.closeModal();
+        }else{
+          history.push(`/patients/${patient.id}`);
         }
+      }else{
+        history.push(`/patients/${patient.id}`);
       }
     }).catch((err) => {
       console.log(err);

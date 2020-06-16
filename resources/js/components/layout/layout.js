@@ -89,6 +89,7 @@ class Layout extends Component {
           </Row>
         </div>
         <Sidebar
+          {...this.props}
           layoutRef={this.header}
           showSideBar={this.state.showSideBar}
           hideSideBar={this.hideSideBar}

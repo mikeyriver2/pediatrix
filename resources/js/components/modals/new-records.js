@@ -45,9 +45,11 @@ export default class NewRecord extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fetchPatient = this.fetchPatient.bind(this);
   }
 
   componentDidMount() {
+    this.fetchPatient();
     const interval = setInterval(() => {
       if (document.getElementById('new-record-modal')) {
         document.getElementById('new-record-modal').addEventListener('click', (e) => {
@@ -65,11 +67,20 @@ export default class NewRecord extends Component {
   }
 
   handleQuickSearch(e) {
+    this.fetchPatient(e);
+  }
+
+  fetchPatient(e = null) {
     this.setState({
-      full_name: e.target.value,
+      full_name: e ? e.target.value : '',
       disableDiv: false,
     }, () => {
-      axios.get(`${'/api/patients/qs' + '?full_name='}${this.state.full_name}`).then((res) => {
+      axios.get('/api/patients/qs',
+        {
+          params: {
+            full_name: this.state.full_name,
+          },
+        }).then((res) => {
         this.setState({
           patients: res.data,
         });
@@ -85,7 +96,6 @@ export default class NewRecord extends Component {
   }
 
   showNewPatientModal() {
-    console.log('ass');
     this.setState((prevState) => ({
       modal: {
         ...prevState.modal,
@@ -170,6 +180,7 @@ export default class NewRecord extends Component {
   }
 
   handleSubmit() {
+    const { history } = this.props;
     const {
       selected_patient, weight, temperature, diagnosis, prescription,
     } = this.state;
@@ -181,7 +192,9 @@ export default class NewRecord extends Component {
       prescription,
     };
     axios.post('/api/records/store', values).then((res) => {
+      const { record } = res.data;
       this.props.closeModal();
+      history.push(`/records/${record.id}`);
     });
   }
 
@@ -191,6 +204,7 @@ export default class NewRecord extends Component {
       borderTopRightRadius: '0px',
       borderBottomRightRadius: '0px',
     };
+    const { selected_patient, full_name } = this.state;
 
     return (
       <div>
@@ -201,10 +215,22 @@ export default class NewRecord extends Component {
             <Form>
               <Form.Label>Patient</Form.Label>
               <div className="patient-suggestions-container">
-                <Form.Control className="ignore-listener" value={this.state.selected_patient.id ? this.state.selected_patient.full_name : ''} id="records-patient-name" onFocus={() => { this.setState({ disableDiv: false, full_name: ' ' }); }} onChange={this.handleQuickSearch} type="text" placeholder="Enter Patient Name" />
-                <button onClick={() => { this.setState({ selected_patient: {} }); }} type="button" className="close">
-                  <span>x</span>
-                </button>
+                <Form.Control
+                  className="ignore-listener"
+                  value={
+                    selected_patient.id ? selected_patient.full_name : full_name
+                  }
+                  id="records-patient-name"
+                  onFocus={() => { this.setState({ disableDiv: false, full_name: ' ' }); }}
+                  onChange={this.handleQuickSearch}
+                  type="text"
+                  placeholder="Enter Patient Name"
+                />
+                {selected_patient.id && (
+                  <button onClick={() => { this.setState({ selected_patient: {} }); }} type="button" className="close">
+                    <span>x</span>
+                  </button>
+                )}
                 {this.showSuggestions()}
               </div>
 
@@ -237,14 +263,14 @@ export default class NewRecord extends Component {
           </Modal.Body>
         </Modal>
         {(this.state.modal.type == 'new-patient' && this.state.modal.show)
-                    && (
-                    <NewPatient
-                      show={this.state.modal.type == 'new-patient' && this.state.modal.show}
-                      closeModal={this.closeModal}
-                      parentComponent="NewRecord"
-                      selectPatient={this.selectPatient}
-                    />
-                    )}
+          && (
+          <NewPatient
+            show={this.state.modal.type == 'new-patient' && this.state.modal.show}
+            closeModal={this.closeModal}
+            parentComponent="NewRecord"
+            selectPatient={this.selectPatient}
+          />
+          )}
       </div>
     );
   }

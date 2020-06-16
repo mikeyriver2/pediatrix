@@ -46,4 +46,17 @@ class PatientController extends Controller
 
         return $patient;
     }
+
+    public function quickSearchPatients(Request $request){
+        $fullName = $request->full_name;
+        if ($fullName === '') {
+            $patients = Patient::limit(5)->orderBy('id','desc')->get();
+        } else {
+            $patients = Patient::where('first_name','LIKE',"%".$request->full_name."%")
+                ->orWhere('last_name','LIKE',"%".$request->full_name."%")
+                ->limit(5)
+                ->get();
+        }
+        return $patients;
+    }
 }
