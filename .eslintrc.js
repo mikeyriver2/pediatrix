@@ -23,6 +23,8 @@ module.exports = {
     'react',
   ],
   rules: {
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'linebreak-style': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true, optionalDependencies: true, peerDependencies: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],

@@ -66,7 +66,7 @@ const Patient = (props) => {
   };
 
   const handleUpdate = () => {
-    const { match } = props;
+    const { match, } = props;
     const { params } = match;
     const { patientId } = params;
 
@@ -96,9 +96,14 @@ const Patient = (props) => {
     home_address: cHomeAddress,
   } = clonedPatient;
 
+  const { history } = props;
+
   return (
     <div className="patient">
-      <h5>Patient</h5>
+      <div className="patient__upper">
+        <img onClick={history.goBack} alt="arrow" src="/images/arrow.svg" />
+        <h5>Patient</h5>
+      </div>
       <Form>
         <Form.Label>Patient Name</Form.Label>
         <Form.Control

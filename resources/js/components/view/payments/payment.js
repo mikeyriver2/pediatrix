@@ -83,9 +83,14 @@ const Payment = (props) => {
     });
   };
 
+  const { history } = props;
+
   return (
     <div className="payment">
-      <h5>Payment</h5>
+      <div className="payment__upper">
+        <img onClick={history.goBack} alt="arrow" src="/images/arrow.svg" />
+        <h5>Payment</h5>
+      </div>
       <Form>
         <Form.Label>Patient</Form.Label>
         <div className="patient-suggestions-container">

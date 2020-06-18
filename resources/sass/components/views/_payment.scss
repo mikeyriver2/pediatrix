@@ -1,5 +1,12 @@
 .payment {
   padding: 10px 20px 50px 20px;
+  &__upper {
+    display: flex;
+    img {
+      transform: rotate(-90deg);
+      width: 25px;
+    }
+  }
   h5{
     padding: 20px;
     font-style: normal;

@@ -44,7 +44,6 @@ class Layout extends Component {
       }, () => {
         element.classList.remove('sidebar-hidden');
         element.classList.add('sidebar-show');
-        document.getElementById('pediatrix').style.height = '100vh'; // temporarily disable scroll
         document.getElementById('pediatrix').style.overflow = 'hidden';
       });
     } else {

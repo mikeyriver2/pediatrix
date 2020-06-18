@@ -33,14 +33,16 @@ class Routes extends Component {
     return (
       <Router>
         <Route path="" component={Layout} />
-        <Route exact path="/" component={Dashboard} />
-        <Route exact path="/patients" component={ViewPatients} />
-        <Route exact path="/patients/:patientId" component={ViewPatient} />
-        <Route exact path="/payments" component={ViewPayments} />
-        <Route exact path="/payments/:paymentId" component={ViewPayment} />
-        <Route exact path="/records" component={ViewRecords} />
-        <Route exact path="/records/:recordId" component={ViewRecord} />
-        <Route exact path="/home" component={Dashboard} />
+        <div className="main-body">
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/patients" component={ViewPatients} />
+          <Route exact path="/patients/:patientId" component={ViewPatient} />
+          <Route exact path="/payments" component={ViewPayments} />
+          <Route exact path="/payments/:paymentId" component={ViewPayment} />
+          <Route exact path="/records" component={ViewRecords} />
+          <Route exact path="/records/:recordId" component={ViewRecord} />
+          <Route exact path="/home" component={Dashboard} />
+        </div>
       </Router>
     );
   }

@@ -77,6 +77,9 @@ export default class Sidebar extends Component {
             {' '}
             <b>Dr. Rivera (Admin)</b>
           </li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
           <li className="sidebar-outter">
             <Link to="/records">View Records</Link>
             <ul className="sidebar-view-records-parent">
