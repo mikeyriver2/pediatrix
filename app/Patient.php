@@ -20,11 +20,16 @@ class Patient extends Model
     ];
 
     public function getFullNameAttribute(){
-        $first_name = $this->attributes["first_name"];
-        $middle_name = $this->attributes["first_name"];
-        $last_name = $this->attributes["last_name"];
+        if(isset($this->attributes["first_name"])) {
+            $first_name = $this->attributes["first_name"];
+            $middle_name = $this->attributes["middle_name"];
+            $last_name = $this->attributes["last_name"];
 
-        return "".$first_name." ".$middle_name." ".$last_name."";
+            return "".$first_name." ".$middle_name." ".$last_name."";
+        }else{
+            return 'null';
+        }
+
     }
 
     public function payments(){

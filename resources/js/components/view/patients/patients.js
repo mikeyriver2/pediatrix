@@ -14,14 +14,21 @@ export default class ViewPatients extends Component {
     this.state = {
       patients: [],
     };
+    this.setPatients = this.setPatients.bind(this);
   }
 
   componentDidMount() {
     axios.get('/api/patients').then((res) => {
-      this.setState({
-        patients: res.data.patients,
-      });
+      this.setPatients(res.data.patients);
     });
+  }
+
+  setPatients(patients) {
+    if (patients) {
+      this.setState({
+        patients,
+      });
+    }
   }
 
   render() {
@@ -41,10 +48,14 @@ export default class ViewPatients extends Component {
                     header = "Patients List"
                 /> */}
         <SummaryWithLabel
+          search={{
+            filterBy: ['All', 'In-Patient', 'Out-Patient'],
+            searchUrl: '/api/patients/filter',
+            setData: this.setPatients,
+          }}
           summary={this.state.patients}
           parent="ViewPatients"
           header="Patients List"
-          filterBy={['All', 'InPatient', 'OutPatient']}
         />
 
       </div>

@@ -59,4 +59,24 @@ class PatientController extends Controller
         }
         return $patients;
     }
+
+    public function filter(Request $request){
+        $search = $request->search;
+
+        // save code for future reference
+        // $patients = Patient::select(
+        //                 \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as display'),
+        //                 \DB::raw('CONCAT("/patients/",patients.id) as redirectUrl')
+        //             )
+        //             ->where(\DB::raw('CONCAT(patients.first_name, patients.middle_name, patients.last_name)'), 'LIKE', "%$search%")
+        //             ->get();
+
+        $patients = Patient::select(
+                        'patients.*'
+                    )
+                    ->where(\DB::raw('CONCAT(patients.first_name, patients.middle_name, patients.last_name)'), 'LIKE', "%$search%")
+                    ->get();
+
+        return $patients;
+    }
 }

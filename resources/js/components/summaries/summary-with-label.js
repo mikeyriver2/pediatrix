@@ -164,7 +164,11 @@ class SummaryWithLabel extends Component{
     }
 
     handleRender = () => { 
-        const { header, parent, summary, filterBy } = this.props;
+        const { header, parent, summary, search } = this.props;
+        let filterBy;
+        if (search) filterBy = search.filterBy;
+
+
         const from_dashboard = false; //this will be a prop soon
         const styles = {
             border: from_dashboard ? "" : "0px",
@@ -182,7 +186,11 @@ class SummaryWithLabel extends Component{
     }
 
     render(){
-        const { header, parent, summary, filterBy } = this.props;
+        const { header, parent, summary, search } = this.props;
+        let filterBy, searchUrl;
+        if (search) filterBy = search.filterBy;
+        searchUrl = search ? search.searchUrl : '';
+
         const from_dashboard = false; //this will be a prop soon
         const styles = {
             border: from_dashboard ? "" : "0px",
@@ -218,13 +226,17 @@ class SummaryWithLabel extends Component{
                                 }
                             </nav>
                         }
-                        <SearchBar />
+                        {searchUrl !== '' &&
+                            <SearchBar 
+                                search={search}
+                            />
+                        }
                     </div>
                     }
                 </div>
                 <div className="summary-items">
                     { this.handleRender() }
-                    <a className="view-all">View All Appointments ></a>
+                    {/* <a className="view-all">View All Appointments ></a> */}
                 </div>
             </div>
         )

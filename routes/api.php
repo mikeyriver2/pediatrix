@@ -20,6 +20,7 @@ Route::group(['prefix' => 'patients'], function(){
     Route::get('qs','PatientController@quickSearchPatients');
     Route::post('store','PatientController@store');
     Route::put('','PatientController@update');
+    Route::get('filter', 'PatientController@filter');
     Route::get('{slug?}','PatientController@view');
 });
 
