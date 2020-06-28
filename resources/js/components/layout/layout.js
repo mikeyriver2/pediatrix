@@ -65,7 +65,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, history } = this.props;
     const { pathname } = location;
     let path = 'HOME';
     if (pathname && pathname !== '') {
@@ -79,12 +79,18 @@ class Layout extends Component {
     }
     return (
       <div ref={this.header} className="main-layout">
-        <div role="button" tabIndex={0} onClick={this.switchSideBar} className="layout-header">
+        <div role="button" tabIndex={0} className="layout-header">
           <Row className="layout-main-logo">
             <img alt="pediatrix" src="/images/pediatrix1.png" />
           </Row>
           <Row className="layout-nav">
-            <h5 className="layout-main-nav">{ path }</h5>
+            <img
+              onClick={history.goBack}
+              className="ignore-sidebar"
+              alt="arrow"
+              src="/images/arrow_2.png"
+            />
+            <h5 onClick={this.switchSideBar} className="layout-main-nav">{ path }</h5>
           </Row>
         </div>
         <Sidebar
