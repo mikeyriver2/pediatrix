@@ -179,11 +179,25 @@
     }
 }
 
+.hollow-btn {
+    background: transparent;
+    color: #5DA327;
+    font-weight: bold;
+    border-width: 2px;
+    border-color: #5DA327;
+    font-size: 18px;
+}
 
 // placing this here instead of the individual record components 
 .viewMode {
     padding: 10px 0px 50px 0px;
     .view {
+        .view-edit {
+            text-align: center;
+            button {
+                width: 90%;
+            }
+        }
         .view-item {
             p {
                 font-size: 18px;

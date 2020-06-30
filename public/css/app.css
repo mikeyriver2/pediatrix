@@ -10990,11 +10990,18 @@ a.text-dark:focus {
 
 .record__upper {
   display: flex;
+  width: 100%;
+  overflow: auto;
+  margin-bottom: 10px;
+  border-bottom: 5px;
+  border-style: solid;
+  border-width: 0px 0px 3px 0px;
+  border-color: #273D8A;
+  padding-bottom: 18px;
 }
 
-.record__upper img {
-  transform: rotate(-90deg);
-  width: 25px;
+.record__upper button {
+  margin: 0px 10px;
 }
 
 .record h5 {
@@ -11341,8 +11348,25 @@ a.text-dark:focus {
   margin: 10px 5px;
 }
 
+.hollow-btn {
+  background: transparent;
+  color: #5DA327;
+  font-weight: bold;
+  border-width: 2px;
+  border-color: #5DA327;
+  font-size: 18px;
+}
+
 .viewMode {
   padding: 10px 0px 50px 0px;
+}
+
+.viewMode .view .view-edit {
+  text-align: center;
+}
+
+.viewMode .view .view-edit button {
+  width: 90%;
 }
 
 .viewMode .view .view-item p {

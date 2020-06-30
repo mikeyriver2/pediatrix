@@ -235,24 +235,24 @@ const Record = (props) => {
         <p>PRESCRIPTION</p>
         <p>{prescription}</p>
       </div>
-      <Button
-        onClick={() => { setEditMode(!editMode); }}
-        variant="success"
-      >
-        Edit
-      </Button>
+      <div className="view-edit">
+        <Button
+          onClick={() => { setEditMode(!editMode); }}
+          variant="success"
+        >
+          Edit
+        </Button>
+      </div>
     </div>
   );
 
   return (
     <div className={editMode ? 'record editMode' : 'record viewMode'}>
       <div className="record__upper">
-        {/* <img
-          onClick={history.goBack}
-          alt="arrow"
-          src="/images/arrow.svg"
-        /> */}
-        <h5>Record</h5>
+        <Button className="hollow-btn" variant="success">HISTORY</Button>
+        <Button className="hollow-btn" variant="success">PAYMENTS</Button>
+        <Button className="hollow-btn" variant="success">APPOINTMENTS</Button>
+        <Button className="hollow-btn" variant="success">ASSSSSSSSS</Button>
       </div>
       {
         editMode ? returnEditMode() : returnViewMode()
