@@ -66,7 +66,7 @@ const Patient = (props) => {
   };
 
   const handleUpdate = () => {
-    const { match, } = props;
+    const { match } = props;
     const { params } = match;
     const { patientId } = params;
 
@@ -98,104 +98,99 @@ const Patient = (props) => {
 
   const { history } = props;
 
-  return (
-    <div className="patient">
-      <div className="patient__upper">
-        <img onClick={history.goBack} alt="arrow" src="/images/arrow.svg" />
-        <h5>Patient</h5>
-      </div>
-      <Form>
-        <Form.Label>Patient Name</Form.Label>
-        <Form.Control
-          onChange={(e) => handleChange(e, 'first_name')}
-          value={editMode ? cFirstName : firstName}
-          style={{ marginBottom: '10px' }}
-          type="text"
-          placeholder="First Name"
-          disabled={!editMode}
-        />
+  const returnEditMode = () => (
+    <Form>
+      <Form.Label>Patient Name</Form.Label>
+      <Form.Control
+        onChange={(e) => handleChange(e, 'first_name')}
+        value={editMode ? cFirstName : firstName}
+        style={{ marginBottom: '10px' }}
+        type="text"
+        placeholder="First Name"
+        disabled={!editMode}
+      />
 
-        <Form.Control
-          onChange={(e) => handleChange(e, 'middle_name')}
-          value={editMode ? cMiddleName : middleName}
-          style={{ marginBottom: '10px' }}
-          type="text"
-          placeholder="Middle Name"
-          disabled={!editMode}
-        />
+      <Form.Control
+        onChange={(e) => handleChange(e, 'middle_name')}
+        value={editMode ? cMiddleName : middleName}
+        style={{ marginBottom: '10px' }}
+        type="text"
+        placeholder="Middle Name"
+        disabled={!editMode}
+      />
 
-        <Form.Control
-          onChange={(e) => handleChange(e, 'last_name')}
-          value={editMode ? cLastName : lastName}
-          type="text"
-          placeholder="Last Name"
-          disabled={!editMode}
-        />
+      <Form.Control
+        onChange={(e) => handleChange(e, 'last_name')}
+        value={editMode ? cLastName : lastName}
+        type="text"
+        placeholder="Last Name"
+        disabled={!editMode}
+      />
 
-        <Form.Label>Phone Number</Form.Label>
-        <Form.Control
-          onChange={(e) => handleChange(e, 'phone_number')}
-          value={editMode ? cPhoneNumber : phoneNumber}
-          type="text"
-          placeholder="09178191791"
-          disabled={!editMode}
-        />
-        <p
-          className="error"
-          style={{
-            display: (errors.phone_number && editMode)
-              ? 'block'
-              : 'none',
-          }}
-        >
-          Invalid Phone Number
-        </p>
+      <Form.Label>Phone Number</Form.Label>
+      <Form.Control
+        onChange={(e) => handleChange(e, 'phone_number')}
+        value={editMode ? cPhoneNumber : phoneNumber}
+        type="text"
+        placeholder="09178191791"
+        disabled={!editMode}
+      />
+      <p
+        className="error"
+        style={{
+          display: (errors.phone_number && editMode)
+            ? 'block'
+            : 'none',
+        }}
+      >
+        Invalid Phone Number
+      </p>
 
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          onChange={(e) => handleChange(e, 'email')}
-          value={editMode ? cEmail : email}
-          type="text"
-          placeholder="pediatrix@gmail.com"
-          disabled={!editMode}
-        />
-        <p
-          className="error"
-          style={{
-            display: (errors.email && editMode)
-              ? 'block'
-              : 'none',
-          }}
-        >
-          Invalid Email
-        </p>
+      <Form.Label>Email</Form.Label>
+      <Form.Control
+        onChange={(e) => handleChange(e, 'email')}
+        value={editMode ? cEmail : email}
+        type="text"
+        placeholder="pediatrix@gmail.com"
+        disabled={!editMode}
+      />
+      <p
+        className="error"
+        style={{
+          display: (errors.email && editMode)
+            ? 'block'
+            : 'none',
+        }}
+      >
+        Invalid Email
+      </p>
 
-        <Form.Label>Address</Form.Label>
-        <Form.Control
-          onChange={(e) => handleChange(e, 'home_ddress')}
-          value={editMode ? cHomeAddress : homeAddress}
-          type="text"
-          as="textarea"
-          rows="3"
-          placeholder="House No. Street, Brgy, City"
-          disabled={!editMode}
-        />
+      <Form.Label>Address</Form.Label>
+      <Form.Control
+        onChange={(e) => handleChange(e, 'home_ddress')}
+        value={editMode ? cHomeAddress : homeAddress}
+        type="text"
+        as="textarea"
+        rows="3"
+        placeholder="House No. Street, Brgy, City"
+        disabled={!editMode}
+      />
 
-        <Button
-          onClick={() => { setEditMode(!editMode); }}
-          variant="success"
-          style={{
-            marginBottom: editMode ? '0px' : '',
-          }}
-        >
-          {
+      <Button
+        onClick={() => { setEditMode(!editMode); }}
+        variant="success"
+        style={{
+          marginBottom: editMode ? '0px' : '',
+        }}
+      >
+        {
             editMode
               ? 'STOP EDIT MODE'
               : 'Edit'
           }
-        </Button>
+      </Button>
 
-        {editMode
+      {editMode
           && (
           <Button
             disabled={Object.keys(errors).length > 0}
@@ -205,9 +200,54 @@ const Patient = (props) => {
             SAVE
           </Button>
           )}
-        {' '}
+      {' '}
 
-      </Form>
+    </Form>
+  );
+
+  const returnViewMode = () => (
+    <div className="view">
+      <div className="view-item">
+        <p>PATIENT NAME</p>
+        <p>
+          {`${firstName} ${middleName} ${lastName}`}
+        </p>
+      </div>
+      <div className="view-item">
+        <p>PHONE NUMBER</p>
+        <p>
+          {phoneNumber}
+        </p>
+      </div>
+      <div className="view-item">
+        <p>EMAIL</p>
+        <p>{email}</p>
+      </div>
+      <div className="view-item">
+        <p>ADDRESS</p>
+        <p>{homeAddress}</p>
+      </div>
+      <div className="view-edit">
+        <Button
+          onClick={() => { setEditMode(!editMode); }}
+          variant="success"
+        >
+          Edit
+        </Button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className={editMode ? 'patient editMode' : 'patient viewMode'}>
+      <div className="patient__upper">
+        <Button className="hollow-btn" variant="success">RECORD HISTORY</Button>
+        <Button className="hollow-btn" variant="success">PAYMENTS</Button>
+        <Button className="hollow-btn" variant="success">APPOINTMENTS</Button>
+      </div>
+      {
+        editMode ? returnEditMode() : returnViewMode()
+      }
     </div>
   );
 };

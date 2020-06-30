@@ -31,7 +31,7 @@ class Routes extends Component {
         components detected in path, while Switch will only render the FIRST :)
     */
     return (
-      <Router>
+      <Router onUpdate={() => window.scrollTo(0, 0)}>
         <Route path="" component={Layout} />
         <div className="main-body">
           <Route exact path="/" component={Dashboard} />

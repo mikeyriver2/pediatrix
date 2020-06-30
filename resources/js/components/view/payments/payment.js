@@ -85,80 +85,75 @@ const Payment = (props) => {
 
   const { history } = props;
 
-  return (
-    <div className="payment">
-      <div className="payment__upper">
-        <img onClick={history.goBack} alt="arrow" src="/images/arrow.svg" />
-        <h5>Payment</h5>
-      </div>
-      <Form>
-        <Form.Label>Patient</Form.Label>
-        <div className="patient-suggestions-container">
-          <Form.Control
+  const returnEditMode = () => (
+    <Form>
+      <Form.Label>Patient</Form.Label>
+      <div className="patient-suggestions-container">
+        <Form.Control
             /* keep code for future purposes :)
                 {...(!editMode && {
                   value: fullName,
                 })
                 }
             */
-            value={fullName}
-            type="text"
-            placeholder="Enter Patient Name"
-            disabled
-          />
-        </div>
+          value={fullName}
+          type="text"
+          placeholder="Enter Patient Name"
+          disabled
+        />
+      </div>
 
-        <Form.Label>Amount</Form.Label>
-        <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text id="Php">PhP</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            disabled={!editMode}
-            value={editMode ? cAmount : amount}
-            onChange={(e) => handleChange(e, 'amount')}
-            placeholder="Enter Amount"
-          />
-        </InputGroup>
-        <p
-          className="error"
-          style={{
-            display: (errors.amount && editMode)
-              ? 'block'
-              : 'none',
-          }}
-        >
-          Invalid Amount
-        </p>
-
-
-        <Form.Label>Status</Form.Label>
-        <Form.Control
-          as="select"
-          value={editMode ? cStatus : status}
-          onChange={(e) => handleChange(e, 'status')}
+      <Form.Label>Amount</Form.Label>
+      <InputGroup>
+        <InputGroup.Prepend>
+          <InputGroup.Text id="Php">PhP</InputGroup.Text>
+        </InputGroup.Prepend>
+        <FormControl
           disabled={!editMode}
-        >
-          <option>Completed</option>
-          <option>Pending</option>
-          <option>Incomplete</option>
-        </Form.Control>
+          value={editMode ? cAmount : amount}
+          onChange={(e) => handleChange(e, 'amount')}
+          placeholder="Enter Amount"
+        />
+      </InputGroup>
+      <p
+        className="error"
+        style={{
+          display: (errors.amount && editMode)
+            ? 'block'
+            : 'none',
+        }}
+      >
+        Invalid Amount
+      </p>
 
-        <Button
-          onClick={() => { setEditMode(!editMode); }}
-          variant="success"
-          style={{
-            marginBottom: editMode ? '0px' : '',
-          }}
-        >
-          {
+
+      <Form.Label>Status</Form.Label>
+      <Form.Control
+        as="select"
+        value={editMode ? cStatus : status}
+        onChange={(e) => handleChange(e, 'status')}
+        disabled={!editMode}
+      >
+        <option>Completed</option>
+        <option>Pending</option>
+        <option>Incomplete</option>
+      </Form.Control>
+
+      <Button
+        onClick={() => { setEditMode(!editMode); }}
+        variant="success"
+        style={{
+          marginBottom: editMode ? '0px' : '',
+        }}
+      >
+        {
             editMode
               ? 'STOP EDIT MODE'
               : 'Edit'
           }
-        </Button>
+      </Button>
 
-        {editMode
+      {editMode
           && (
           <Button
             disabled={Object.keys(errors).length > 0}
@@ -168,7 +163,41 @@ const Payment = (props) => {
             SAVE
           </Button>
           )}
-      </Form>
+    </Form>
+  );
+
+  const returnViewMode = () => (
+    <div className="view">
+      <div className="view-item">
+        <p>PATIENT</p>
+        <p>{fullName}</p>
+      </div>
+      <div className="view-item">
+        <p>AMOUNT</p>
+        <p>
+          Php {amount}
+        </p>
+      </div>
+      <div className="view-item">
+        <p>STATUS</p>
+        <p>{status}</p>
+      </div>
+      <div className="view-edit">
+        <Button
+          onClick={() => { setEditMode(!editMode); }}
+          variant="success"
+        >
+          EDIT
+        </Button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className={editMode ? 'payment editMode' : 'payment viewMode'}>
+      {
+        editMode ? returnEditMode() : returnViewMode()
+      }
     </div>
   );
 };

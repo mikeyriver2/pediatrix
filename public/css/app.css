@@ -10680,7 +10680,7 @@ a.text-dark:focus {
 
 .main-layout .layout-header .layout-nav img {
   position: absolute;
-  margin-top: 0.7em;
+  margin-top: 0.8em;
   margin-left: 20px;
 }
 
@@ -11001,6 +11001,7 @@ a.text-dark:focus {
 }
 
 .record__upper button {
+  white-space: nowrap;
   margin: 0px 10px;
 }
 
@@ -11076,11 +11077,19 @@ a.text-dark:focus {
 
 .payment__upper {
   display: flex;
+  width: 100%;
+  overflow: auto;
+  margin-bottom: 10px;
+  border-bottom: 5px;
+  border-style: solid;
+  border-width: 0px 0px 3px 0px;
+  border-color: #273D8A;
+  padding-bottom: 18px;
 }
 
-.payment__upper img {
-  transform: rotate(-90deg);
-  width: 25px;
+.payment__upper button {
+  white-space: nowrap;
+  margin: 0px 10px;
 }
 
 .payment h5 {
@@ -11147,11 +11156,19 @@ a.text-dark:focus {
 
 .patient__upper {
   display: flex;
+  width: 100%;
+  overflow: auto;
+  margin-bottom: 10px;
+  border-bottom: 5px;
+  border-style: solid;
+  border-width: 0px 0px 3px 0px;
+  border-color: #273D8A;
+  padding-bottom: 18px;
 }
 
-.patient__upper img {
-  transform: rotate(-90deg);
-  width: 25px;
+.patient__upper button {
+  margin: 0px 10px;
+  white-space: nowrap;
 }
 
 .patient h5 {

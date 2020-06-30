@@ -49,7 +49,7 @@ export default class ViewPatients extends Component {
                 /> */}
         <SummaryWithLabel
           search={{
-            filterBy: ['All', 'In-Patient', 'Out-Patient'],
+            filterBy: ['All', 'Inpatient', 'Outpatient'],
             searchUrl: '/api/patients/filter',
             setData: this.setPatients,
           }}

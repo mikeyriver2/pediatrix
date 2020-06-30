@@ -11,7 +11,8 @@ class SummaryWithLabel extends Component{
     constructor(props){
         super(props);
         this.state = {
-            
+            filter: 'All',
+            filterIndex: 0
         }
     }
 
@@ -186,6 +187,7 @@ class SummaryWithLabel extends Component{
     }
 
     render(){
+        const { filter, filterIndex } = this.state;
         const { header, parent, summary, search } = this.props;
         let filterBy, searchUrl;
         if (search) filterBy = search.filterBy;
@@ -216,18 +218,32 @@ class SummaryWithLabel extends Component{
                         </h6>
                         {filterBy &&
                             <nav className="filter-by">
-                                <span>Filter By:</span>
+                                <span>Filter</span>
                                 {
                                     filterBy.map((value,index)=>{
                                         return (
-                                            <a key={index} style={{fontWeight: index === 0 ? "bold" : ""}}>{value}</a>
+                                            <a 
+                                              key={index} 
+                                              style={{
+                                                fontWeight: index === filterIndex ? "bold" : ""
+                                              }}
+                                              onClick={() => {
+                                                this.setState({
+                                                    filter: value,
+                                                    filterIndex: index
+                                                });
+                                              }}
+                                            >
+                                              {value}
+                                            </a>
                                         )
                                     })
                                 }
                             </nav>
                         }
                         {searchUrl !== '' &&
-                            <SearchBar 
+                            <SearchBar
+                                filter={filter}
                                 search={search}
                             />
                         }

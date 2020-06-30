@@ -20,23 +20,32 @@ export default class SearchBar extends Component {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  handleSearch (e) {
-    const { value } = e.target;
-    const { search } = this.props;
+  componentDidUpdate(prevProps) {
+    const { filter, search } = this.props;
+    const { filter: prevFilter } = prevProps;
+    if (filter !== prevFilter) {
+      this.handleSearch();
+    }
+  }
+
+  handleSearch(e) {
+    const value = e ? e.target.value : '';
+    const { search, filter } = this.props;
     let searchUrl;
     searchUrl = search ? search.searchUrl : '';
     if (searchUrl !== '') {
       if (this.timeout) clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         axios.get(searchUrl, {
-          params: { 
-            search: value
-          }
+          params: {
+            search: value,
+            filter,
+          },
         }).then((res) => {
           const { setData } = search;
           setData(res.data);
         });
-      }, 400);
+      }, 200);
     }
   }
 

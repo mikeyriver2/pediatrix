@@ -35,6 +35,15 @@ class Layout extends Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    const { location } = this.props;
+    if (
+      location.pathname !== prevProps.location.pathname
+    ) {
+      window.scrollTo(0, 0);
+    }
+  }
+
   switchSideBar() {
     const element = document.getElementById('sidebar-container');
     const classes = element.className;
