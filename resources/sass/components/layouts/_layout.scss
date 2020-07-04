@@ -1,6 +1,8 @@
 .main-body {
     margin-top: 125px;
 }
+
+// Original CSS and for Mobile considerations
 .main-layout{
     position: fixed;
     width: 100%;
@@ -78,3 +80,94 @@
         }
     }
 }
+
+//
+@media(min-width: 768px) {
+    .main-layout {
+        position: relative; 
+        .layout-header {
+            .row {
+                height: 80px;
+                display: flex;
+                align-items: center;
+                img {
+                    max-height: 80px;
+                }
+            }
+        }
+    }
+    .main-body {
+        margin-top: 0px;
+        display: flex;
+        & > div:first-of-type {
+            width: 25%;
+        }
+        & > div:nth-of-type(2) {
+            width: 75%;
+            overflow-x: hidden;
+        }
+        &__contents {
+            &--lower {
+                height: calc(100vh - 120px);
+                overflow-y: auto;
+            }
+        }
+    }
+    .top-nav-desktop {
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h5 {
+            color: #6A6A6A;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0px;
+        }
+    }
+    .sideBar-desktop {
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+        padding-top: 15px;
+        p {
+            padding: 0px 15px;
+            font-size: 18px;
+            margin: 0px;
+        }
+        ul {
+            padding: 0px;
+            padding-top: 15px;
+            list-style: none;
+        }
+        .sidebar-desktop__item {
+            cursor: pointer;
+            border-width: 0px 0px 1px 0px;
+            border-color: #e1e2e3;
+            border-style: solid;
+            font-size: 14px;
+            padding: 15px 15px;
+            font-weight: bold;
+            color: #293661;
+            &:hover {
+                color: white;
+                background: #53639D;
+            }
+            &.sub{
+                padding-left: 24px;
+                color: #6C7B8A;
+                svg {
+                    margin-right: 4px;
+                }
+                &:hover {
+                    color: white;
+                    svg > path {
+                        fill: white;
+                    }
+                }
+            }
+        }
+    }
+}
+  

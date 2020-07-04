@@ -13,6 +13,9 @@ import ViewPayments from './view/payments/payments';
 import ViewPayment from './view/payments/payment';
 import Dashboard from './dashboard/dashboard';
 
+import DesktopSideBar from './layout/desktop-view/sidebar';
+import DesktopNavBar from './layout/desktop-view/navigation-bar';
+
 class Routes extends Component {
   constructor() {
     super();
@@ -26,6 +29,7 @@ class Routes extends Component {
   }
 
   render() {
+    const isMobile = window.innerWidth < 768;
     /*
         The difference between <Router> and <Switch> is that Router will render all
         components detected in path, while Switch will only render the FIRST :)
@@ -34,14 +38,20 @@ class Routes extends Component {
       <Router onUpdate={() => window.scrollTo(0, 0)}>
         <Route path="" component={Layout} />
         <div className="main-body">
-          <Route exact path="/" component={Dashboard} />
-          <Route exact path="/patients" component={ViewPatients} />
-          <Route exact path="/patients/:patientId" component={ViewPatient} />
-          <Route exact path="/payments" component={ViewPayments} />
-          <Route exact path="/payments/:paymentId" component={ViewPayment} />
-          <Route exact path="/records" component={ViewRecords} />
-          <Route exact path="/records/:recordId" component={ViewRecord} />
-          <Route exact path="/home" component={Dashboard} />
+          { !isMobile && <DesktopSideBar /> }
+          <div className="main-body__contents">
+            { !isMobile && <DesktopNavBar /> }
+            <div className="main-body__contents--lower">
+              <Route exact path="/" component={Dashboard} />
+              <Route exact path="/patients" component={ViewPatients} />
+              <Route exact path="/patients/:patientId" component={ViewPatient} />
+              <Route exact path="/payments" component={ViewPayments} />
+              <Route exact path="/payments/:paymentId" component={ViewPayment} />
+              <Route exact path="/records" component={ViewRecords} />
+              <Route exact path="/records/:recordId" component={ViewRecord} />
+              <Route exact path="/home" component={Dashboard} />
+            </div>
+          </div>
         </div>
       </Router>
     );

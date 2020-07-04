@@ -19,7 +19,6 @@ class Layout extends Component {
     super();
     this.state = {
       appHeight: '',
-      ass: 'ass',
       showSideBar: false,
     };
     this.header = React.createRef();
@@ -29,9 +28,6 @@ class Layout extends Component {
   componentDidMount() {
     this.setState({
       appHeight: document.getElementById('pediatrix').clientHeight,
-    }, () => {
-      // console.log(this.state.appHeight);
-      // document.getElementById('sidebar-container').style.height = `${this.state.appHeight}px`;
     });
   }
 
@@ -68,12 +64,15 @@ class Layout extends Component {
 
   hideSideBar() {
     const element = document.getElementById('sidebar-container');
-    element.classList.remove('sidebar-show');
-    element.classList.add('sidebar-hidden');
-    document.getElementById('pediatrix').removeAttribute('style');
+    if (element) {
+      element.classList.remove('sidebar-show');
+      element.classList.add('sidebar-hidden');
+      document.getElementById('pediatrix').removeAttribute('style');
+    }
   }
 
   render() {
+    const isMobile = window.innerWidth < 768;
     const { location, history } = this.props;
     const { pathname } = location;
     let path = 'HOME';
@@ -92,21 +91,25 @@ class Layout extends Component {
           <Row className="layout-main-logo">
             <img alt="pediatrix" src="/images/pediatrix1.png" />
           </Row>
-          <Row className="layout-nav">
-            <img
-              onClick={history.goBack}
-              className="ignore-sidebar"
-              alt="arrow"
-              src="/images/arrow_2.png"
-            />
-            <h5 onClick={this.switchSideBar} className="layout-main-nav">{ path }</h5>
-          </Row>
+          { isMobile
+            && (
+            <Row className="layout-nav">
+              <img
+                onClick={history.goBack}
+                className="ignore-sidebar"
+                alt="arrow"
+                src="/images/arrow_2.png"
+              />
+              <h5 onClick={this.switchSideBar} className="layout-main-nav">{ path }</h5>
+            </Row>
+            )}
         </div>
         <Sidebar
           {...this.props}
           layoutRef={this.header}
           showSideBar={this.state.showSideBar}
           hideSideBar={this.hideSideBar}
+          isMobile={isMobile}
         />
       </div>
     );

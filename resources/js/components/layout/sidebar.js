@@ -31,8 +31,7 @@ export default class Sidebar extends Component {
   componentDidUpdate(prevProps) {
     const { location, hideSideBar } = this.props;
     const { location: prevLoc } = prevProps;
-    console.log(location.pathname)
-    console.log(prevLoc.pathname)
+
     if (location && location.pathname !== prevLoc.pathname) {
       hideSideBar();
     }
@@ -53,7 +52,10 @@ export default class Sidebar extends Component {
   }
 
   handleClick(e) {
-    if (!e.target.className.includes('layout-main') && this.node && !this.node.contains(e.target) && !this.state.modal.show) {
+    if (!e.target.className.includes('layout-main')
+      && this.node && !this.node.contains(e.target)
+      && !this.state.modal.show
+    ) {
       this.props.hideSideBar();
     }
   }
@@ -69,7 +71,8 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    return (
+    const { isMobile } = this.props;
+    return !isMobile ? <div /> : (
       <div ref={(node) => { this.node = node; }} className="layout-sidebar">
         <ul id="sidebar-container" className="sidebar-container sidebar-hidden">
           <li className="sidebar-user-name">
