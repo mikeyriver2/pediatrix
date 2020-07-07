@@ -35,7 +35,10 @@ const sideBarDesktop = (props) => {
         >
           View Record
         </li>
-        <li className="sidebar-desktop__item sub">
+        <li
+          onClick={() => { history.push('/records/new'); }} 
+          className="sidebar-desktop__item sub"
+        >
           { addSvg() }
           <span>New Record</span>
         </li>
@@ -55,7 +58,10 @@ const sideBarDesktop = (props) => {
         >
           View Patients
         </li>
-        <li className="sidebar-desktop__item sub">
+        <li
+          className="sidebar-desktop__item sub"
+          onClick={() => { history.push('/patients/new'); }}
+        >
           { addSvg() }
           <span>New Patient</span>
         </li>
@@ -65,7 +71,10 @@ const sideBarDesktop = (props) => {
         >
           View Payments
         </li>
-        <li className="sidebar-desktop__item sub">
+        <li
+          className="sidebar-desktop__item sub"
+          onClick={() => { history.push('/payments/new'); }}
+        >
           { addSvg() }
           <span>New Payment</span>
         </li>

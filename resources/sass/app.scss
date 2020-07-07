@@ -16,15 +16,21 @@
 
 @import './components/layouts/layout';
 @import './components/dashboard/dashboard';
+
 @import './components/modals/new-payments';
 @import './components/modals/new-appointments';
 @import './components/modals/new-patient';
 @import './components/modals/new-record';
+
 @import './components/views/record';
 @import './components/views/payment';
 @import './components/views/patient';
 
-//general styles non-component specific
+@import './components/new/create';
+@import './components/new/patient';
+
+
+// general styles non-component specific
 #pediatrix {
     width: 100%;
     overflow: hidden;

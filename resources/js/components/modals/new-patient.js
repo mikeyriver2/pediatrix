@@ -13,9 +13,6 @@ import {
   Button,
 } from 'react-bootstrap';
 import axios from 'axios';
-import Summary from '../summaries/summary';
-import QuickSummary from '../summaries/quick-summary';
-import SummaryWithLabel from '../summaries/summary-with-label';
 import * as helpers from '../../helpers/validations';
 
 export default class NewPatient extends Component {

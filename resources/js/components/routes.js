@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router, Link, Route, withRouter,
 } from 'react-router-dom';
 import axios from 'axios';
+
 import Layout from './layout/layout';
 import ViewPatients from './view/patients/patients';
 import ViewPatient from './view/patients/patient';
@@ -12,6 +13,10 @@ import ViewRecord from './view/records/record';
 import ViewPayments from './view/payments/payments';
 import ViewPayment from './view/payments/payment';
 import Dashboard from './dashboard/dashboard';
+
+import CreatePatient from './create/patient';
+import CreateRecord from './create/record';
+import CreatePayment from './create/payment';
 
 import DesktopSideBar from './layout/desktop-view/sidebar';
 import DesktopNavBar from './layout/desktop-view/navigation-bar';
@@ -44,11 +49,14 @@ class Routes extends Component {
             <div className="main-body__contents--lower">
               <Route exact path="/" component={Dashboard} />
               <Route exact path="/patients" component={ViewPatients} />
-              <Route exact path="/patients/:patientId" component={ViewPatient} />
+              <Route exact path="/patients/new" component={CreatePatient} />
+              <Route path="/patients/:patientId(\d+)" component={ViewPatient} />
               <Route exact path="/payments" component={ViewPayments} />
-              <Route exact path="/payments/:paymentId" component={ViewPayment} />
+              <Route exact path="/payments/new" component={CreatePayment} />
+              <Route exact path="/payments/:paymentId(\d+)" component={ViewPayment} />
               <Route exact path="/records" component={ViewRecords} />
-              <Route exact path="/records/:recordId" component={ViewRecord} />
+              <Route path="/records/new" component={CreateRecord} />
+              <Route exact path="/records/:recordId(\d+)" component={ViewRecord} />
               <Route exact path="/home" component={Dashboard} />
             </div>
           </div>
