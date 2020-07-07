@@ -1,0 +1,24 @@
+.create-desktop {
+  padding: 30px 5vw;
+  .form-label,h5 {
+    font-weight: bold;
+    font-size: 18px;
+    color: #6C7B8A;
+  }
+  .form-label {
+    margin-top: 15px;
+  }
+  .form-control {
+    background: #FFFFFF;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+  }
+
+  &__submit {
+    margin-top: 25px;
+    width: 100%;
+    button {
+      width: 100%;
+    }
+  }
+}
