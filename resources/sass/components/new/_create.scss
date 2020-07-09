@@ -21,4 +21,33 @@
       width: 100%;
     }
   }
+
+  .patient-suggestions-container {
+    position: relative;
+    .close{
+      margin: 0px !important;
+      width: 0px !important;
+      position: absolute;
+      top: 7px;
+      left: 60vw;
+    }
+    .suggestions-patients{
+      position: absolute;
+      z-index: 10;
+      background: #FFFFFF;
+      box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+      width: 100%;
+      padding: 10px;
+      top: 35px;
+      .suggestion-patient {
+        padding: 5px;
+        &:hover {
+          cursor: pointer;
+          background: grey;
+          color: white;
+        }
+      }
+    }
+  }
 }

@@ -25,6 +25,10 @@ class Payment extends Component {
       amount: 0,
       status: 'Complete',
       errors: {},
+      modal: {
+        type: '',
+        show: false,
+      },
     };
 
     this.handleQuickSearch = this.handleQuickSearch.bind(this);
@@ -32,19 +36,44 @@ class Payment extends Component {
     this.selectPatient = this.selectPatient.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fetchPatient = this.fetchPatient.bind(this);
   }
 
   componentDidMount() {
+    // this.fetchPatient();
     const interval = setInterval(() => {
-      if (document.getElementById('new-payments-modal')) {
-        document.getElementById('new-payments-modal').addEventListener('click', (e) => {
+      if (document.querySelector('.new-payment')) {
+        console.log('assss');
+        document.querySelector('.new-payment').addEventListener('click', (e) => {
+          console.log(e.target.className);
           if (!e.target.className.includes('ignore-listener')) {
+            console.log('disabling div');
             this.setState({ disableDiv: true });
+          } else {
+            console.log('ignoring div');
           }
         });
         clearInterval(interval);
       }
     }, 1000);
+  }
+
+  fetchPatient(e = null) {
+    this.setState({
+      full_name: e ? e.target.value : '',
+      disableDiv: false,
+    }, () => {
+      axios.get('/api/patients/qs',
+        {
+          params: {
+            full_name: this.state.full_name,
+          },
+        }).then((res) => {
+        this.setState({
+          patients: res.data,
+        });
+      });
+    });
   }
 
   handleQuickSearch(e) {
@@ -96,7 +125,6 @@ class Payment extends Component {
     axios.post('/api/payments/store', values).then((res) => {
       const { history } = this.props;
       const { payment } = res.data;
-      this.props.closeModal();
       history.push(`/payments/${payment.id}`);
     });
   }
@@ -134,11 +162,11 @@ class Payment extends Component {
 
 
   render() {
-    const { full_name: fullName, amount } = this.state;
+    const { full_name: fullName, amount, selected_patient } = this.state;
     const disableSave = Object.keys(this.state.errors).length > 0 || !this.state.selected_patient.id || (amount && amount.replace(/\s/g, '') === '');
 
     return (
-      <div className="create-desktop new-record">
+      <div className="create-desktop new-payment">
         <h5>New Payment</h5>
         <Form>
           <Form.Label>Patient</Form.Label>
@@ -149,6 +177,11 @@ class Payment extends Component {
               type="text"
               placeholder="Enter Patient Name"
             />
+            {selected_patient.id && (
+            <button onClick={() => { this.setState({ selected_patient: {} }); }} type="button" className="close">
+              <span>x</span>
+            </button>
+            )}
             {this.showSuggestions()}
           </div>
           <Form.Label>Amount</Form.Label>
@@ -175,6 +208,15 @@ class Payment extends Component {
 
           <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
         </Form>
+        {(this.state.modal.type == 'new-patient' && this.state.modal.show)
+                    && (
+                    <NewPatient
+                      show={this.state.modal.type == 'new-patient' && this.state.modal.show}
+                      closeModal={this.closeModal}
+                      parentComponent="NewRecord"
+                      selectPatient={this.selectPatient}
+                    />
+                    )}
       </div>
     );
   }

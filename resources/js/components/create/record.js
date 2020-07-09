@@ -46,8 +46,9 @@ class Record extends Component {
   componentDidMount() {
     this.fetchPatient();
     const interval = setInterval(() => {
-      if (document.getElementById('new-record-modal')) {
-        document.getElementById('new-record-modal').addEventListener('click', (e) => {
+      if (document.querySelector('.new-record')) {
+        console.log('assss');
+        document.querySelector('.new-record').addEventListener('click', (e) => {
           console.log(e.target.className);
           if (!e.target.className.includes('ignore-listener')) {
             console.log('disabling div');
@@ -253,6 +254,15 @@ class Record extends Component {
 
           <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
         </Form>
+        {(this.state.modal.type == 'new-patient' && this.state.modal.show)
+          && (
+          <NewPatient
+            show={this.state.modal.type == 'new-patient' && this.state.modal.show}
+            closeModal={this.closeModal}
+            parentComponent="NewRecord"
+            selectPatient={this.selectPatient}
+          />
+          )}
       </div>
     );
   }
