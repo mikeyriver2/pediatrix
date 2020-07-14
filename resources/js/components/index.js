@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {
+  applyMiddleware, createStore, combineReducers, compose,
+} from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import Router from './routes.js';
+import reducers from '../reducers/index';
 
-export default class Index extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-8">
-            <div className="card">
-              <div className="card-header">Example Component</div>
-              <div className="card-body">I'm an example component!</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  reducers,
+  composeEnhancer(applyMiddleware(thunk)),
+);
 
 if (document.getElementById('pediatrix')) {
-  ReactDOM.render(<Router />, document.getElementById('pediatrix'));
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router />
+    </Provider>,
+    document.getElementById('pediatrix'),
+  );
 }

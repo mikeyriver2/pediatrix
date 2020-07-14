@@ -8,6 +8,10 @@ import {
 import {
   Row,
 } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../../actions/index';
+
 import Sidebar from './sidebar';
 import Dashboard from '../dashboard/dashboard';
 import ViewPatients from '../view/patients/patients';
@@ -15,8 +19,8 @@ import ViewRecords from '../view/records/records';
 import ViewPayments from '../view/payments/payments';
 
 class Layout extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       appHeight: '',
       showSideBar: false,
@@ -72,8 +76,7 @@ class Layout extends Component {
   }
 
   render() {
-    const isMobile = window.innerWidth < 768;
-    const { location, history } = this.props;
+    const { location, history, isMobile } = this.props;
     const { pathname } = location;
     let path = 'HOME';
     if (pathname && pathname !== '') {
@@ -116,4 +119,10 @@ class Layout extends Component {
   }
 }
 
-export default withRouter(Layout);
+const mapStateToProps = (state) => ({
+  isMobile: state.isMobile,
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...actions }, dispatch);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

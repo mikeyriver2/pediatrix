@@ -1,10 +1,22 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   withRouter,
 } from 'react-router-dom';
+import {
+  Button,
+} from 'react-bootstrap';
 
 
 const navBar = (props) => {
+  const [mode, setMode] = useState('list');
+  /**
+   * MODES:
+   *  list - tables/listing of info
+   *  view - viewing record/patient/payment
+   *  edit - editing //
+   *  create - creating //
+   */
+
   const { location, history } = props;
   const { pathname } = location;
   let path = 'HOME';
@@ -17,9 +29,77 @@ const navBar = (props) => {
       path = 'PAYMENTS';
     }
   }
+
+  useEffect(() => {
+    // sample: patient/1 ,  record/1,   payment/1
+    const regex = /[a-z]\w+\/\d+/g;
+    const match = pathname.match(regex);
+    if (match && match.length > 0) {
+      setMode('view');
+    }
+  }, []);
+
+  const handleClick = (e) => {
+    const { target } = e;
+    let action = target.innerText;
+
+    let dom;
+    if (mode === 'view') {
+      dom = document.querySelector('#button-edit');
+    } else if (mode === 'edit') {
+      dom = document.querySelector('#button-save');
+    }
+
+    if (dom) {
+      dom.click();
+    }
+
+    if (action) {
+      action = action.toLowerCase();
+      if (action === 'edit') {
+        setMode('edit');
+      } else if (action === 'save') {
+        setMode('view');
+      }
+    }
+  };
+
+  const handleCancel = (e) => {
+    const { target } = e;
+    const action = target.innerText;
+
+    if (action === '') {
+      history.goBack();
+    } else {
+      const dom = document.querySelector('#button-edit');
+      if (dom) dom.click();
+      setMode('view');
+    }
+  };
+
   return (
     <div className="top-nav-desktop">
+      <Button onClick={handleCancel} className={`mode-${mode}`}>
+        {mode === 'view'
+          ? (
+            <img
+              onClick={history.goBack}
+              className="ignore-sidebar"
+              alt="arrow"
+              src="/images/arrow_2.png"
+            />
+          )
+          : 'Cancel'}
+      </Button>
       <h5>{path}</h5>
+      <Button
+        onClick={handleClick}
+        className={`mode-${mode}`}
+      >
+        {mode === 'edit'
+          ? 'Save'
+          : 'Edit'}
+      </Button>
     </div>
   );
 };

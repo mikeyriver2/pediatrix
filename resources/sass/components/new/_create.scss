@@ -14,6 +14,12 @@
     border-radius: 5px;
   }
 
+  .input-group {
+    & .justify-content {
+      justify-content: space-between;
+    }
+  }
+
   &__submit {
     margin-top: 25px;
     width: 100%;

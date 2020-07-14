@@ -228,23 +228,28 @@ class Record extends Component {
             {this.showSuggestions()}
           </div>
 
-          <Form.Label>Weight</Form.Label>
-          <InputGroup>
-            <FormControl style={borderStyle} onChange={(e) => this.handleOnChange(e, 'weight')} type="text" placeholder="10" />
-            <InputGroup.Prepend>
-              <InputGroup.Text>lbs</InputGroup.Text>
-            </InputGroup.Prepend>
-          </InputGroup>
-          <p className="error" style={{ display: this.state.errors.weight ? 'block' : 'none' }}>Weight is Invalid</p>
-
-          <Form.Label>Temperature</Form.Label>
-          <InputGroup>
-            <Form.Control style={borderStyle} onChange={(e) => this.handleOnChange(e, 'temperature')} type="text" placeholder="36" />
-            <InputGroup.Prepend>
-              <InputGroup.Text>°C</InputGroup.Text>
-            </InputGroup.Prepend>
-          </InputGroup>
-          <p className="error" style={{ display: this.state.errors.temperature ? 'block' : 'none' }}>Temperature is Invalid</p>
+          <div className="input-group">
+            <div className="input-group--item">
+              <Form.Label>Weight</Form.Label>
+              <InputGroup>
+                <FormControl style={borderStyle} onChange={(e) => this.handleOnChange(e, 'weight')} type="text" placeholder="10" />
+                <InputGroup.Prepend>
+                  <InputGroup.Text>lbs</InputGroup.Text>
+                </InputGroup.Prepend>
+              </InputGroup>
+              <p className="error" style={{ display: this.state.errors.weight ? 'block' : 'none' }}>Weight is Invalid</p>
+            </div>
+            <div className="input-group--item">
+              <Form.Label>Temperature</Form.Label>
+              <InputGroup>
+                <Form.Control style={borderStyle} onChange={(e) => this.handleOnChange(e, 'temperature')} type="text" placeholder="36" />
+                <InputGroup.Prepend>
+                  <InputGroup.Text>°C</InputGroup.Text>
+                </InputGroup.Prepend>
+              </InputGroup>
+              <p className="error" style={{ display: this.state.errors.temperature ? 'block' : 'none' }}>Temperature is Invalid</p>
+            </div>
+          </div>
 
           <Form.Label>Diagnosis</Form.Label>
           <Form.Control onChange={(e) => this.handleOnChange(e, 'diagnosis')} as="textarea" rows="3" />
@@ -252,7 +257,9 @@ class Record extends Component {
           <Form.Label>Prescription</Form.Label>
           <Form.Control onChange={(e) => this.handleOnChange(e, 'prescription')} as="textarea" rows="3" />
 
-          <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
+          <div className="create-desktop__submit">
+            <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
+          </div>
         </Form>
         {(this.state.modal.type == 'new-patient' && this.state.modal.show)
           && (

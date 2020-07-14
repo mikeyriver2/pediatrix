@@ -53,3 +53,22 @@
     }
   }
 }
+
+// handle desktop view
+@media(min-width: 768px) {
+  .patient {
+    padding: 20px 0px 0px 0px;
+    &__fullName {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      input {
+        width: 30%;
+      }
+    }
+    &__upper {
+      padding-left: 15px;
+      border: 0px;
+    }
+  }
+}

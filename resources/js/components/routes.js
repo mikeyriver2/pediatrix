@@ -4,8 +4,12 @@ import {
   BrowserRouter as Router, Link, Route, withRouter,
 } from 'react-router-dom';
 import axios from 'axios';
+import { bindActionCreators } from 'redux';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions/index';
 import Layout from './layout/layout';
+
 import ViewPatients from './view/patients/patients';
 import ViewPatient from './view/patients/patient';
 import ViewRecords from './view/records/records';
@@ -22,19 +26,23 @@ import DesktopSideBar from './layout/desktop-view/sidebar';
 import DesktopNavBar from './layout/desktop-view/navigation-bar';
 
 class Routes extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
 
     };
   }
 
   componentDidMount() {
-
+    const { checkIfMobile } = this.props;
+    checkIfMobile();
+    window.addEventListener('resize', () => {
+      checkIfMobile();
+    });
   }
 
   render() {
-    const isMobile = window.innerWidth < 768;
+    const { isMobile } = this.props;
     /*
         The difference between <Router> and <Switch> is that Router will render all
         components detected in path, while Switch will only render the FIRST :)
@@ -66,4 +74,11 @@ class Routes extends Component {
   }
 }
 
-export default Routes;
+const mapStateToProps = (state) => ({
+  isMobile: state.isMobile,
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...actions }, dispatch);
+
+// export default Routes;
+export default connect(mapStateToProps, mapDispatchToProps)(Routes);

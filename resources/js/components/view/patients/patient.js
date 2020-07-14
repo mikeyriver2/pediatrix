@@ -9,6 +9,7 @@ import {
   withRouter,
 } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import * as helpers from '../../../helpers/validations';
 
 const Patient = (props) => {
@@ -96,37 +97,38 @@ const Patient = (props) => {
     home_address: cHomeAddress,
   } = clonedPatient;
 
-  const { history } = props;
+  const { history, isMobile } = props;
 
   const returnEditMode = () => (
     <Form>
       <Form.Label>Patient Name</Form.Label>
-      <Form.Control
-        onChange={(e) => handleChange(e, 'first_name')}
-        value={editMode ? cFirstName : firstName}
-        style={{ marginBottom: '10px' }}
-        type="text"
-        placeholder="First Name"
-        disabled={!editMode}
-      />
+      <div className="patient__fullName">
+        <Form.Control
+          onChange={(e) => handleChange(e, 'first_name')}
+          value={editMode ? cFirstName : firstName}
+          style={{ marginBottom: '10px' }}
+          type="text"
+          placeholder="First Name"
+          disabled={!editMode}
+        />
 
-      <Form.Control
-        onChange={(e) => handleChange(e, 'middle_name')}
-        value={editMode ? cMiddleName : middleName}
-        style={{ marginBottom: '10px' }}
-        type="text"
-        placeholder="Middle Name"
-        disabled={!editMode}
-      />
+        <Form.Control
+          onChange={(e) => handleChange(e, 'middle_name')}
+          value={editMode ? cMiddleName : middleName}
+          style={{ marginBottom: '10px' }}
+          type="text"
+          placeholder="Middle Name"
+          disabled={!editMode}
+        />
 
-      <Form.Control
-        onChange={(e) => handleChange(e, 'last_name')}
-        value={editMode ? cLastName : lastName}
-        type="text"
-        placeholder="Last Name"
-        disabled={!editMode}
-      />
-
+        <Form.Control
+          onChange={(e) => handleChange(e, 'last_name')}
+          value={editMode ? cLastName : lastName}
+          type="text"
+          placeholder="Last Name"
+          disabled={!editMode}
+        />
+      </div>
       <Form.Label>Phone Number</Form.Label>
       <Form.Control
         onChange={(e) => handleChange(e, 'phone_number')}
@@ -177,10 +179,12 @@ const Patient = (props) => {
       />
 
       <Button
+        id="button-edit"
         onClick={() => { setEditMode(!editMode); }}
         variant="success"
         style={{
           marginBottom: editMode ? '0px' : '',
+          display: !isMobile ? 'none' : '',
         }}
       >
         {
@@ -193,6 +197,8 @@ const Patient = (props) => {
       {editMode
           && (
           <Button
+            style={{ display: !isMobile ? 'none' : '' }}
+            id="button-save"
             disabled={Object.keys(errors).length > 0}
             onClick={handleUpdate}
             variant="primary"
@@ -229,6 +235,7 @@ const Patient = (props) => {
       </div>
       <div className="view-edit">
         <Button
+          style={{ display: !isMobile ? 'none' : '' }}
           onClick={() => { setEditMode(!editMode); }}
           variant="success"
         >
@@ -238,6 +245,13 @@ const Patient = (props) => {
     </div>
   );
 
+  let returnDom;
+  if (editMode || !isMobile) {
+    returnDom = returnEditMode();
+  } else {
+    returnDom = returnViewMode();
+  }
+
   return (
     <div className={editMode ? 'patient editMode' : 'patient viewMode'}>
       <div className="patient__upper">
@@ -245,11 +259,15 @@ const Patient = (props) => {
         <Button className="hollow-btn" variant="success">PAYMENTS</Button>
         <Button className="hollow-btn" variant="success">APPOINTMENTS</Button>
       </div>
-      {
-        editMode ? returnEditMode() : returnViewMode()
-      }
+      { returnDom }
     </div>
   );
 };
 
-export default withRouter(Patient);
+const mapStateToProps = (state) => ({
+  isMobile: state.isMobile,
+});
+
+const PatientConnect = connect(mapStateToProps)(Patient);
+
+export default withRouter(PatientConnect);

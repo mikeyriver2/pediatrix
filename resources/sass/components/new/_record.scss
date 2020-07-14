@@ -1,0 +1,16 @@
+.new-record {
+  &__full-name {
+    display: flex;
+    input:first-of-type {
+      margin-right: 5px;
+    }
+    input:nth-of-type(3) {
+      margin-left: 5px;
+    } 
+  }
+  .input-group {
+    & > div:nth-child(1) {
+      margin-right: 80px;
+    }
+  }
+}

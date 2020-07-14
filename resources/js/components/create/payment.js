@@ -206,7 +206,9 @@ class Payment extends Component {
             <option>Incomplete</option>
           </Form.Control>
 
-          <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
+          <div className="create-desktop__submit">
+            <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
+          </div>
         </Form>
         {(this.state.modal.type == 'new-patient' && this.state.modal.show)
                     && (
