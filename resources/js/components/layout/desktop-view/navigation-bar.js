@@ -36,12 +36,15 @@ const navBar = (props) => {
     const match = pathname.match(regex);
     if (match && match.length > 0) {
       setMode('view');
+    } else {
+      setMode('list');
     }
-  }, []);
+  }, [pathname]);
 
   const handleClick = (e) => {
     const { target } = e;
     let action = target.innerText;
+    console.log(mode);
 
     let dom;
     if (mode === 'view') {
@@ -78,12 +81,16 @@ const navBar = (props) => {
   };
 
   return (
-    <div className="top-nav-desktop">
+    <div
+      style={{justifyContent: mode === 'list' ? 'center' : ''}}
+      className="top-nav-desktop"
+    >
+      {mode !== 'list'
+      && (
       <Button onClick={handleCancel} className={`mode-${mode}`}>
         {mode === 'view'
           ? (
             <img
-              onClick={history.goBack}
               className="ignore-sidebar"
               alt="arrow"
               src="/images/arrow_2.png"
@@ -91,7 +98,10 @@ const navBar = (props) => {
           )
           : 'Cancel'}
       </Button>
+      )}
       <h5>{path}</h5>
+      {mode !== 'list'
+      && (
       <Button
         onClick={handleClick}
         className={`mode-${mode}`}
@@ -100,6 +110,7 @@ const navBar = (props) => {
           ? 'Save'
           : 'Edit'}
       </Button>
+      )}
     </div>
   );
 };
