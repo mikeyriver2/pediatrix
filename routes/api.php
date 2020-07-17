@@ -34,6 +34,7 @@ Route::group(['prefix' => 'payments'], function(){
 Route::group(['prefix' => 'records'], function(){
     Route::post('store','RecordController@store');
     Route::get('','RecordController@index');
+    Route::get('filter', 'RecordController@filter');
     Route::get('{slug?}','RecordController@view');
     Route::put('','RecordController@update');
 });

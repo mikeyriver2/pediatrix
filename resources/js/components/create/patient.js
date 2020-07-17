@@ -22,6 +22,33 @@ class NewPatient extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.enableDisableSave = this.enableDisableSave.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.enableDisableSave();
+    }, 100);
+  }
+
+  componentDidUpdate() {
+    this.enableDisableSave();
+  }
+
+  enableDisableSave() {
+    const disableSave = Object.keys(this.state.errors).length > 0
+    || this.state.firstName == ''
+    || this.state.middleName == ''
+    || this.state.lastName == ''
+    || this.state.phoneNumber == ''
+    || this.state.email == ''
+    || this.state.address == '';
+
+    const dom = document.querySelector('#navButtonRight');
+    if (dom) {
+      if (disableSave) dom.setAttribute('disabled', '');
+      else dom.removeAttribute('disabled');
+    }
   }
 
   handleClick() {
@@ -112,7 +139,7 @@ class NewPatient extends Component {
 
     return (
       <div className="create-desktop new-patient">
-        <h5>New Patient</h5>
+        {/* <h5>New Patient</h5> */}
         <Form>
           <Form.Label>Patient Name</Form.Label>
           <div className="new-patient__full-name">
@@ -136,8 +163,18 @@ class NewPatient extends Component {
           <Form.Control onChange={(e) => { this.handleOnChange(e, 'address'); }} type="text" placeholder="House No. Street, Brgy, City" />
           <p className="error" style={{ display: this.state.errors.address ? 'block' : 'none' }}>Address is Invalid</p>
 
-          <div className="create-desktop__submit">
-            <Button disabled={disableSave} onClick={this.handleClick} variant="success">SAVE</Button>
+          <div
+            style={{ display: 'none' }}
+            className="create-desktop__submit"
+          >
+            <Button
+              id="button-save"
+              disabled={disableSave}
+              onClick={this.handleClick}
+              variant="success"
+            >
+              SAVE
+            </Button>
           </div>
         </Form>
       </div>

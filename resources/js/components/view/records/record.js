@@ -8,6 +8,7 @@ import {
 import {
   withRouter,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import * as helpers from '../../../helpers/validations';
 
 const Record = (props) => {
@@ -99,7 +100,7 @@ const Record = (props) => {
     diagnosis: cDiagnosis,
   } = clonedRecord;
 
-  const { history } = props;
+  const { history, isMobile } = props;
 
   const returnEditMode = () => (
     <Form>
@@ -186,8 +187,10 @@ const Record = (props) => {
 
       <Button
         onClick={() => { setEditMode(!editMode); }}
+        id="button-edit"
         variant="success"
         style={{
+          display: 'none',
           marginBottom: editMode ? '0px' : '',
         }}
       >
@@ -201,9 +204,11 @@ const Record = (props) => {
       {editMode
           && (
           <Button
+            id="button-save"
             disabled={Object.keys(errors).length > 0}
             onClick={handleUpdate}
             variant="primary"
+            style={{ display: 'none' }}
           >
             SAVE
           </Button>
@@ -237,6 +242,7 @@ const Record = (props) => {
       </div>
       <div className="view-edit">
         <Button
+          id="button-edit"
           onClick={() => { setEditMode(!editMode); }}
           variant="success"
         >
@@ -245,6 +251,14 @@ const Record = (props) => {
       </div>
     </div>
   );
+
+  let returnDom;
+  if (editMode || !isMobile) {
+    returnDom = returnEditMode();
+  } else {
+    returnDom = returnViewMode();
+  }
+
 
   return (
     <div className={editMode ? 'record editMode' : 'record viewMode'}>
@@ -255,10 +269,16 @@ const Record = (props) => {
         <Button className="hollow-btn" variant="success">ASSSSSSSSS</Button>
       </div>
       {
-        editMode ? returnEditMode() : returnViewMode()
+       returnDom
       }
     </div>
   );
 };
 
-export default withRouter(Record);
+const mapStateToProps = (state) => ({
+  isMobile: state.isMobile,
+});
+
+const RecordConnect = connect(mapStateToProps)(Record);
+
+export default withRouter(RecordConnect);

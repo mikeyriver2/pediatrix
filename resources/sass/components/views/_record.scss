@@ -80,3 +80,14 @@
       }
   }
 }
+
+// handle desktop view
+@media(min-width: 768px) {
+    .record {
+      padding: 20px 0px 0px 0px;
+      &__upper {
+        padding-left: 15px;
+        border: 0px;
+      }
+    }
+  }

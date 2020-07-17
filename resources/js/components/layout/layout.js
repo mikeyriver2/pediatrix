@@ -27,12 +27,18 @@ class Layout extends Component {
     };
     this.header = React.createRef();
     this.switchSideBar = this.switchSideBar.bind(this);
+    this.adjust = this.adjust.bind(this);
   }
 
   componentDidMount() {
     this.setState({
       appHeight: document.getElementById('pediatrix').clientHeight,
     });
+
+    setTimeout(() => {
+      this.adjust();
+      window.addEventListener('resize', this.adjust);
+    }, 100);
   }
 
   componentDidUpdate(prevProps) {
@@ -41,6 +47,25 @@ class Layout extends Component {
       location.pathname !== prevProps.location.pathname
     ) {
       window.scrollTo(0, 0);
+    }
+  }
+
+  adjust() {
+    console.log('adjusting');
+    const { isMobile } = this.props;
+    const sideBar = document.querySelector('.sideBar-desktop');
+    const bodyContents = document.querySelector('.main-body__contents');
+    if (sideBar) {
+      const width = sideBar.clientWidth;
+      if (sideBar) {
+        if (!isMobile) {
+          bodyContents.style.width = `calc(100vw - ${width}px)`;
+        } else {
+          bodyContents.style.width = null;
+        }
+      }
+    } else if (bodyContents) {
+      bodyContents.style.width = null;
     }
   }
 

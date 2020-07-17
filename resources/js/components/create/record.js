@@ -41,13 +41,17 @@ class Record extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchPatient = this.fetchPatient.bind(this);
+    this.enableDisableSave = this.enableDisableSave.bind(this);
   }
 
   componentDidMount() {
     this.fetchPatient();
+    setTimeout(() => {
+      this.enableDisableSave();
+    }, 1000);
+
     const interval = setInterval(() => {
       if (document.querySelector('.new-record')) {
-        console.log('assss');
         document.querySelector('.new-record').addEventListener('click', (e) => {
           console.log(e.target.className);
           if (!e.target.className.includes('ignore-listener')) {
@@ -60,6 +64,21 @@ class Record extends Component {
         clearInterval(interval);
       }
     }, 1000);
+  }
+
+  componentDidUpdate() {
+    this.enableDisableSave();
+  }
+
+  enableDisableSave() {
+    const disableSave = Object.keys(this.state.errors).length > 0
+      || !this.state.selected_patient.id;
+
+    const dom = document.querySelector('#navButtonRight');
+    if (dom) {
+      if (disableSave) dom.setAttribute('disabled', '');
+      else dom.removeAttribute('disabled');
+    }
   }
 
   handleQuickSearch(e) {
@@ -196,7 +215,8 @@ class Record extends Component {
 
 
   render() {
-    const disableSave = Object.keys(this.state.errors).length > 0 || !this.state.selected_patient.id;
+    const disableSave = Object.keys(this.state.errors).length > 0
+      || !this.state.selected_patient.id;
     const borderStyle = {
       borderTopRightRadius: '0px',
       borderBottomRightRadius: '0px',
@@ -205,7 +225,7 @@ class Record extends Component {
 
     return (
       <div className="create-desktop new-record">
-        <h5>New Record</h5>
+        {/* <h5>New Record</h5> */}
         <Form>
           <Form.Label>Patient</Form.Label>
           <div className="patient-suggestions-container">
@@ -257,8 +277,18 @@ class Record extends Component {
           <Form.Label>Prescription</Form.Label>
           <Form.Control onChange={(e) => this.handleOnChange(e, 'prescription')} as="textarea" rows="3" />
 
-          <div className="create-desktop__submit">
-            <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
+          <div
+            className="create-desktop__submit"
+            style={{ display: 'none' }}
+          >
+            <Button
+              id="button-save"
+              onClick={this.handleSubmit}
+              disabled={disableSave}
+              variant="success"
+            >
+              SAVE
+            </Button>
           </div>
         </Form>
         {(this.state.modal.type == 'new-patient' && this.state.modal.show)

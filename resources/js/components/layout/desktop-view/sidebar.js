@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useRef } from 'react';
 import {
   withRouter,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Sidebar from '../sidebar';
 
 const addSvg = (props) => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,8 +13,47 @@ const addSvg = (props) => (
 );
 
 const sideBarDesktop = (props) => {
-  const { location, history } = props;
+  const { location, history, isMobile } = props;
   const { pathname } = location;
+  const dashboardNav = useRef(null);
+  const recordsNav = useRef(null);
+  const newRecordNav = useRef(null);
+  const appointmentsNav = useRef(null);
+  const newAppointmentNav = useRef(null);
+  const patientsNav = useRef(null);
+  const newPatientNav = useRef(null);
+  const paymentsNav = useRef(null);
+  const newPaymentNav = useRef(null);
+
+  useEffect(() => {
+    const regex = /\d+/g;
+    let dom;
+    const doms = document.querySelectorAll('.sidebar-desktop__item');
+    if (doms && doms.length > 0) {
+      for (let i = 0; i < doms.length; i++) {
+        if (doms[i]) {
+          doms[i].classList.remove('active-nav');
+        }
+      }
+    }
+
+    if (pathname === '/') {
+      dom = dashboardNav;
+    } else if (pathname.includes('records')) {
+      if (pathname.includes('new')) {
+        dom = newRecordNav;
+      } else {
+        dom = recordsNav;
+      }
+    }
+
+    if (dom) {
+      dom = dom.current;
+      dom.classList.add('active-nav');
+      // dom.style.color = 'white';
+      // dom.style.background = '#53639D';
+    }
+  });
 
   return (
     <div className="sideBar-desktop">
@@ -24,41 +65,47 @@ const sideBarDesktop = (props) => {
       </p>
       <ul>
         <li
+          ref={dashboardNav}
           onClick={() => { history.push('/'); }}
           className="sidebar-desktop__item"
         >
           Dashboard
         </li>
         <li
+          ref={recordsNav}
           onClick={() => { history.push('/records'); }}
           className="sidebar-desktop__item"
         >
           View Record
         </li>
         <li
-          onClick={() => { history.push('/records/new'); }} 
+          ref={newRecordNav}
+          onClick={() => { history.push('/records/new'); }}
           className="sidebar-desktop__item sub"
         >
           { addSvg() }
           <span>New Record</span>
         </li>
         <li
+          ref={appointmentsNav}
           onClick={() => { history.push('/appointments'); }}
           className="sidebar-desktop__item"
         >
           View Appointments
         </li>
-        <li className="sidebar-desktop__item sub">
+        <li ref={newAppointmentNav} className="sidebar-desktop__item sub">
           { addSvg() }
           <span>New Appointments</span>
         </li>
         <li
+          ref={patientsNav}
           onClick={() => { history.push('/patients'); }}
           className="sidebar-desktop__item"
         >
           View Patients
         </li>
         <li
+          ref={newPatientNav}
           className="sidebar-desktop__item sub"
           onClick={() => { history.push('/patients/new'); }}
         >
@@ -66,12 +113,14 @@ const sideBarDesktop = (props) => {
           <span>New Patient</span>
         </li>
         <li
+          ref={paymentsNav}
           onClick={() => { history.push('/payments'); }}
           className="sidebar-desktop__item"
         >
           View Payments
         </li>
         <li
+          ref={newPatientNav}
           className="sidebar-desktop__item sub"
           onClick={() => { history.push('/payments/new'); }}
         >
@@ -83,4 +132,9 @@ const sideBarDesktop = (props) => {
   );
 };
 
-export default withRouter(sideBarDesktop);
+const mapStateToProps = (state) => ({
+  isMobile: state.isMobile,
+});
+
+const connectSideBar = connect(mapStateToProps)(sideBarDesktop);
+export default withRouter(connectSideBar);

@@ -37,9 +37,13 @@ class Payment extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchPatient = this.fetchPatient.bind(this);
+    this.enableDisableSave = this.enableDisableSave.bind(this);
   }
 
   componentDidMount() {
+    setTimeout(() => {
+      this.enableDisableSave();
+    }, 100);
     // this.fetchPatient();
     const interval = setInterval(() => {
       if (document.querySelector('.new-payment')) {
@@ -56,6 +60,23 @@ class Payment extends Component {
         clearInterval(interval);
       }
     }, 1000);
+  }
+
+  componentDidUpdate() {
+    this.enableDisableSave();
+  }
+
+  enableDisableSave() {
+    const { amount } = this.state;
+    const disableSave = Object.keys(this.state.errors).length > 0
+      || !this.state.selected_patient.id 
+      || (amount && amount.replace(/\s/g, '') === '');
+
+    const dom = document.querySelector('#navButtonRight');
+    if (dom) {
+      if (disableSave) dom.setAttribute('disabled', '');
+      else dom.removeAttribute('disabled');
+    }
   }
 
   fetchPatient(e = null) {
@@ -163,7 +184,9 @@ class Payment extends Component {
 
   render() {
     const { full_name: fullName, amount, selected_patient } = this.state;
-    const disableSave = Object.keys(this.state.errors).length > 0 || !this.state.selected_patient.id || (amount && amount.replace(/\s/g, '') === '');
+    const disableSave = Object.keys(this.state.errors).length > 0
+      || !this.state.selected_patient.id 
+      || (amount && amount.replace(/\s/g, '') === '');
 
     return (
       <div className="create-desktop new-payment">
@@ -206,8 +229,18 @@ class Payment extends Component {
             <option>Incomplete</option>
           </Form.Control>
 
-          <div className="create-desktop__submit">
-            <Button onClick={this.handleSubmit} disabled={disableSave} variant="success">SAVE</Button>
+          <div
+            style={{ display: 'none' }}
+            className="create-desktop__submit"
+          >
+            <Button
+              id="button-save"
+              onClick={this.handleSubmit}
+              disabled={disableSave}
+              variant="success"
+            >
+              SAVE
+            </Button>
           </div>
         </Form>
         {(this.state.modal.type == 'new-patient' && this.state.modal.show)

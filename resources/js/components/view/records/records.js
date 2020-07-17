@@ -14,6 +14,7 @@ export default class ViewRecords extends Component {
     this.state = {
       records: [],
     };
+    this.setRecords = this.setRecords.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +23,14 @@ export default class ViewRecords extends Component {
         records: res.data,
       });
     });
+  }
+
+  setRecords(records) {
+    if (records) {
+      this.setState({
+        records,
+      });
+    }
   }
 
   render() {
@@ -41,6 +50,10 @@ export default class ViewRecords extends Component {
                     header = "Patients List"
                 /> */}
         <SummaryWithLabel
+          search={{
+            searchUrl: '/api/patients/filter',
+            setData: this.setRecords,
+          }}
           summary={this.state.records}
           parent="ViewRecords"
           header="Records List"

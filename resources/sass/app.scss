@@ -37,6 +37,9 @@
     width: 100%;
     overflow: hidden;
     font-family: "Roboto-Normal";
+    @media(min-width: 768px) {
+        height: 100vh;
+    }
 }
 
 .error{
@@ -132,28 +135,30 @@
                 padding-right: 15px;
             }
         }
-        .summary-item{
-            padding: 10px 30px 0px 30px;
-            // border-bottom-style: solid;
-            // border-bottom-width: 1px;
-            // border-top-style: solid;
-            // border-color: #2a2c331f;
-            // border-top-width: 1px;
-            .item-header{
-                font-style: normal;
-                font-weight: bold;
-                font-size: 18px;
-                line-height: 21px;
-                display: flex;
-                align-items: center;
+        .item-row-container {
+            .row {
+                a {
+                    cursor: pointer;
+                }
             }
-            .item-desc{
-                font-style: normal;
-                font-size: 18px;
-                line-height: 21px;
-                margin-bottom: 10px;
-                display: flex;
-                align-items: center;
+            .summary-item{
+                padding: 10px 30px 0px 30px;
+                .item-header{
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 18px;
+                    line-height: 21px;
+                    display: flex;
+                    align-items: center;
+                }
+                .item-desc{
+                    font-style: normal;
+                    font-size: 18px;
+                    line-height: 21px;
+                    margin-bottom: 10px;
+                    display: flex;
+                    align-items: center;
+                }
             }
         }
     }

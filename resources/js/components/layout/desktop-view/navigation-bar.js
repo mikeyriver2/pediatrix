@@ -32,24 +32,28 @@ const navBar = (props) => {
 
   useEffect(() => {
     // sample: patient/1 ,  record/1,   payment/1
-    const regex = /[a-z]\w+\/\d+/g;
-    const match = pathname.match(regex);
-    if (match && match.length > 0) {
+    const matchView = pathname.match(/[a-z]\w+\/\d+/g);
+    const matchNew = pathname.match(/[a-z]\w+\/new/g);
+    if (matchView && matchView.length > 0) {
       setMode('view');
+    } else if (matchNew && matchNew.length > 0) {
+      setMode('new');
     } else {
       setMode('list');
     }
+
+    const dom = document.querySelector('#navButtonRight');
+    if (dom) dom.removeAttribute('disabled');
   }, [pathname]);
 
   const handleClick = (e) => {
     const { target } = e;
     let action = target.innerText;
-    console.log(mode);
 
     let dom;
     if (mode === 'view') {
       dom = document.querySelector('#button-edit');
-    } else if (mode === 'edit') {
+    } else if (mode === 'edit' || mode === 'new') {
       dom = document.querySelector('#button-save');
     }
 
@@ -71,7 +75,7 @@ const navBar = (props) => {
     const { target } = e;
     const action = target.innerText;
 
-    if (action === '') {
+    if (action === '' || mode === 'new') {
       history.goBack();
     } else {
       const dom = document.querySelector('#button-edit');
@@ -103,10 +107,11 @@ const navBar = (props) => {
       {mode !== 'list'
       && (
       <Button
+        id="navButtonRight"
         onClick={handleClick}
         className={`mode-${mode}`}
       >
-        {mode === 'edit'
+        {(mode === 'edit' || mode === 'new')
           ? 'Save'
           : 'Edit'}
       </Button>

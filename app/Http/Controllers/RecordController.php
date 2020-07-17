@@ -63,4 +63,15 @@ class RecordController extends Controller
             'record' => $record
         ]);
     }
+
+    public function filter(Request $request) {
+        $search = $request->search;
+        $filter = $request->filter;
+
+        $records = Record::leftJoin('patients', 'patients.id', 'patient_id')
+            ->where(\DB::raw('CONCAT(patients.first_name, patients.middle_name, patients.last_name)'), 'LIKE', "%$search%")
+            ->get();
+        
+        return $records;
+    }
 }
