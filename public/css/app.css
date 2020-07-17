@@ -10718,7 +10718,7 @@ a.text-dark:focus {
   background: white;
   height: 100vh;
   top: -125px;
-  width: 80%;
+  width: 310px;
 }
 
 .main-layout .layout-sidebar .sidebar-container .sidebar-user-name {
@@ -11517,6 +11517,10 @@ a.text-dark:focus {
   #pediatrix {
     height: 100vh;
   }
+}
+
+*:focus {
+  outline: none;
 }
 
 .error {

@@ -45,6 +45,18 @@ const sideBarDesktop = (props) => {
       } else {
         dom = recordsNav;
       }
+    } else if (pathname.includes('patients')) {
+      if (pathname.includes('new')) {
+        dom = newPatientNav;
+      } else {
+        dom = patientsNav;
+      }
+    } else if (pathname.includes('payments')) {
+      if (pathname.includes('new')) {
+        dom = newPaymentNav;
+      } else {
+        dom = paymentsNav;
+      }
     }
 
     if (dom) {
@@ -120,7 +132,7 @@ const sideBarDesktop = (props) => {
           View Payments
         </li>
         <li
-          ref={newPatientNav}
+          ref={newPaymentNav}
           className="sidebar-desktop__item sub"
           onClick={() => { history.push('/payments/new'); }}
         >
