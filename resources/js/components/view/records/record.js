@@ -10,12 +10,17 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as helpers from '../../../helpers/validations';
+import axios from 'axios';
+import SummaryWithLabel from '../../summaries/summary-with-label';
 
 const Record = (props) => {
   const [record, setRecord] = useState({});
   const [clonedRecord, setClonedRecord] = useState({});
+
+  const [records, setRecords] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [errors, setErrors] = useState({});
+  const [showRecords, setShowRecords] = useState(false);
 
   useState(() => {
     const { match, location } = props;
@@ -26,6 +31,9 @@ const Record = (props) => {
       const { data } = res;
       setRecord(data);
       setClonedRecord(data);
+      axios.get(`/api/records/filter?patientId=${data.patient_id}`).then((resFoo) => {
+        setRecords(resFoo.data);
+      });
     });
 
     if (state && state.edit) {
@@ -90,6 +98,7 @@ const Record = (props) => {
     type,
     prescription,
     diagnosis,
+    patient_id: patientId,
   } = record;
   const {
     full_name: cFullName,
@@ -226,7 +235,11 @@ const Record = (props) => {
       </div>
       <div className="view-item">
         <p>WEIGHT</p>
-        <p>{weight} lbs.</p>
+        <p>
+          {weight}
+          {' '}
+          lbs.
+        </p>
       </div>
       <div className="view-item">
         <p>TEMP °C</p>
@@ -252,8 +265,22 @@ const Record = (props) => {
     </div>
   );
 
+  const returnSummaries = () => {
+    return (
+      <div className="record__records">
+        <SummaryWithLabel
+          summary={records}
+          parent="ViewRecord"
+          header={`History Records of ${fullName}`}
+        />
+      </div>
+    );
+  };
+
   let returnDom;
-  if (editMode || !isMobile) {
+  if (showRecords) {
+    returnDom = returnSummaries();
+  } else if (editMode || !isMobile) {
     returnDom = returnEditMode();
   } else {
     returnDom = returnViewMode();
@@ -263,10 +290,22 @@ const Record = (props) => {
   return (
     <div className={editMode ? 'record editMode' : 'record viewMode'}>
       <div className="record__upper">
-        <Button className="hollow-btn" variant="success">HISTORY</Button>
-        <Button className="hollow-btn" variant="success">PAYMENTS</Button>
-        <Button className="hollow-btn" variant="success">APPOINTMENTS</Button>
-        <Button className="hollow-btn" variant="success">ASSSSSSSSS</Button>
+        <Button
+          onClick={() => {
+            history.push(`/patients/${patientId}`);
+          }}
+          className="hollow-btn fixed-width"
+        >
+          PATIENT PROFILE
+        </Button>
+        <Button
+          className={`${showRecords ? 'active' : ''} hollow-btn fixed-width`} 
+          onClick={() => { setShowRecords(!showRecords) }}
+        >
+          HISTORY
+        </Button>
+        {/* <Button className="hollow-btn fixed-width" variant="success">PAYMENTS</Button>
+        <Button className="hollow-btn fixed-width" variant="success">APPOINTMENTS</Button> */}
       </div>
       {
        returnDom

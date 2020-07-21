@@ -14,4 +14,8 @@ class Record extends Model
         'prescription',
         'type'
     ];
+
+    public function patient() {
+        return $this->belongsTo('App\Patient');
+    }
 }

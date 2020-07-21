@@ -36,5 +36,9 @@ class Patient extends Model
         return $this->hasMany('App\Payment');
     }
 
+    public function records(){
+        return $this->hasMany('App\Record');
+    }
+
 
 }

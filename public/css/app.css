@@ -11690,11 +11690,20 @@ a.text-dark:focus {
   font-size: 18px;
 }
 
-.hollow-btn:hover,
-.hollow-btn:focus,
-.hollow-btn:active {
+.hollow-btn:hover {
   background: #53639D !important;
   border-color: #53639D !important;
+  color: white;
+}
+
+.hollow-btn .active {
+  background: #53639D !important;
+  border-color: #53639D !important;
+  color: white;
+}
+
+.hollow-btn.fixed-width {
+  width: 178px;
 }
 
 @media (max-width: 768px) {

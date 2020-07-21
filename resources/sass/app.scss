@@ -203,10 +203,19 @@
     border-width: 2px;
     border-color: #53639D;
     font-size: 18px;
-    &:hover, &:focus, &:active {
+    &:hover {
         background: #53639D !important;
         border-color: #53639D !important;
+        color: white;
     }
+}
+.hollow-btn .active {
+    background: #53639D !important;
+    border-color: #53639D !important;
+    color: white;
+} 
+.hollow-btn.fixed-width {
+    width: 178px;
 }
 
 // placing this here instead of the individual record components 

@@ -48,7 +48,10 @@ class SummaryWithLabel extends Component{
                     <Row style={{width:"100%"}}>
                         <Col xs={8} className="no-right-padding summary-item">
                             <h6 className="item-created-at">
-                                {/*dis a filler div*/}
+                                {(parent === "ViewRecord" || parent === "ViewRecords")
+                                    ? value.created_at
+                                    : ''
+                                }
                             </h6>
                         </Col>
                         <Col style={{textAlign: "right"}} xs={4}>
