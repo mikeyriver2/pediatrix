@@ -28,6 +28,7 @@ Route::group(['prefix' => 'payments'], function(){
     Route::post('store','PaymentController@store');
     Route::put('','PaymentController@update');
     Route::get('','PaymentController@index');    
+    Route::get('filter', 'PaymentController@filter');
     Route::get('{slug?}','PaymentController@view');    
 });
 

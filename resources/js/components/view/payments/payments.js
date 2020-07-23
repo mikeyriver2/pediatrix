@@ -14,6 +14,7 @@ export default class ViewPayments extends Component {
     this.state = {
       payments: [],
     };
+    this.setRecords = this.setRecords.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +23,14 @@ export default class ViewPayments extends Component {
         payments: res.data,
       });
     });
+  }
+
+  setRecords(payments) {
+    if (payments) {
+      this.setState({
+        payments,
+      });
+    }
   }
 
   render() {
@@ -41,10 +50,14 @@ export default class ViewPayments extends Component {
                     header = "Patients List"
                 /> */}
         <SummaryWithLabel
+          search={{
+            filterBy: ['All', 'Pending', 'Paid', 'Delayed'],
+            searchUrl: '/api/payments/filter',
+            setData: this.setRecords,
+          }}
           summary={this.state.payments}
           parent="ViewPayments"
           header="Payment List"
-          filterBy={['All', 'InPatient', 'OutPatient']}
         />
 
       </div>

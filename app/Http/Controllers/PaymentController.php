@@ -53,6 +53,7 @@ class PaymentController extends Controller
         $payment = Payment::select(
                 'amount', 
                 'status',
+                'patients.id as patient_id', 
                 \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
             )
             ->join('patients','patients.id','=','patient_id')
@@ -60,5 +61,28 @@ class PaymentController extends Controller
             ->first();
 
         return $payment;
+    }
+
+    public function filter(Request $request) {
+        $search = $request->search;
+        $filter = $request->filter;
+        $patientId = $request->patientId;
+
+        $payments = Payment::select(
+            'payments.id',
+            'payments.created_at',
+            'payments.amount',
+            \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
+        )
+        ->join('patients','patients.id','patient_id')
+        ->where(\DB::raw('CONCAT(patients.first_name, patients.middle_name, patients.last_name)'), 'LIKE', "%$search%");
+
+        if(isset($patientId) && !empty($patientId)) {
+            $payments->where('patients.id', $patientId);
+        }
+
+        $payments = $payments->get();
+        
+        return $payments;
     }
 }

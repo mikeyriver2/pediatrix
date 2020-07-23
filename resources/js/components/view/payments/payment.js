@@ -10,6 +10,7 @@ import {
   withRouter,
 } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { fi } from 'date-fns/locale';
 import * as helpers from '../../../helpers/validations';
 
@@ -39,7 +40,13 @@ const Payment = (props) => {
     setClonedPatient(patient);
   }, [patient.amount, patient.status]);
 
-  const { full_name: fullName, amount, status } = patient;
+  const { isMobile, history } = props;
+  const { 
+    patient_id: patientId, 
+    full_name: fullName, 
+    amount, 
+    status 
+  } = patient;
   const { full_name: cFullName, amount: cAmount, status: cStatus } = clonedPatient;
 
   const handleChange = (e, type = '') => {
@@ -82,8 +89,6 @@ const Payment = (props) => {
       setEditMode(false);
     });
   };
-
-  const { history } = props;
 
   const returnEditMode = () => (
     <Form>
@@ -140,9 +145,11 @@ const Payment = (props) => {
       </Form.Control>
 
       <Button
+        id="button-edit"
         onClick={() => { setEditMode(!editMode); }}
         variant="success"
         style={{
+          display: !isMobile ? 'none' : '',
           marginBottom: editMode ? '0px' : '',
         }}
       >
@@ -156,6 +163,8 @@ const Payment = (props) => {
       {editMode
           && (
           <Button
+            id="button-save"
+            style={{ display: !isMobile ? 'none' : '' }}
             disabled={Object.keys(errors).length > 0}
             onClick={handleUpdate}
             variant="primary"
@@ -193,13 +202,36 @@ const Payment = (props) => {
     </div>
   );
 
+  let returnDom;
+  if (editMode || !isMobile) {
+    returnDom = returnEditMode();
+  } else {
+    returnDom = returnViewMode();
+  }
+
   return (
     <div className={editMode ? 'payment editMode' : 'payment viewMode'}>
+      <div className="payment__upper">
+        <Button
+          className="hollow-btn"
+          onClick={() => {
+            history.push(`/patients/${patientId}`)
+          }}
+        >
+          Patient Profile
+        </Button>
+      </div>
       {
-        editMode ? returnEditMode() : returnViewMode()
+        returnDom
       }
     </div>
   );
 };
 
-export default withRouter(Payment);
+const mapStateToProps = (state) => ({
+  isMobile: state.isMobile,
+});
+
+const PaymentConnect = connect(mapStateToProps)(Payment);
+
+export default withRouter(PaymentConnect);

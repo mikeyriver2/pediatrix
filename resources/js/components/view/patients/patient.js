@@ -11,12 +11,20 @@ import {
 import axios from 'axios';
 import { connect } from 'react-redux';
 import * as helpers from '../../../helpers/validations';
+import SummaryWithLabel from '../../summaries/summary-with-label';
+import { first } from 'lodash';
 
 const Patient = (props) => {
+  const [records, setRecords] = useState({});
   const [patient, setPatient] = useState({});
+  const [payments, setPayments] = useState({});
+
   const [clonedPatient, setClonedPatient] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const [showRecords, setShowRecords] = useState(false);
+  const [showPayments, setShowPayments] = useState(false);
 
   useState(() => {
     const { match, location } = props;
@@ -27,6 +35,14 @@ const Patient = (props) => {
       const { data } = res;
       setPatient(data);
       setClonedPatient(data);
+
+      axios.get(`/api/records/filter?patientId=${data.id}`).then((resFoo) => {
+        setRecords(resFoo.data);
+      });
+
+      axios.get(`/api/payments/filter?patientId=${data.id}`).then((resFoo) => {
+        setPayments(resFoo.data);
+      });
     });
 
     if (state && state.edit) {
@@ -245,8 +261,36 @@ const Patient = (props) => {
     </div>
   );
 
+  const returnSummaries = () => {
+    let header;
+    let toSummary;
+    let viewAs;
+
+    if (showPayments) {
+      toSummary = payments;
+      header = `Payments of ${firstName}`;
+      viewAs = 'ViewPayments';
+    } else if (showRecords) {
+      toSummary = records;
+      header = `Records of ${firstName}`;
+      viewAs = 'ViewRecord';
+    }
+
+    return (
+      <div className="record__records">
+        <SummaryWithLabel
+          summary={toSummary}
+          parent={viewAs}
+          header={header}
+        />
+      </div>
+    );
+  };
+
   let returnDom;
-  if (editMode || !isMobile) {
+  if (showRecords || showPayments) {
+    returnDom = returnSummaries();
+  } else if (editMode || !isMobile) {
     returnDom = returnEditMode();
   } else {
     returnDom = returnViewMode();
@@ -255,8 +299,24 @@ const Patient = (props) => {
   return (
     <div className={editMode ? 'patient editMode' : 'patient viewMode'}>
       <div className="patient__upper">
-        <Button className="hollow-btn" variant="success">RECORD HISTORY</Button>
-        <Button className="hollow-btn" variant="success">PAYMENTS</Button>
+        <Button
+          className={`${showRecords ? 'active' : ''} hollow-btn fixed-width`}
+          onClick={() => {
+            setShowPayments(false);
+            setShowRecords(!showRecords);
+          }}
+        >
+          RECORDS
+        </Button>
+        <Button
+          className={`${showPayments ? 'active' : ''} hollow-btn fixed-width`}
+          onClick={() => {
+            setShowPayments(!showPayments);
+            setShowRecords(false);
+          }}
+        >
+          PAYMENTS
+        </Button>
         <Button className="hollow-btn" variant="success">APPOINTMENTS</Button>
       </div>
       { returnDom }
