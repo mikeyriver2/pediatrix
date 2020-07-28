@@ -13,33 +13,35 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('', 'Controller@dashboardIndex');
+Route::post('login', 'AuthController@login');
 
-Route::group(['prefix' => 'patients'], function(){
-    Route::get('','PatientController@index');
-    Route::get('qs','PatientController@quickSearchPatients');
-    Route::post('store','PatientController@store');
-    Route::put('','PatientController@update');
-    Route::get('filter', 'PatientController@filter');
-    Route::get('{slug?}','PatientController@view');
-});
-
-Route::group(['prefix' => 'payments'], function(){
-    Route::post('store','PaymentController@store');
-    Route::put('','PaymentController@update');
-    Route::get('','PaymentController@index');    
-    Route::get('filter', 'PaymentController@filter');
-    Route::get('{slug?}','PaymentController@view');    
-});
-
-Route::group(['prefix' => 'records'], function(){
-    Route::post('store','RecordController@store');
-    Route::get('','RecordController@index');
-    Route::get('filter', 'RecordController@filter');
-    Route::get('{slug?}','RecordController@view');
-    Route::put('','RecordController@update');
-});
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['preAuth','auth:api'])->group(function(){
+    Route::get('/user', function(Request $request){
+        return $request->user();
+    });
+    Route::get('', 'Controller@dashboardIndex');
+    Route::group(['prefix' => 'patients'], function(){
+        Route::get('','PatientController@index');
+        Route::get('qs','PatientController@quickSearchPatients');
+        Route::post('store','PatientController@store');
+        Route::put('','PatientController@update');
+        Route::get('filter', 'PatientController@filter');
+        Route::get('{slug?}','PatientController@view');
+    });
+    
+    Route::group(['prefix' => 'payments'], function(){
+        Route::post('store','PaymentController@store');
+        Route::put('','PaymentController@update');
+        Route::get('','PaymentController@index');    
+        Route::get('filter', 'PaymentController@filter');
+        Route::get('{slug?}','PaymentController@view');    
+    });
+    
+    Route::group(['prefix' => 'records'], function(){
+        Route::post('store','RecordController@store');
+        Route::get('','RecordController@index');
+        Route::get('filter', 'RecordController@filter');
+        Route::get('{slug?}','RecordController@view');
+        Route::put('','RecordController@update');
+    });
 });
