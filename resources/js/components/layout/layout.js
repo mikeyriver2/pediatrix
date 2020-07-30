@@ -35,13 +35,15 @@ class Layout extends Component {
       appHeight: document.getElementById('pediatrix').clientHeight,
     });
 
+    this.adjust();
     setTimeout(() => {
       this.adjust();
       window.addEventListener('resize', this.adjust);
-    }, 100);
+    }, 1000);
   }
 
   componentDidUpdate(prevProps) {
+    this.adjust();
     const { location } = this.props;
     if (
       location.pathname !== prevProps.location.pathname
