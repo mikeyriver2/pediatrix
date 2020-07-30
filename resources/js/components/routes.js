@@ -41,11 +41,19 @@ class Routes extends Component {
     const { checkIfMobile } = this.props;
     this.checkIfLogin();
     checkIfMobile();
+    setTimeout(() => {
+      checkIfMobile();
+    }, 1000)
     window.addEventListener('resize', () => {
       checkIfMobile();
     });
 
     axios.defaults.headers.common.Accept = 'application/json';
+  }
+
+  componentDidUpdate() {
+    const { checkIfMobile } = this.props;
+    checkIfMobile();
   }
 
   setUser(user) {
