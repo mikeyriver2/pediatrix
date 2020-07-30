@@ -14,14 +14,19 @@ const Login = (props) => {
   useEffect(() => {
     const login = document.querySelector('.login__form > input:nth-of-type(2)');
     if (login) {
-      login.addEventListener('keyup', (event) => {
-        if (event.keyCode === 13) {
-          console.log('ass')
-          handleLogin();
-        }
-      });
+      login.addEventListener('keyup', enterLogin);
+      return () => {
+        login.removeEventListener('keyup',enterLogin);
+      }
     }
-  }, []);
+  });
+
+  const enterLogin = (e) => {
+    if (event.keyCode === 13) {
+      console.log('ass')
+      handleLogin();
+    }
+  }
 
   const handleLogin = () => {
     axios.post('/api/login', {
@@ -52,6 +57,7 @@ const Login = (props) => {
             console.log('asssseee')
             setPassword(e.target.value);
           }}
+          type="password"
           placeholder="Password"
         />
       </div>

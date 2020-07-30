@@ -44,7 +44,7 @@ class PatientController extends Controller
             'email' => $request->email
         ]);
 
-        return $patient;
+        return Patient::find($request->id);
     }
 
     public function quickSearchPatients(Request $request){

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::post('login', 'AuthController@login');
 
 Route::middleware(['preAuth','auth:api'])->group(function(){
-    Route::get('/user', function(Request $request){
+    Route::get('user', function(Request $request){
         return $request->user();
     });
     Route::get('', 'Controller@dashboardIndex');
@@ -44,4 +44,6 @@ Route::middleware(['preAuth','auth:api'])->group(function(){
         Route::get('{slug?}','RecordController@view');
         Route::put('','RecordController@update');
     });
+
+    Route::get('logout', 'AuthController@logout');
 });

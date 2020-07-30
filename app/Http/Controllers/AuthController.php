@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use Tymon\JWTAuth\Facades\JWTAuth; 
 use Illuminate\Http\Request;
 use App\User;
 
@@ -30,5 +30,13 @@ class AuthController extends Controller
         } else {
             return response('Invalid Credentials', 401);
         }
+    }
+
+    public function logout(Request $request) {
+        $cookie = \Cookie::forget('token');
+        $token= $request->bearerToken();
+        Auth::user()->AauthAcessToken()->delete();
+
+        return response('Logout Success', 200)->withCookie($cookie);
     }
 }

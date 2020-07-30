@@ -11157,6 +11157,12 @@ a.text-dark:focus {
   margin: 0px 10px;
 }
 
+@media (max-height: 768px) {
+  .record form {
+    padding: 20px 25px;
+  }
+}
+
 .record h5 {
   padding: 20px;
   font-style: normal;
@@ -11255,6 +11261,12 @@ a.text-dark:focus {
   margin: 0px 10px;
 }
 
+@media (max-height: 768px) {
+  .payment form {
+    padding: 20px 25px;
+  }
+}
+
 .payment h5 {
   padding: 20px;
   font-style: normal;
@@ -11343,6 +11355,12 @@ a.text-dark:focus {
 .patient__upper button {
   margin: 0px 10px;
   white-space: nowrap;
+}
+
+@media (max-height: 768px) {
+  .patient form {
+    padding: 20px 25px;
+  }
 }
 
 .patient h5 {
@@ -11591,7 +11609,7 @@ a.text-dark:focus {
 
 @media (max-width: 768px) {
   .login {
-    padding: 15vw 0px 15vw 0px;
+    padding: 7vw 0px 15vw 0px;
   }
 
   .login__form {

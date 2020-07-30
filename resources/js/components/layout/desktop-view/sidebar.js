@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Sidebar from '../sidebar';
+import axios from 'axios';
 
 const addSvg = (props) => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,10 +63,14 @@ const sideBarDesktop = (props) => {
     if (dom) {
       dom = dom.current;
       dom.classList.add('active-nav');
-      // dom.style.color = 'white';
-      // dom.style.background = '#53639D';
     }
   });
+
+  const handleLogout = () => {
+    axios.get('/api/logout').then(() => {
+      window.location.href = window.location.origin
+    });
+  }
 
   return (
     <div className="sideBar-desktop">
@@ -138,6 +143,12 @@ const sideBarDesktop = (props) => {
         >
           { addSvg() }
           <span>New Payment</span>
+        </li>
+        <li
+          onClick={handleLogout}
+          className="sidebar-desktop__item"
+        >
+          Logout
         </li>
       </ul>
     </div>

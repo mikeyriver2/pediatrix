@@ -208,7 +208,6 @@ class Record extends Component {
     };
     axios.post('/api/records/store', values).then((res) => {
       const { record } = res.data;
-      this.props.closeModal();
       history.push(`/records/${record.id}`);
     });
   }

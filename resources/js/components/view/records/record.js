@@ -199,7 +199,7 @@ const Record = (props) => {
         id="button-edit"
         variant="success"
         style={{
-          display: 'none',
+          display: isMobile ? '' : 'none',
           marginBottom: editMode ? '0px' : '',
         }}
       >
@@ -217,7 +217,7 @@ const Record = (props) => {
             disabled={Object.keys(errors).length > 0}
             onClick={handleUpdate}
             variant="primary"
-            style={{ display: 'none' }}
+            style={{ display: isMobile ? '' : 'none' }}
           >
             SAVE
           </Button>

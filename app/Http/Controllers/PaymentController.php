@@ -36,6 +36,7 @@ class PaymentController extends Controller
         $payment = Payment::select(
             'amount', 
             'status',
+            'patients.id as patient_id',
             \DB::raw('CONCAT(patients.first_name, " ",patients.last_name) as full_name')
         )
         ->join('patients','patients.id','=','patient_id')

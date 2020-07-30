@@ -70,6 +70,12 @@ export default class Sidebar extends Component {
     }));
   }
 
+  handleLogout() {
+    axios.get('/api/logout').then(() => {
+      window.location.href = window.location.origin
+    });
+  }
+
   render() {
     const { isMobile } = this.props;
     return !isMobile ? <div /> : (
@@ -81,7 +87,9 @@ export default class Sidebar extends Component {
             <b>Dr. Rivera (Admin)</b>
           </li>
           <li>
-            <Link to="/">Home</Link>
+            <b>
+              <Link to="/">Home</Link>
+            </b>
           </li>
           <li className="sidebar-outter">
             <Link to="/records">View Records</Link>
@@ -106,6 +114,16 @@ export default class Sidebar extends Component {
             <ul onClick={(e) => this.triggerModal('new-payment')} className="sidebar-view-records-parent">
               <li className="sidebar-inner">New Payment</li>
             </ul>
+          </li>
+          <li className="sidebar-outter">
+            <a
+              style={{
+                color: "#3490dc" // i'm so fucking lazy rn
+              }} 
+              onClick={this.handleLogout}
+            >
+              <b>Logout</b>
+            </a>
           </li>
         </ul>
 
