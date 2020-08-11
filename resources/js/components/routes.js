@@ -86,15 +86,20 @@ class Routes extends Component {
                 { !isMobile && <DesktopNavBar /> }
                 <div className="main-body__contents--lower">
                   <Route exact path="/" component={Dashboard} />
+                  
                   <Route exact path="/patients" component={ViewPatients} />
                   <Route exact path="/patients/new" component={CreatePatient} />
                   <Route path="/patients/:patientId(\d+)" component={ViewPatient} />
+                  
                   <Route exact path="/payments" component={ViewPayments} />
                   <Route exact path="/payments/new" component={CreatePayment} />
                   <Route exact path="/payments/:paymentId(\d+)" component={ViewPayment} />
+                  
                   <Route exact path="/records" component={ViewRecords} />
                   <Route path="/records/new" component={CreateRecord} />
                   <Route exact path="/records/:recordId(\d+)" component={ViewRecord} />
+                  
+                  
                   <Route exact path="/home" component={Dashboard} />
                 </div>
               </div>

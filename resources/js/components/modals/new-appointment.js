@@ -1,32 +1,13 @@
 import React, { Fragment, Component } from 'react';
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router, Link, Route, withRouter,
-} from 'react-router-dom';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  Row,
-  Col,
   Modal,
   Form,
-  InputGroup,
-  FormControl,
   Button,
 } from 'react-bootstrap';
 
-import {
-  KeyboardDatePicker,
-  KeyboardTimePicker,
-  DatePicker,
-  TimePicker,
-  DateTimePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-
-import Summary from '../summaries/summary';
-import QuickSummary from '../summaries/quick-summary';
-import SummaryWithLabel from '../summaries/summary-with-label';
 import NewPatient from './new-patient';
+import DatePicker from'../modules/datepicker';
 
 export default class NewAppointment extends Component {
   constructor() {
@@ -89,7 +70,6 @@ export default class NewAppointment extends Component {
   }
 
   showNewPatientModal() {
-    console.log('ass');
     this.setState((prevState) => ({
       modal: {
         ...prevState.modal,
@@ -165,30 +145,7 @@ export default class NewAppointment extends Component {
 
 
               <Form.Label>Set Appointment time</Form.Label>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  clearable
-                  label="Select Date"
-                                // value={this.state.selectedDate}
-                  placeholder="10/10/2018"
-                  onChange={(date) => { this.setState({ selectedDate: date }); }}
-                  minDate={new Date()}
-                  InputProps={{
-                    disableUnderline: true,
-                  }}
-                  format="MM/dd/yyyy"
-                />
-                <KeyboardTimePicker
-                  margin="normal"
-                  id="time-picker"
-                  label="Select Time"
-                                // value={this.state.selectedTime}
-                  onChange={(time) => { this.setState({ selectedTime: time }); }}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change time',
-                  }}
-                />
-              </MuiPickersUtilsProvider>
+              <DatePicker />
 
               <Button variant="success">SAVE</Button>
             </Form>
