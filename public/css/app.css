@@ -11536,7 +11536,7 @@ a.text-dark:focus {
 }
 
 .login__form {
-  margin: 25px 0px 15vh 0px;
+  margin: 25px 0px 6vh 0px;
   min-width: 40%;
   max-width: 500px;
 }
@@ -11625,6 +11625,40 @@ a.text-dark:focus {
 .datePicker {
   display: flex;
   justify-content: center;
+}
+
+.timeSlots__timeSlot {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  font-weight: bold;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  color: black;
+  margin: 0px !important;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.timeSlots .taken {
+  background: #E4E4E4;
+  border-color: #E4E4E4;
+}
+
+.timeSlots .activeState {
+  background: #7896FF;
+  border-color: #7896FF;
+}
+
+.timeSlots .busy {
+  color: #C6C6C6;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.timeSlots .approved {
+  background: #A3D27E;
+  border-color: #A3D27E;
 }
 
 #pediatrix {

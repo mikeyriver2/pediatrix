@@ -8,6 +8,7 @@ import {
 
 import NewPatient from './new-patient';
 import DatePicker from'../modules/datepicker';
+import TimeSlots from'../modules/timeslots';
 
 export default class NewAppointment extends Component {
   constructor() {
@@ -146,6 +147,7 @@ export default class NewAppointment extends Component {
 
               <Form.Label>Set Appointment time</Form.Label>
               <DatePicker />
+              <TimeSlots />
 
               <Button variant="success">SAVE</Button>
             </Form>
