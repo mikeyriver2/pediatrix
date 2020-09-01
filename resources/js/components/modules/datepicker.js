@@ -9,7 +9,6 @@ const returnFormat = (type = 'DD') => {
 }
 
 const DatePicker = () => {
-    const [date, setDate] = useState(null);
     const [day, setDay] = useState(returnFormat('DD'));
     const [month, setMonth] = useState(returnFormat('MM'));
     const [year, setYear] = useState(returnFormat('YYYY'))
@@ -18,7 +17,7 @@ const DatePicker = () => {
         const days = moment(`${month}-${year}`,'MM-YYYY').daysInMonth();
         let toReturn = [];
         for(let i = 1; i < days+1; i++) {
-            toReturn.push(<option>{i}</option>);
+            toReturn.push(<option>{("0" + i).slice(-2)}</option>);
         }
         return toReturn;
     }
@@ -26,7 +25,7 @@ const DatePicker = () => {
     const renderMonths = () => {
         let toReturn = [];
         for(let i = 1; i < 13; i++) {
-            toReturn.push(<option>{i}</option>);
+            toReturn.push(<option>{("0" + i).slice(-2)}</option>);
         }
         return toReturn;  
     }
@@ -40,27 +39,19 @@ const DatePicker = () => {
         return toReturn;  
     }
 
+    const chosenDate = moment(`${month}-${day}-${year}`,'MM-DD-YYYY');
+    const dayString = chosenDate.format('ddd');
+
     return (
         <div className="datePicker">
             <div>
                 <Form.Control
-                    className="datePick__day"
-                    onChange={() => {}}
-                    as="select"
-                    value={day}
-                >
-                    { renderDays() }
-                </Form.Control>
-                <p>DD</p>
-            </div>
-            <div>
-                <Form.Control
-                    className="datePick__month"
+                    className="datePicker__month"
                     onChange={(e) => {
                         setMonth(e.target.value)
                     }}
                     as="select"
-                    value={month}
+                    // value={month}
                 >
                     { renderMonths() }
                 </Form.Control>
@@ -68,16 +59,34 @@ const DatePicker = () => {
             </div>
             <div>
                 <Form.Control
-                    className="datePick__year"
+                    className="datePicker__day"
                     onChange={(e) => {
+                        setDay(e.target.value)
+                    }}                    
+                    as="select"
+                    // value={day}
+                >
+                    { renderDays() }
+                </Form.Control>
+                <p>DD</p>
+            </div>
+            <div>
+                <Form.Control
+                    className="datePicker__year"
+                    onChange={(e) => {
+                        
                         setYear(e.target.value)
                     }}
                     as="select"
+                    // value={year}
                 >
                     { renderYears() }
                 </Form.Control>
                 <p>YYYY</p>
             </div>
+            <p>
+                ({dayString})
+            </p>
         </div>
     );
 }

@@ -1,4 +1,37 @@
 .datePicker {
     display: flex;
     justify-content: center;
+    p {
+        margin-top: 15px;
+        margin-left: 15px;
+    }
+    div {
+        p {
+            text-align: center;
+        }
+    }
+    select {
+        font-size: 24px;
+        -webkit-appearance: none;
+        border: 0px !important;
+        box-shadow: none !important;
+        background-position-y: 13px !important;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+        // text align for select
+        text-align-last:center;
+        margin-bottom: 0px !important;
+    }
+    // yes i had to put these backgrounds here
+    &__day, &__month {
+        width: 65px;
+        background: url(/images/keyboard_arrow_down_24px_rounded.svg) no-repeat !important;
+        background-position-x: 45px !important;
+    }
+    &__year {
+        width: 88px;
+        background: url(/images/keyboard_arrow_down_24px_rounded.svg) no-repeat !important;
+        background-position-x: 69px !important;
+    }
 }
