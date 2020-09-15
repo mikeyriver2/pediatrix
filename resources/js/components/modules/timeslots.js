@@ -5,7 +5,8 @@ import {
 } from 'react-bootstrap';
 
 
-const TimeSlots = () => {
+const TimeSlots = (props) => {
+  const {setTime} = props;
   let toReturn = [];
 
   let startTime = moment('9:30:00', 'h:mm:ss');
@@ -22,6 +23,9 @@ const TimeSlots = () => {
       toReturn.push(
         <Button 
           className="timeSlots__timeSlot"
+          onClick={() => {
+            setTime(start, end);
+          }}
           value={{
             start,
             end
@@ -47,7 +51,7 @@ const TimeSlots = () => {
   return (
     <div className="timeSlots">
       { renderTimeSlots() }
-      <Button className="timeSlots__timeSlot">
+      {/* <Button className="timeSlots__timeSlot">
         <div>
           <span>9:30</span>
             -
@@ -96,7 +100,7 @@ const TimeSlots = () => {
         <span>
           Michael Rivera
         </span>
-      </Button>
+      </Button> */}
     </div>
   );
 }

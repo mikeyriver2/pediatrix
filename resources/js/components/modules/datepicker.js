@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Form
 } from 'react-bootstrap';
@@ -8,10 +8,15 @@ const returnFormat = (type = 'DD') => {
     return parseInt(moment().format(type));
 }
 
-const DatePicker = () => {
+const DatePicker = (props) => {
     const [day, setDay] = useState(returnFormat('DD'));
     const [month, setMonth] = useState(returnFormat('MM'));
     const [year, setYear] = useState(returnFormat('YYYY'))
+
+    useEffect(() => {
+        const { setDate } = props;
+        setDate(moment(`${month}-${day}-${year}`,'MM-DD-YYYY'));
+    })
 
     const renderDays = () => {
         const days = moment(`${month}-${year}`,'MM-YYYY').daysInMonth();
@@ -74,7 +79,6 @@ const DatePicker = () => {
                 <Form.Control
                     className="datePicker__year"
                     onChange={(e) => {
-                        
                         setYear(e.target.value)
                     }}
                     as="select"

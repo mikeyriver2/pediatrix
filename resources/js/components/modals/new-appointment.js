@@ -22,7 +22,10 @@ export default class NewAppointment extends Component {
         show: false,
       },
       selectedDate: '',
-      selectedTime: '',
+      selectedTime: {
+        start: '',
+        end: ''
+      },
       selected_patient: {},
       consultationType: 'General Consultation',
     };
@@ -128,7 +131,14 @@ export default class NewAppointment extends Component {
             <Form>
               <div className="patient-appointments-container">
                 <Form.Label>Patient</Form.Label>
-                <Form.Control onFocus={() => { this.setState({ disableDiv: false, full_name: ' ' }); }} onChange={this.handleQuickSearch} value={this.state.selected_patient.id ? this.state.selected_patient.full_name : this.state.full_name} className="ignore-listener" type="text" placeholder="Enter Patient Name" />
+                <Form.Control 
+                  onFocus={() => { this.setState({ disableDiv: false, full_name: ' ' }); }} 
+                  onChange={this.handleQuickSearch} 
+                  value={this.state.selected_patient.id ? this.state.selected_patient.full_name : this.state.full_name} 
+                  className="ignore-listener" 
+                  type="text" 
+                  placeholder="Enter Patient Name" 
+                />
                 <button onClick={() => { this.setState({ selected_patient: {} }); }} type="button" className="close">
                   <span>x</span>
                 </button>
@@ -136,7 +146,9 @@ export default class NewAppointment extends Component {
               </div>
               <Form.Label>Appointment Type</Form.Label>
               <Form.Control
-                onChange={(e) => { this.setState({ consultationType: e.target.value }); }}
+                onChange={(e) => { 
+                  this.setState({ consultationType: e.target.value }); 
+                }}
                 as="select"
               >
                 <option>General Consultation</option>
@@ -146,22 +158,40 @@ export default class NewAppointment extends Component {
 
 
               <Form.Label>Set Appointment time</Form.Label>
-              <DatePicker />
-              <TimeSlots />
+              <DatePicker 
+                setDate={(selectedDate) => {
+                  this.setState({
+                    selectedDate
+                  });
+                }}
+              />
+              <TimeSlots 
+                setTime={(start, end) => {
+                  this.setState((prevState) => {
+                    return {
+                      selectedTime: {
+                        ...prevState.selectedTime,
+                        start,
+                        end
+                      }
+                    }
+                  })
+                }}
+              />
 
               <Button variant="success">SAVE</Button>
             </Form>
           </Modal.Body>
         </Modal>
         {(this.state.modal.type == 'new-patient' && this.state.modal.show)
-                    && (
-                    <NewPatient
-                      show={this.state.modal.type == 'new-patient' && this.state.modal.show}
-                      closeModal={this.closeModal}
-                      parentComponent="NewRecord"
-                      selectPatient={this.selectPatient}
-                    />
-                    )}
+        && (
+          <NewPatient
+            show={this.state.modal.type == 'new-patient' && this.state.modal.show}
+            closeModal={this.closeModal}
+            parentComponent="NewRecord"
+            selectPatient={this.selectPatient}
+          />
+        )}
       </div>
     );
   }
