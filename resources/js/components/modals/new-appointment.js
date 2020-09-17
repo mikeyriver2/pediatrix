@@ -34,6 +34,7 @@ export default class NewAppointment extends Component {
     this.selectPatient = this.selectPatient.bind(this);
     this.showNewPatientModal = this.showNewPatientModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +52,22 @@ export default class NewAppointment extends Component {
         clearInterval(interval);
       }
     }, 1000);
+  }
+
+  handleSave() {
+    const { 
+      full_name, 
+      selectedDate, 
+      selectedTime 
+    } = this.state;
+
+    const params = {
+      full_name,
+      selectedDate,
+      selectedTime
+    };
+
+    axios.post('/api/appointments/store', params);
   }
 
   handleQuickSearch(e) {
@@ -179,7 +196,12 @@ export default class NewAppointment extends Component {
                 }}
               />
 
-              <Button variant="success">SAVE</Button>
+              <Button 
+                variant="success"
+                onClick={this.handleSave}
+              >
+                SAVE
+              </Button>
             </Form>
           </Modal.Body>
         </Modal>

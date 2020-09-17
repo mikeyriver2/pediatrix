@@ -24,7 +24,10 @@ const TimeSlots = (props) => {
         <Button 
           className="timeSlots__timeSlot"
           onClick={() => {
-            setTime(start, end);
+            setTime(
+              startTime.format('hh:mm:ss'), 
+              endTime.format('hh:mm:ss')
+            );
           }}
           value={{
             start,

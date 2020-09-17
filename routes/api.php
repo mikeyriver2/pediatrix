@@ -44,6 +44,8 @@ Route::middleware(['preAuth','auth:api'])->group(function(){
         Route::get('{slug?}','RecordController@view');
         Route::put('','RecordController@update');
     });
-
+    Route::group(['prefix' => 'appointments'], function(){
+        Route::post('store','AppointmentsController@store');
+    });
     Route::get('logout', 'AuthController@logout');
 });

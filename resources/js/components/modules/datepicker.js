@@ -15,7 +15,8 @@ const DatePicker = (props) => {
 
     useEffect(() => {
         const { setDate } = props;
-        setDate(moment(`${month}-${day}-${year}`,'MM-DD-YYYY'));
+        setDate(moment(`${month}-${day}-${year}`,'MM-DD-YYYY')
+            .format('MM-DD-YYYY'));
     })
 
     const renderDays = () => {
